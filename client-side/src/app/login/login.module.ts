@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -24,6 +24,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   imports: [
     CommonModule,
     LoginRoutingModule,
+    MatSnackBarModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ]
 })
