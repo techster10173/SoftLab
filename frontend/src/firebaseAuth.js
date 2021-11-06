@@ -1,5 +1,6 @@
 import React, {createContext,useState, useEffect} from 'react';
 import {auth} from './firebase';
+import axios from 'axios'
 
 export const AuthContext= createContext({userPresent:false,user:null});
 
@@ -27,11 +28,14 @@ export default function FirebaseAuthContext(props){
         }
     },[]);
   
-  
-  
     return (
         <AuthContext.Provider value={state}>
             {props.children}
         </AuthContext.Provider>
     )
 }
+
+axios.interceptors.request.use(async config => {
+    config.headers.token = await auth.currentUser.getIdToken();
+    return config
+}, (error) => Promise.reject(error));
