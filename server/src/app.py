@@ -5,7 +5,7 @@ from auth import check_token
 
 app = Flask(__name__)
 
-@app.route('/projects/<pid>/', methods=('GET', 'PUT', 'DELETE'))
+@app.route('/api/projects/<pid>/', methods=('GET', 'PUT', 'DELETE'))
 @check_token
 def handleSpecificProject(pid: str):
     schema = ProjectSchema()
@@ -31,7 +31,7 @@ def handleSpecificProject(pid: str):
         except Exception as e:
             return jsonify({"error": str(e)}), 403
 
-@app.route('/projects/', methods=('GET', 'POST'))
+@app.route('/api/projects/', methods=('GET', 'POST'))
 @check_token
 def handleProjects():
     schema = ProjectSchema()
