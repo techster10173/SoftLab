@@ -4,12 +4,10 @@ import database
 from bson.objectid import ObjectId
 
 class Project:
-    def __init__(self, id: str = "", creator:str = "", editors:list = [], viewers:list = [], hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = ""):
+    def __init__(self, id: str = "", creator:str = "", hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = ""):
         self.id = ObjectId(id)
         self.projectName = projectName
         self.creator = creator
-        self.editors = editors
-        self.viewers = viewers
         self.hardwares = hardwares
         self.funds = funds
         self.description = description
@@ -24,7 +22,7 @@ class Project:
     def update_project(self):
         self.dateUpdated = datetime.now()
         document = database.client.projects.find_one({'_id': self.id})
-        if self.creator in document['editors'] or self.creator == document['creator']:
+        if self.creator == document['creator']:
             database.client.projects.update_one({'_id': self.id}, {'$set': self.__dict__})
         else:
             raise Exception("User Lacks Permissions")
@@ -36,7 +34,7 @@ class Project:
         except Exception as e:
             return e
             
-        if self.creator in project['editors'] or self.creator == project['creator']:
+        if self.creator == project['creator']:
             database.client.projects.delete_one({'_id': self.id})
         else:
             raise Exception("User Lacks Permissions")
@@ -45,7 +43,7 @@ class Project:
     def get_project(self):
         project = database.client.projects.find_one({'_id': self.id})
         project_obj = ProjectSchema.dump(project)
-        if project_obj.creator == self.creator or self.creator in project_obj.editors or self.creator in project_obj.viewers:
+        if project_obj.creator == self.creator:
             return project_obj
         else:
             raise Exception("User Lacks Permissions")
@@ -53,11 +51,7 @@ class Project:
     @staticmethod
     def get_projects(offset: int, creator: str):
         query = {
-            "$or": [
-                {"creator": creator},
-                {"editors": {"$in": [creator]}},
-                {"viewers": {"$in": [creator]}}
-            ]
+            'creator': creator
         }
         items = database.client.projects.find(query).skip(offset).limit(10)
         return ProjectSchema(many=True).dump(items)
@@ -66,8 +60,6 @@ class ProjectSchema(Schema):
     id = fields.Str(attribute='_id')
     projectName = fields.Str()
     creator = fields.Str()
-    editors = fields.List(fields.Str())
-    viewers = fields.List(fields.Str())
     hardwares = fields.Dict(fields.Str(), fields.Int())
     funds = fields.Float()
     description = fields.Str()
