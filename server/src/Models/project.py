@@ -1,99 +1,79 @@
+from marshmallow import Schema, fields, post_load
+from datetime import datetime
+import database
+from bson.objectid import ObjectId
+
 class Project:
-    #initialize with no inputs
-    def __init__(self):
-        self.projectName = ""
-        self.mainUser = set()
-        self.editor = set()
-        self.viewer = set()
-        self.hardwares = {} # hardwareID : units being used
-        self.funds = 0
-        self.description = ""
-        self.dateCreated = 0.0
-        self.dateUpdated = 0.0
-
-    def initProject(self, mainUser, projectName, funds, description, dateCreated, dateUpdated):
-        self.name = projectName
-        self.mainUser.append(mainUser)
+    def __init__(self, id: str = "", creator:str = "", editors:list = [], viewers:list = [], hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = ""):
+        self.id = ObjectId(id)
+        self.projectName = projectName
+        self.creator = creator
+        self.editors = editors
+        self.viewers = viewers
+        self.hardwares = hardwares
         self.funds = funds
         self.description = description
-        self.dateCreated = dateCreated
-        self.dateUpdated = dateUpdated
 
-    def getHardwareUnits(self, hardware):
-        if(hardware in self.hardwares):
-            return self.hardwares.get(hardware)
-    
-    def setHardwareUnits(self, hardware, units):
-        if(hardware in self.hardwares):
-            self.hardwares.update({hardware: units})
+    def create_project(self, creator_uid: str):
+        self.dateCreated = datetime.now()
+        self.dateUpdated = datetime.now()
+        self.creator = creator_uid
+        del self.id
+        database.client.projects.insert_one(self.__dict__)
 
-    def addHardware(self, hardware, units):
-        self.hardwares.update({hardware: units})
+    def update_project(self):
+        self.dateUpdated = datetime.now()
+        document = database.client.projects.find_one({'_id': self.id})
+        if self.creator in document['editors'] or self.creator == document['creator']:
+            database.client.projects.update_one({'_id': self.id}, {'$set': self.__dict__})
+        else:
+            raise Exception("User Lacks Permissions")
 
-    def removeHardware(self, hardware):
-        self.hardwares.pop(hardware)
+    def delete_project(self):
+        project = None
+        try:
+            project = self.get_project()
+        except Exception as e:
+            return e
+            
+        if self.creator in project['editors'] or self.creator == project['creator']:
+            database.client.projects.delete_one({'_id': self.id})
+        else:
+            raise Exception("User Lacks Permissions")
+        return project
 
-    def setDescription(self, description):
-        self.description = description
-    
-    def setFunds(self, funds):
-        self.funds = funds
+    def get_project(self):
+        project = database.client.projects.find_one({'_id': self.id})
+        project_obj = ProjectSchema.dump(project)
+        if project_obj.creator == self.creator or self.creator in project_obj.editors or self.creator in project_obj.viewers:
+            return project_obj
+        else:
+            raise Exception("User Lacks Permissions")
 
-    def getFunds(self):
-        return self.funds
-    
-    def addFunds(self, funds):
-        self.funds += funds
+    @staticmethod
+    def get_projects(offset: int, creator: str):
+        query = {
+            "$or": [
+                {"creator": creator},
+                {"editors": {"$in": [creator]}},
+                {"viewers": {"$in": [creator]}}
+            ]
+        }
+        items = database.client.projects.find(query).skip(offset).limit(10)
+        return ProjectSchema(many=True).dump(items)
 
-    def removeFunds(self, funds):
-        if(self.funds - funds >= 0):
-            self.funds -= funds
-            return True
-        return False
+class ProjectSchema(Schema):
+    id = fields.Str(attribute='_id')
+    projectName = fields.Str()
+    creator = fields.Str()
+    editors = fields.List(fields.Str())
+    viewers = fields.List(fields.Str())
+    hardwares = fields.Dict(fields.Str(), fields.Int())
+    funds = fields.Float()
+    description = fields.Str()
+    dateCreated = fields.DateTime()
+    dateUpdated = fields.DateTime()
 
-    def isMainUser(self, user):
-        if(user in self.mainUser):
-            return True
-    
-    def addMainUser(self, user):
-        self.mainUser.add(user)
-
-    def removeMainUser(self, user):
-        if(self.isMainUser(self, user)):
-            self.mainUser.remove(user)
-            return True
-        return False
-
-    def isEditor(self, user):
-        if(user in self.editor):
-            return True
-    
-    def addEditor(self, user):
-        self.editor.append(user)
-
-    def removeEditor(self, user):
-        if(self.isEditor(self, user)):
-            self.editor.remove(user)
-            return True
-        return False
-
-    def isViewer(self, user):
-        if(user in self.viewer):
-            return True
-
-    def addViewer(self, user):
-        self.viewer.append(user)
-
-    def removeViewer(self, user):
-        if(self.isViewer(self, user)):
-            self.viewer.remove(user)
-            return True
-        return False
-
-    def updateDate(self, date):
-        self.updateDate = date
-
-    
-
-
-
+    @post_load
+    def make_project(self, data, **kwargs):
+        return Project(**data)
