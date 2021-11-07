@@ -5,9 +5,7 @@ from auth import check_token
 
 app = Flask(__name__)
 
-#@app.route('/api/userinfo')
-#@check_token
-#def userinfo():
-    #return {'data': users}, 200    init_db()
+
+if __name__ == '__main__':
+    init_db()
     app.run(debug=True, load_dotenv=True)
-    
