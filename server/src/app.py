@@ -21,7 +21,7 @@ def handleSpecificProject(pid: str):
         project.id = pid
         try:
             project.update_project()
-            return jsonify({"message": "Project Updated"})
+            return jsonify({"message": "Project Updated"}), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 403
     elif request.method == 'DELETE':
@@ -39,7 +39,7 @@ def handleProjects():
         if request.args.get('offset') is None:
             return jsonify({"message": "Missing Offset"}), 400
         project_data = Project.get_projects(int(request.args.get('offset')), request.user)            
-        return jsonify({"projectData": project_data})
+        return jsonify({"projectData": project_data}), 200
     elif request.method == 'POST':
         project = schema.load(request.json, partial=True, unknown="INCLUDE")
         project.create_project(request.user)
