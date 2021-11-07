@@ -5,7 +5,7 @@ from auth import check_token
 
 app = Flask(__name__)
 
-@app.route('/projects/<pid>', methods=('GET', 'PUT', 'DELETE'))
+@app.route('/projects/<pid>/', methods=('GET', 'PUT', 'DELETE'))
 @check_token
 def handleSpecificProject(pid: str):
     schema = ProjectSchema()
