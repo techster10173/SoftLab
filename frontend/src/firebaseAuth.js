@@ -1,6 +1,8 @@
 import React, {createContext,useState, useEffect} from 'react';
-import {auth} from './firebase';
 import axios from 'axios'
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 
 export const AuthContext= createContext({userPresent:false,user:null});
 
@@ -13,7 +15,7 @@ export default function FirebaseAuthContext(props){
 
     useEffect(()=>{
         if(state.listener==null) {
-            changeState({...state,listener:auth.onAuthStateChanged((user)=>{
+            changeState({...state,listener:firebase.auth().onAuthStateChanged((user)=>{
                 
             if(user)
                 changeState(oldState=>({...oldState,userDataPresent:true,user:user}));
@@ -35,7 +37,9 @@ export default function FirebaseAuthContext(props){
     )
 }
 
-axios.interceptors.request.use(async config => {
-    config.headers.token = await auth.currentUser.getIdToken();
-    return config
-}, (error) => Promise.reject(error));
+export function initInterceptor(){
+    axios.interceptors.request.use(async config => {
+        config.headers.authorization = await firebase.auth().currentUser.getIdToken();
+        return config
+    }, (error) => Promise.reject(error));
+}
