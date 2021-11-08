@@ -15,77 +15,76 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+
   
 function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, del) {
     return {projectName, dateCreated, lastUpdate, creator, funds, edit, del };
   }
   
   const rows = [
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+
+    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>, <Button>Delete</Button>),
+
   ];
 
-export function Projects(props){
-  // const [open, setOpen] = React.useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
+export class Projects extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+        currentProject: null,
+        showModal: false
+    }
+  } 
+  render(){
+    const style = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+    }
+  
     return(
+      
         <div>
-          {/* <Button onClick={handleOpen}>Edit</Button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-              </Typography>
-            </Box>
-          </Modal> */}
-          <Box
-              sx={{
-                // width: 400,
-                height: 50,
-                marginLeft: 80,
-                marginRight: 80,
-                marginTop: 20,
-                // backgroundColor: 'primary.dark',
-                p: 5, 
-            }}
-          >
-            {/* <button class="button button1">Create Project</button> */}
-            <Button>Create Project</Button>
-          </Box>
-          <Box
-              sx={{
-                // width: 1500,
-                height: 300,
-                marginLeft: 10,
-                marginRight: 10,
-                marginTop: 10,
-                marginBottom: 10,
-                backgroundColor: 'primary.dark',
-                
-                boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
-            }}
-          >
-            <TableContainer component={Paper} left>
-              <Table sx={{ minWidth: 400 }} aria-label="simple table">
+          <Button sx={{
+              // width: 400,
+              height: 50,
+              marginLeft: 80,
+              marginRight: 80,
+              marginTop: 20,
+              // backgroundColor: 'primary.dark',
+              p: 5, 
+          }}>Create Project</Button>
+            <TableContainer component={Paper}
+            sx={{
+              // width: 1000,
+              height: 300,
+              margnLeft: 20,
+              marginRight: 20,
+              marginTop: 10,
+              marginBottom: 10,
+              // backgroundColor: 'primary.dark',
+              
+              boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
+          }}>
+              <Table sx={{ minWidth: 200 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell align="middle">Project Name</TableCell>
@@ -115,9 +114,7 @@ export function Projects(props){
                 </TableBody>
               </Table>
             </TableContainer>
-            
-            </Box>
         </div>
-    );
-    
+    )
+  } 
 }
