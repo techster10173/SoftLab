@@ -20,7 +20,7 @@ export function Home(props){
     }
     return (
         <div>
-            <AppBar variant = "contained" color = "primary">
+            <AppBar variant = "contained" color = "primary" position = "relative">
                 <Toolbar>
                     <div class="container">
                             <img src={logo} alt="logo" class="img1"/>
@@ -43,9 +43,6 @@ export function Home(props){
             </AppBar>   
 
         <div id="#about">
-            <h1 class = "tformat">
-                PlaceHolder
-            </h1>
 
             <h2 class = "tformat">
                 About our Product
@@ -69,7 +66,7 @@ export function Home(props){
                                 </React.Fragment>
                             }
                         />
-                        <img src={HaaS} alt="hardware as a service" height = "300px"  />
+                        <img src={HaaS} alt="hardware as a service" height = "300px" class = "img"/>
                     </ListItem>
             </List>        
         </div>

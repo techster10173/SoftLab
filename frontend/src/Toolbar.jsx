@@ -5,7 +5,7 @@ import './home.css';
 
 export function Navbar(props){
     return(
-            <AppBar variant="contained" color="primary">
+            <AppBar variant="contained" color="primary" position = "relative">
                 <Toolbar>
                     <div>
                             <img src={logo} alt="logo" class="img1"/>
