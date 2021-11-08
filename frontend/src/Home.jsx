@@ -66,7 +66,7 @@ export function Home(props){
                                 </React.Fragment>
                             }
                         />
-                        <img src={HaaS} alt="hardware as a service" height = "300px"  />
+                        <img src={HaaS} alt="hardware as a service" height = "300px" class = "img" />
                     </ListItem>
             </List>        
         </div>

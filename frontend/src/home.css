@@ -23,10 +23,7 @@ html { scroll-behavior: smooth; }
 }
 
 .img{
-    width: 1000px;
-    height: auto;
-    margin: 100px;
-    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .tformat{
