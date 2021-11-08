@@ -1,6 +1,6 @@
 import './home.css';
 import { Link } from 'react-router-dom';
-import React, { useRef } from 'react'
+import React from 'react'
 import logo from "./assets/BB.png"
 import Sai from "./assets/Sai.jpg"
 import Sparsh from "./assets/sparsh.jfif"
@@ -13,11 +13,7 @@ import HaaS from "./assets/haas.jpg"
 import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 
 export function Home(props){
-    const titleRef = useRef(null)
 
-    function handleBackClick() {
-        titleRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
     return (
         <div>
             <AppBar variant = "contained" color = "primary" position = 'relative'>
@@ -73,7 +69,7 @@ export function Home(props){
 
         <div id="#the-team">
             <div class = "team">
-                <h2 class = "tformat" ref = {titleRef}>
+                <h2 class = "tformat">
                     Meet our Team
                 </h2>
                 <List>
@@ -84,7 +80,7 @@ export function Home(props){
                         <ListItemText
                             primary="Saiteja Rawulwar"
                             secondary={
-                                <React.Fragment>
+                                <>
                                     <Typography
                                         sx={{ display: 'inline'}}
                                         component="span"
@@ -93,7 +89,7 @@ export function Home(props){
                                     >
                                     </Typography>
                                 {" I am an ECE student specializing in Software Engineering and Design and the University of Texas at Austin"}
-                                </React.Fragment>
+                                </>
                             }
                         />
                         
