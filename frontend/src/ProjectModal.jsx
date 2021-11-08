@@ -1,7 +1,11 @@
 import React from 'react'
 import {Modal, Box, TextField, FormControl, Button, InputAdornment, OutlinedInput} from '@mui/material';
 import axios from 'axios';
-import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import "./projects.css"
+
+const MySwal = withReactContent(Swal)
 
 export class ProjectModal extends React.Component {
     constructor(props) {
@@ -10,12 +14,15 @@ export class ProjectModal extends React.Component {
             projectName: "",
             projectDescription: "",
             projectFunds: 0,
+            fundsError: false,
+            nameError: false,
+            descError: false,
         }
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.displayModal && !prevProps.displayModal && this.props.pid) {
-            axios.get(`/api/projects/${this.props.pid}`).then(res => {
+            axios.get(`/api/projects/${this.props.pid}`).then(res => res.json()).then(res => {
                 const data = res.projectData;
                 this.setState({
                     projectName: data.projectName,
@@ -30,59 +37,78 @@ export class ProjectModal extends React.Component {
     }
 
     handleNameChange = (event) => {
-        this.setState({projectName: event.target.value});
+        this.setState({projectName: event.target.value, nameError: event.target.value === ""});
     }
 
     handleDescriptionChange = (event) => {
-        this.setState({projectDescription: event.target.value});
+        const description = event.target.value;
+        this.setState({projectDescription: description, descError: description === ""});
     }
 
     handleFundsChange = (event) => {
-        this.setState({projectFunds: event.target.value});
+        const funds = event.target.value;
+        this.setState({projectFunds: funds, fundsError: funds < 0});
     }
 
     updateProject = (event) => {
         event.preventDefault();
+        
+        this.setState({nameError: this.state.projectName === "", descError: this.state.projectDescription === ""});
+
+        if(this.state.projectName === "" || this.state.projectDescription === "" || this.state.projectFunds < 0){
+            return;
+        }
+
         axios.put(`/api/project/${this.props.pid}`, {
             name: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds
         }).then(res => {
-            swal.fire({
-                title: 'Project Updated!',
-                text: 'Your project has been updated!',
-                type: 'success',
-                confirmButtonText: 'Cool'
-            })
+            MySwal.fire({
+                icon: "success",
+                title: "Project Updated!",
+                text: `${this.state.projectName} has successfully been updated`,
+                timer: 1500
+            });
+            this.props.closeModalHandler();        
         }).catch(err => {
-            swal.fire({
-                title: 'Error!',
-                text: 'Something went wrong!',
-                type: 'error',
-                confirmButtonText: 'Cool'
-            })
+            MySwal.fire({
+                icon: "error",
+                title: "Whoops! Unexpected Problem",
+                text: "Please Try Again",
+                timer: 1500
+            });
         });
     }
 
     createProject = (event) => {
         event.preventDefault();
-        axios.post('/api/projects', {
+
+        this.setState({nameError: this.state.projectName === "", descError: this.state.projectDescription === ""});
+
+        if(this.state.projectName === "" || this.state.projectDescription === "" || this.state.projectFunds < 0){
+            return;
+        }
+
+        axios.post('/api/projects/', {
             name: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds,
         }).then(res => {
-            swal.fire({
-                title: 'Project Created!',
-                text: 'Your project has been created!',
-                icon: 'success',
-                confirmButtonText: 'Cool'
-            }).catch(e => console.log(e));
+            MySwal.fire({
+                icon: "success",
+                title: "Project Created!",
+                text: `${this.state.projectName} has successfully been made`,
+                timer: 1500
+            });
+            this.props.closeModalHandler();
         }).catch(err => {
-            swal.Fire({
-                title: 'Error',
-                text: err,
-                icon: 'error',
-            }).catch(e => console.log(e));
+            MySwal.fire({
+                icon: "error",
+                title: "Whoops! Unexpected Problem",
+                text: "Please Try Again",
+                timer: 1500
+            });
             console.log(err);
         });
     }
@@ -106,16 +132,16 @@ export class ProjectModal extends React.Component {
         }
 
         return (
-            <Modal
-                open={this.props.displayModal}
-            >
+            <>
+            <Modal open={this.props.displayModal}>
                 <Box sx={wrapperStyle}>
                     <h1>{this.props.pid ? "Update" : "Create"} Project</h1>
                     <form onSubmit={this.props.pid ? this.updateProject : this.createProject}>
                         <FormControl>
                             <div>
-                                <TextField label="Name" sx={{width: '100%', marginBottom: "5%"}} value={this.state.projectName} onChange={this.handleNameChange} />
+                                <TextField label="Name" error={this.state.nameError} sx={{width: '100%', marginBottom: "5%"}} value={this.state.projectName} onChange={this.handleNameChange} />
                                 <OutlinedInput
+                                    error={this.state.fundsError}
                                     type="number"
                                     sx={{width: '100%', marginBottom: "5%"}}
                                     value={this.state.projectFunds}
@@ -126,6 +152,7 @@ export class ProjectModal extends React.Component {
                             <TextField
                                 id="outlined-multiline-flexible"
                                 label="Description"
+                                error={this.state.descError}
                                 multiline
                                 rows={4}
                                 sx={{marginBottom: "5%"}}
@@ -140,6 +167,7 @@ export class ProjectModal extends React.Component {
                     </form>
                 </Box>
             </Modal>
+        </>
         )
     }
 }
