@@ -51,14 +51,14 @@ export class Projects extends React.Component{
       }
 
     return(
-        <div>
+        <>
           <Navbar />
             <ProjectsTable/>
           <Fab sx={
             fabStyle
           } onClick={this.openCreateModal}><AddIcon/></Fab>
           <ProjectModal closeModalHandler={this.closeModal} displayModal={this.state.showModal} pid={this.state.currentProject} />
-        </div>
+        </>
     )
   } 
 }
