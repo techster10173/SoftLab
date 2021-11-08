@@ -9,18 +9,6 @@ import {Fab} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {ProjectsTable} from "./ProjectsTable.jsx";
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-
 export class Projects extends React.Component{
   constructor(props) {
     super(props);
@@ -51,19 +39,17 @@ export class Projects extends React.Component{
       border: '2px solid #000',
       boxShadow: 24,
       p: 4,
-    }
+    }  
 
     const fabStyle = {
-      margin: 0,
-      top: 'auto',
-      right: 40,
-      bottom: 40,
-      left: 'auto',
-      position: 'fixed',
-    }
+        margin: 0,
+        top: 'auto',
+        right: 40,
+        bottom: 40,
+        left: 'auto',
+        position: 'fixed',
+      }
 
-  
-  
     return(
         <div>
           <Navbar />
