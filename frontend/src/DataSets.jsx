@@ -16,25 +16,31 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
+const style = {
+    position: 'relative',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+    
+  function createData(name, description, memory, download) {
+      return {name, description, memory, download};
+    }
+    
+    const rows = [
+      createData('Project 1', 'testing', '30mb',<a href='/somefile.txt' download>Click to download</a>)
+    ];
 
 export class DataSets extends React.Component {
     render() {
         return (
             <div>
-                 <>
                 <Navbar />
-            </>
-          <Box
-              sx={{
-                height: 50,
-                marginLeft: 80,
-                marginRight: 80,
-                marginTop: 20,
-                p: 5, 
-            }}
-          >
-            <Button>Create Project</Button>
-          </Box>
           <Box
               sx={{
                 height: 300,
@@ -42,7 +48,7 @@ export class DataSets extends React.Component {
                 marginRight: 10,
                 marginTop: 10,
                 marginBottom: 10,
-                backgroundColor: 'primary.dark',
+                // backgroundColor: 'primary.dark',
                 
                 boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
             }}
@@ -51,28 +57,22 @@ export class DataSets extends React.Component {
               <Table sx={{ minWidth: 400 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="middle">Project Name</TableCell>
-                    <TableCell align="middle">Date Created</TableCell>
-                    <TableCell align="middle">Last Updated</TableCell>
-                    <TableCell align="middle">Creator</TableCell>
-                    <TableCell align="middle">Funds</TableCell>
-                    <TableCell align="middle">Edit</TableCell>
-                    <TableCell align="middle">Delete</TableCell>
+                    <TableCell align="middle">Name</TableCell>
+                    <TableCell align="middle">Description</TableCell>
+                    <TableCell align="middle">Download Memory</TableCell>
+                    <TableCell align="middle">Download</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {rows.map((row) => (
                     <TableRow
-                      key={row.projectName}
+                      key={row.name}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <TableCell align="middle">{row.projectName}</TableCell>
-                      <TableCell align="middle">{row.dateCreated}</TableCell>
-                      <TableCell align="middle">{row.lastUpdate}</TableCell>
-                      <TableCell align="middle">{row.creator}</TableCell>
-                      <TableCell align="middle">{row.funds}</TableCell>
-                      <TableCell align="middle">{row.edit}</TableCell>
-                      <TableCell align="middle">{row.del}</TableCell>
+                      <TableCell align="middle">{row.name}</TableCell>
+                      <TableCell align="middle">{row.description}</TableCell>
+                      <TableCell align="middle">{row.memory}</TableCell>
+                      <TableCell align="middle">{row.download}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
