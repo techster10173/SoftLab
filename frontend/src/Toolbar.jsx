@@ -1,7 +1,7 @@
-import {Toolbar, AppBar} from '@material-ui/core';
+import {Toolbar, AppBar, Menu} from '@material-ui/core';
 import {Link} from "react-router-dom";
 import logo from "./assets/BB.png"
-
+import './home.css';
 
 export function Navbar(props){
     return(
@@ -11,7 +11,7 @@ export function Navbar(props){
                             <img src={logo} alt="logo" class="img1"/>
                         </div>
 
-                        <div class>
+                        <div class= "menu">
                             <ul>
                                 <li>
                                     <Link to="/project">Projects</Link>
