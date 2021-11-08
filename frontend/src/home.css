@@ -1,32 +1,4 @@
-* {
-    box-sizing: border-box;
-}
-
-body{
-    margin:-8px;
-}
-
-/* --------------------- NAVIGATION SECTION -------------------*/
-nav{
-    background-color: #00008b;
-    position: fixed;
-    width: 100%;
-}
-
-.images, .menu{
-    display: inline-block;
-} 
-
-.menu{
-    float: right;
-    margin: 30px;
-}
-
-.menu ul{
-    list-style: none;
-    padding-left: 0px;
-    margin: 0;
-}
+html { scroll-behavior: smooth; } 
 
 .menu ul li{
     display: inline-block;
@@ -40,22 +12,29 @@ nav{
     font-size: 18px;
     color: white;
     padding: 20px 10px 20px 10px;
+    margin-right: 20px;
+    
 }
-
-.menu ul li a:hover {
-    background-color: #00008b;
-    color: gray;
-    transition: all 0.5s ease;
-}
-
-.container{
-    display:inline-block;
-}
-
 .img1{
     width: 50px;
     height: auto;
     margin: 10px;
     margin-left: 15px;
+}
+
+.img{
+    margin-right: 50px;
+}
+
+.tformat{
+    margin-left: 50px;
+}
+
+.format{
+    margin-left: 20px;
+}
+
+.about{
+    margin-left: 35px;
 }
 

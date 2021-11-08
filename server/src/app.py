@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from database import init_db
 from Models.project import ProjectSchema, Project
-from auth import check_token
+from auth import check_token, init_firebase
 
 app = Flask(__name__)
 
@@ -47,4 +47,5 @@ def handleProjects():
 
 if __name__ == "__main__":
     init_db()
+    init_firebase()
     app.run(debug=True, load_dotenv=True)

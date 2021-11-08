@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { Login } from './Login.jsx';
 import { Home } from './Home.jsx';
 import {initInterceptor} from './firebaseAuth';
-import { Navbar } from './Toolbar.jsx';
-import { createTheme, ThemeProvider, Button } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+import {Projects} from './Projects.jsx';
+import { DataSets } from './DataSets.jsx';
 
 const theme = createTheme({
   palette: {
@@ -27,12 +27,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>} />
           <Route path="/login" element={<Login></Login>} />
-          {/* <Route path="/projects" element={<Projects></Projects>} /> */}
+          <Route path="/projects" element={<Projects></Projects>} />
+          <Route path="/data" element={<DataSets></DataSets>} />
           {/* <Route path="/hardwaresets" element={<HardwareSets></HardwareSets>} /> */}
         </Routes>
       </Router>
     </ThemeProvider>
-    
   );
 }
 

@@ -5,7 +5,10 @@ from bson.objectid import ObjectId
 
 class Project:
     def __init__(self, id: str = "", creator:str = "", hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = ""):
-        self.id = ObjectId(id)
+        if id != "":
+            self.id = ObjectId(id)
+        else:
+            self.id = id
         self.projectName = projectName
         self.creator = creator
         self.hardwares = hardwares
@@ -53,7 +56,12 @@ class Project:
         query = {
             'creator': creator
         }
-        items = database.client.projects.find(query).skip(offset).limit(10)
+
+        projection = {
+            "hardwares": 0
+        }
+
+        items = database.client.projects.find(query, projection=projection).skip(offset).limit(10)
         return ProjectSchema(many=True).dump(items)
 
 class ProjectSchema(Schema):
