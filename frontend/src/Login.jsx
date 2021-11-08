@@ -3,9 +3,8 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import './login.css';
 import logo from "./assets/BB.png"
-import {Box, Container} from '@material-ui/core';
-
-
+import {Box} from '@material-ui/core';
+import 'firebase/auth';
 
 export class Login extends React.Component {
     constructor(props) {
