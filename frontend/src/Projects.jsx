@@ -90,11 +90,11 @@ export function Projects(props){
                   <TableRow>
                     <TableCell align="middle">Project Name</TableCell>
                     <TableCell align="middle">Date Created</TableCell>
-                    <TableCell align="middle">Last Updated&nbsp;</TableCell>
-                    <TableCell align="middle">Creator&nbsp;</TableCell>
-                    <TableCell align="middle">Funds&nbsp;</TableCell>
-                    <TableCell align="middle">Edit&nbsp;</TableCell>
-                    <TableCell align="middle">Delete&nbsp;</TableCell>
+                    <TableCell align="middle">Last Updated</TableCell>
+                    <TableCell align="middle">Creator</TableCell>
+                    <TableCell align="middle">Funds</TableCell>
+                    <TableCell align="middle">Edit</TableCell>
+                    <TableCell align="middle">Delete</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
