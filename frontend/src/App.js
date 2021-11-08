@@ -27,7 +27,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home></Home>} />
           <Route path="/login" element={<Login></Login>} />
-          {/* <Route path = "/Toolbar" element = {<Navbar></Navbar>} /> */}
           {/* <Route path="/projects" element={<Projects></Projects>} /> */}
           {/* <Route path="/hardwaresets" element={<HardwareSets></HardwareSets>} /> */}
         </Routes>
