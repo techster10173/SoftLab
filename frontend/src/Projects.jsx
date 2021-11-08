@@ -33,13 +33,6 @@ function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, 
   
   const rows = [
     createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button >Edit</Button>, <Button>Delete</Button>),
   ];
 
 export function Projects(props){
