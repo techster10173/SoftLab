@@ -16,24 +16,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-const style = {
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
     
   function createData(name, description, memory, download) {
       return {name, description, memory, download};
     }
     
     const rows = [
-      createData('Project 1', 'testing', '30mb',<a href='/somefile.txt' download>Click to download</a>)
+      createData('Project 1', 'testing', '30mb',<a href='/somefile.txt' download>Click to download</a>),
+      createData('Project 2', 'testing', '30mb',<a href='/somefile.txt' download>Click to download</a>),
+      createData('Project 3', 'testing', '30mb',<a href='/somefile.txt' download>Click to download</a>),
+      
     ];
 
 export class DataSets extends React.Component {
@@ -43,18 +35,16 @@ export class DataSets extends React.Component {
                 <Navbar />
           <Box
               sx={{
-                height: 300,
                 marginLeft: 10,
                 marginRight: 10,
                 marginTop: 10,
                 marginBottom: 10,
-                // backgroundColor: 'primary.dark',
                 
                 boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
             }}
           >
-            <TableContainer component={Paper} left>
-              <Table sx={{ minWidth: 400 }} aria-label="simple table">
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell align="middle">Name</TableCell>
