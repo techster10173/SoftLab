@@ -1,5 +1,4 @@
-{
-    "data": [
+[
       {
         "name": "Abdominal and Direct Fetal ECG Database",
         "description": "The research material included in the Abdominal and Direct Fetal Electrocardiogram Database contains multichannel fetal electrocardiogram (FECG) recordings obtained from 5 different women in labor, between 38 and 41 weeks of gestation. The recordings were acquired in the Department of Obstetrics at the Medical University of Silesia, by means of the KOMPOREL system for acquisition and analysis of fetal electrocardiogram (ITAM Institute, Zabrze, Poland). Each recording comprises four differential signals acquired from maternal abdomen and the reference direct fetal electrocardiogram registered from the fetal head.",
@@ -67,4 +66,3 @@
         "download": "https://physionet.org/static/published-projects/crisdb/cast-rr-interval-sub-study-database-1.0.0.zip"
       }
     ]
-  }
