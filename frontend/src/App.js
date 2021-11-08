@@ -3,9 +3,12 @@ import './App.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { Login } from './Login.jsx';
 import { Home } from './Home.jsx';
+import {initInterceptor} from './firebaseAuth';
 
 
 function App() {
+  initInterceptor();
+
   return (
     <Router>
       <Routes>
