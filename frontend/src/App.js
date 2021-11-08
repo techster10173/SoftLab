@@ -6,6 +6,7 @@ import { Home } from './Home.jsx';
 import {initInterceptor} from './firebaseAuth';
 import { createTheme, ThemeProvider } from '@material-ui/core';
 import {Projects} from './Projects.jsx';
+import { DataSets } from './DataSets.jsx';
 
 const theme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Home></Home>} />
           <Route path="/login" element={<Login></Login>} />
           <Route path="/projects" element={<Projects></Projects>} />
+          <Route path="/data" element={<DataSets></DataSets>} />
           {/* <Route path="/hardwaresets" element={<HardwareSets></HardwareSets>} /> */}
         </Routes>
       </Router>
