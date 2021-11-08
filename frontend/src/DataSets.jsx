@@ -1,6 +1,6 @@
 import {Navbar} from "./Toolbar.jsx";
 import React from "react";
-import './Projects.css';
+import './projects.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

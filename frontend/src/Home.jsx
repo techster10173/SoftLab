@@ -86,7 +86,7 @@ export function Home(props){
                             secondary={
                                 <React.Fragment>
                                     <Typography
-                                        sx={{ display: 'inline' }}
+                                        sx={{ display: 'inline'}}
                                         component="span"
                                         variant="body"
                                         color="text.primary"
@@ -96,6 +96,7 @@ export function Home(props){
                                 </React.Fragment>
                             }
                         />
+                        
                     </ListItem>
 
                     <ListItem alignItems="flex-start">

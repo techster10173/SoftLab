@@ -1,5 +1,5 @@
 import React from 'react';
-import './Projects.css';
+import './projects.css';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,7 +19,7 @@ function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, 
   
   const rows = [
     createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>)
-
+    
   ];
 
   export class ProjectsTable extends React.Component{
@@ -53,12 +53,11 @@ function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, 
                   marginLeft: 5,
                   marginRight: 5,
                   marginTop: 5,
-                  marginBottom: 5,
-                  // backgroundColor: 'primary.dark', 
+                  marginBottom: 5, 
                   boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
               }}>
                   <Table aria-label="simple table">
-                    <TableHead sx={{backgroundColor: 'primary.dark'}}>
+                    <TableHead sx={{backgroundColor: 'primary.color'}}>
                       <TableRow>
                         <TableCell align="middle">Project Name</TableCell>
                         <TableCell align="middle">Date Created</TableCell>
