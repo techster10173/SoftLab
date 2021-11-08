@@ -10,7 +10,7 @@ import Dhruva from "./assets/dhruva.jfif"
 import HaaS from "./assets/haas.jpg"
 
 
-import { createTheme, ThemeProvider, Button, Toolbar, AppBar, Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
+import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 
 export function Home(props){
     const titleRef = useRef(null)
