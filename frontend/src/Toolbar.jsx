@@ -5,14 +5,13 @@ import logo from "./assets/BB.png"
 
 export function Navbar(props){
     return(
-        <div>
-            <AppBar variant = "contained" color = "primary">
+            <AppBar variant="contained" color="primary">
                 <Toolbar>
-                    <div class="container">
+                    <div>
                             <img src={logo} alt="logo" class="img1"/>
                         </div>
 
-                        <div class="nav">
+                        <div class>
                             <ul>
                                 <li>
                                     <Link to="/project">Projects</Link>
@@ -27,6 +26,5 @@ export function Navbar(props){
                         </div>
                 </Toolbar>
             </AppBar>
-        </div>
     )
 }
