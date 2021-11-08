@@ -67,12 +67,6 @@ export class Projects extends React.Component{
     return(
         <div>
           <Navbar />
-          {/* <Button sx={{
-              width:'auto',
-              marginTop: 5,
-              marginLeft: 85,
-              marginRight: 10,
-          }} onClick={this.openCreateModal}>Create Project</Button> */}
             <ProjectsTable/>
           <Fab sx={
             fabStyle
