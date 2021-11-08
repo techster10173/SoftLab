@@ -129,7 +129,8 @@ export class ProjectModal extends React.Component {
                                 value={this.state.projectDescription}
                                 onChange={this.handleDescriptionChange}
                             />
-                            {this.props.pid ? <HardwareTable data={this.state.hardwareData}/> : null}
+                            {/* This will be commented out until HardwareTable component is created */}
+                            {/* {this.props.pid ? <HardwareTable data={this.state.hardwareData}/> : null} */}
                             <Button type="submit">{this.props.pid ? "Update" : "Create"}</Button>
                         </FormControl>
                     </form>
