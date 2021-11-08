@@ -2,8 +2,6 @@ import {Navbar} from "./Toolbar.jsx";
 import React from "react";
 import './Projects.css';
 
-import { Link } from 'react-router-dom';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,9 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 
     
   function createData(name, description, memory, download) {
