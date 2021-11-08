@@ -3,6 +3,11 @@ import './Projects.css';
 
 import { Link } from 'react-router-dom';
 
+import {ProjectModal} from "./ProjectModal.jsx";
+import {Navbar} from "./Toolbar.jsx";
+import {Fab} from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -47,6 +52,17 @@ export class Projects extends React.Component{
         showModal: false
     }
   } 
+  projectHandler = (pid) => {
+    this.setState({currentProject: pid, showModal: true});
+  }
+
+  openCreateModal = () => {
+      this.projectHandler(null);
+  }
+
+  closeModal = () => {
+      this.setState({showModal: false});
+  }
   render(){
     const style = {
       position: 'absolute',
@@ -58,6 +74,15 @@ export class Projects extends React.Component{
       border: '2px solid #000',
       boxShadow: 24,
       p: 4,
+    }
+
+    const fabStyle = {
+      margin: 0,
+      top: 'auto',
+      right: 20,
+      bottom: 20,
+      left: 'auto',
+      position: 'fixed',
     }
   
     return(
