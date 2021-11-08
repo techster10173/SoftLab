@@ -88,7 +88,7 @@ export class ProjectModal extends React.Component {
     }
 
     render() {
-        const style = {
+        const wrapperStyle = {
             position: 'absolute',
             top: '50%',
             left: '50%',
@@ -98,24 +98,26 @@ export class ProjectModal extends React.Component {
             boxShadow: 24,
             padding: 2,
             display: "flex",
-            flexWrap: "wrap",
             borderRadius: 4,
           };
+
+        const cancelButtonStyle = {
+            background: "#f50057", width:"27%", marginRight: "3%", "&:hover": {background: "#ab003c"}
+        }
 
         return (
             <Modal
                 open={this.props.displayModal}
             >
-                <Box sx={style}>
-                    <h1>Create Project</h1>
+                <Box sx={wrapperStyle}>
+                    <h1>{this.props.pid ? "Update" : "Create"} Project</h1>
                     <form onSubmit={this.props.pid ? this.updateProject : this.createProject}>
                         <FormControl>
                             <div>
-                                <TextField label="Name" sx={{width: '14ch'}} value={this.state.projectName} onChange={this.handleNameChange} />
+                                <TextField label="Name" sx={{width: '100%', marginBottom: "5%"}} value={this.state.projectName} onChange={this.handleNameChange} />
                                 <OutlinedInput
                                     type="number"
-                                    label="Funds"
-                                    sx={{width: '25ch'}}
+                                    sx={{width: '100%', marginBottom: "5%"}}
                                     value={this.state.projectFunds}
                                     onChange={this.handleFundsChange}
                                     startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -126,10 +128,14 @@ export class ProjectModal extends React.Component {
                                 label="Description"
                                 multiline
                                 rows={4}
+                                sx={{marginBottom: "5%"}}
                                 value={this.state.projectDescription}
                                 onChange={this.handleDescriptionChange}
                             />
-                            <Button type="submit">{this.props.pid ? "Update" : "Create"}</Button>
+                            <div>
+                                <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
+                                <Button variant="contained" type="submit" sx={{width: "70%"}}>{this.props.pid ? "Update" : "Create"}</Button>
+                            </div>
                         </FormControl>
                     </form>
                 </Box>
