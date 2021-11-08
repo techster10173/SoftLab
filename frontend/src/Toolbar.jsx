@@ -22,6 +22,9 @@ export function Navbar(props){
                             <li>
                                 <Link to="/data">Data Sets</Link>
                             </li>
+                            <li>
+                                <Link to="/">Logout</Link>
+                            </li>
                         </ul>
                     </div>
                 </Toolbar>
