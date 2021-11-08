@@ -1,0 +1,18 @@
+#login_body{
+    background-color: dimgrey;
+    height: 80vh;
+    padding-top: 20vh;
+}
+#rectangle {
+    height: 50px;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+  }
+.log_logo{
+    width: 100px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20%;
+    margin-top: 8%;
+}
