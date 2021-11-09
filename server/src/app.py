@@ -1,12 +1,52 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
+from auth import Auth
 from database import init_db
 from Models.project import ProjectSchema, Project
-from auth import check_token, init_firebase
+from auth import check_auth
+from os import environ
 
 app = Flask(__name__)
 
+@app.route('/api/auth', methods=["GET", "POST"])
+def handle_auth():
+    json_data = request.get_json()
+    auth_handler = Auth(json_data["uname"], json_data["pass"])
+
+    if request.method == "POST":
+        try:
+            auth_handler.signup()
+            return jsonify({"message": "Signed Up!"}), 200
+        except Exception as e:
+            if str(e) == "User Exists":
+                return jsonify({"message": str(e)}), 409
+            else:
+                print(e)
+                return jsonify({"message": "Internal Server Error"}), 500
+    else:
+        try:
+            if auth_handler.login():
+                return jsonify({"message": "Logged In!"}), 200
+            else:
+                return jsonify({"message": "Invalid Credentials"}), 405
+        except Exception as e:
+            if str(e) == "No Account":
+                return jsonify({"message": str(e)}), 409
+            else:
+                print(e)
+                return jsonify({"message": "Internal Server Error"}), 500
+            
+
+@app.route("/api/auth/signout", methods=["POST"])
+@check_auth
+def handle_signout():
+    json_data = request.get_json()
+    auth_handler = Auth(json_data["uname"], json_data["pass"])
+    auth_handler.logout()
+    return jsonify({"message": "Logged Out!"}), 200
+
+
 @app.route('/api/projects/<pid>/', methods=('GET', 'PUT', 'DELETE'))
-@check_token
+@check_auth
 def handleSpecificProject(pid: str):
     schema = ProjectSchema()
     if request.method == 'GET':
@@ -32,7 +72,7 @@ def handleSpecificProject(pid: str):
             return jsonify({"error": str(e)}), 403
 
 @app.route('/api/projects/', methods=('GET', 'POST'))
-@check_token
+@check_auth
 def handleProjects():
     schema = ProjectSchema()
     if request.method == 'GET':
@@ -47,5 +87,6 @@ def handleProjects():
 
 if __name__ == "__main__":
     init_db()
-    init_firebase()
+    app.secret_key = environ.get("SECRET_KEY")
     app.run(debug=True, load_dotenv=True)
+
