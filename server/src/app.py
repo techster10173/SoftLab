@@ -4,7 +4,6 @@ from database import init_db
 from Models.project import ProjectSchema, Project
 from auth import check_auth
 from os import environ
-import bcrypt
 
 app = Flask(__name__)
 
