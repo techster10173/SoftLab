@@ -12,15 +12,18 @@ function HardwareList(props) {
     const deleteArticle = (article) => {
         APIService.DeleteArticle(article.name)
         .then(() => props.deleteArticle(article))
-
     }
+
+    // cosnt[]
+    // const[projectName, setProjectName] = useState(props.projects.projectName)
+    // const[projectFunds, setProjectFunds] = useState(props.projects.funds)
 
     return (
         <div>
             {props.articles && props.articles.map(article => {
             return(
                 <div key = {article.name}>
-                    <h1>Name: {article.name}</h1>
+                    <h1>Hardware Name: {article.name}</h1>
                     <h3>Capacity: {article.capacity}</h3>
                     <h3>Unit Price: {article.unitPrice}</h3>
                     <h3>Units Used: {article.unitsUsed}</h3>
@@ -32,24 +35,20 @@ function HardwareList(props) {
                             >Update</button>
                         </div>
 
-                        <div className = "col">
+
+
+
+                        {/* <div className = "col">
                             <button className = "btn btn-danger"
                             onClick = {() => deleteArticle(article)}
                             
                             >Delete</button>
-                        </div>
+                        </div> */}
                     </div>
-
-
                     <hr/>
-
-
                 </div>
-
- 
             )
-            })}
-            
+            })}            
         </div>
     )
 }

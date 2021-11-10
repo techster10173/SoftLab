@@ -16,6 +16,8 @@ import ssl
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/api/projects/<pid>/', methods=('GET', 'PUT', 'DELETE'))
 @check_token
