@@ -180,9 +180,9 @@ export class ProjectModal extends React.Component {
                                 onChange={this.handleDescriptionChange}
                             />
                             <div>
-                                {this.props.pid ? <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button> : null}
                                 <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
-                                <Button variant="contained" type="submit" sx={{width: "44%"}}>{this.props.pid ? "Update" : "Create"}</Button>
+                                {this.props.pid ? <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button> : null}
+                                <Button variant="contained" type="submit" sx={this.props.pid ? {width: "44%"}:{width: "72%"}}>{this.props.pid ? "Update" : "Create"}</Button>
                             </div>
                         </FormControl>
                     </form>
