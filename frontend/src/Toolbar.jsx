@@ -9,7 +9,7 @@ export function Navbar(props){
     const [open, setOpen] = useState(false);
 
     const logout = () => {
-        axios.post('/api/auth/signout').then(res => {
+        axios.post('/auth/signout').then(res => {
             setOpen(true);
         }).catch(err => {
             console.error(err);
