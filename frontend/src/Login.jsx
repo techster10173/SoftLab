@@ -20,7 +20,7 @@ export class Login extends React.Component {
     }
 
     login = () => {
-        axios.put('/api/auth/', {
+        axios.put('/auth/', {
             uname: this.state.username,
             pass: this.state.password
         }).then(res => {
@@ -38,7 +38,7 @@ export class Login extends React.Component {
     }
 
     signup = () => {
-        axios.post('/api/auth/', {
+        axios.post('/auth/', {
             uname: this.state.username,
             pass: this.state.password
         }).then(res => {
