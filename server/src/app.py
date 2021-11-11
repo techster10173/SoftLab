@@ -4,6 +4,7 @@ from database import init_db
 from Models.project import ProjectSchema, Project
 from auth import check_auth
 from os import environ
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
@@ -51,26 +52,27 @@ def handle_signout():
 def handleSpecificProject(pid: str):
     schema = ProjectSchema()
     if request.method == 'GET':
-        project = Project(pid)
+        project = Project(id=pid, creator=request.user)
         try:
             project_data = project.get_project()
             return jsonify({"projectData": project_data}), 200
         except Exception as e:
-            return jsonify({"error": str(e)}), 403
+            return jsonify({"error": str(e)}), 500
     elif request.method == 'PUT':
         project = schema.load(request.json, partial=True, unknown="INCLUDE")
-        project.id = pid
+        project.id = ObjectId(pid)
+        project.creator = request.user
         try:
             project.update_project()
             return jsonify({"message": "Project Updated"}), 200
         except Exception as e:
-            return jsonify({"error": str(e)}), 403
+            return jsonify({"error": str(e)}), 500
     elif request.method == 'DELETE':
-        project = Project(pid)
+        project = Project(id=pid, creator=request.user)
         try:
             return jsonify({"projectData": project.delete_project()}), 200
         except Exception as e:
-            return jsonify({"error": str(e)}), 403
+            return jsonify({"error": str(e)}), 500
 
 @app.route('/api/projects/', methods=('GET', 'POST'))
 @check_auth
@@ -83,7 +85,8 @@ def handleProjects():
         return jsonify({"projectData": project_data}), 200
     elif request.method == 'POST':
         project = schema.load(request.json, partial=True, unknown="INCLUDE")
-        project.create_project(request.user)
+        project.creator = request.user
+        project.create_project()
         return jsonify({"message": "Created Successfully"}), 201
 
 if __name__ == "__main__":

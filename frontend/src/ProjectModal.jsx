@@ -22,8 +22,8 @@ export class ProjectModal extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.displayModal && !prevProps.displayModal && this.props.pid) {
-            axios.get(`/api/projects/${this.props.pid}`).then(res => res.json()).then(res => {
-                const data = res.projectData;
+            axios.get(`/api/projects/${this.props.pid}/`).then(res => {
+                const data = res.data.projectData;
                 this.setState({
                     projectName: data.projectName,
                     projectDescription: data.description,
@@ -59,8 +59,8 @@ export class ProjectModal extends React.Component {
             return;
         }
 
-        axios.put(`/api/project/${this.props.pid}`, {
-            name: this.state.projectName,
+        axios.put(`/api/projects/${this.props.pid}/`, {
+            projectName: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds
         }).then(res => {
@@ -91,7 +91,7 @@ export class ProjectModal extends React.Component {
         }
 
         axios.post('/api/projects/', {
-            name: this.state.projectName,
+            projectName: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds,
         }).then(res => {
@@ -114,30 +114,25 @@ export class ProjectModal extends React.Component {
     }
 
     deleteProject = (event) => {
-        // event.preventDefault();
-        // axios.delete('/api/projects/', { data: {
-        //     name: this.state.projectName,
-        //     description: this.state.projectDescription,
-        //     funds: this.state.projectFunds,
-        // }
-        // }).then(res => {
-        //     MySwal.fire({
-        //         icon: "success",
-        //         title: "Project Deleted!",
-        //         timer: 1500
-        //     });
-        //     this.props.closeModalHandler();
-        // }).catch(err => {
-        //     MySwal.fire({
-        //         icon: "error",
-        //         title: "Whoops! Unexpected Problem",
-        //         text: "Please Try Again",
-        //         timer: 1500
-        //     });
-        //     console.log(err);
-        // });
-
+        event.preventDefault();
+        axios.delete(`/api/projects/${this.props.pid}/`).then(res => {
+            MySwal.fire({
+                icon: "success",
+                title: "Project Deleted!",
+                timer: 1500
+            });
+            this.props.closeModalHandler();
+        }).catch(err => {
+            MySwal.fire({
+                icon: "error",
+                title: "Whoops! Unexpected Problem",
+                text: "Please Try Again",
+                timer: 1500
+            });
+            console.log(err);
+        });
     }
+
     render() {
         const wrapperStyle = {
             position: 'absolute',
@@ -185,7 +180,7 @@ export class ProjectModal extends React.Component {
                                 onChange={this.handleDescriptionChange}
                             />
                             <div>
-                                <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button>
+                                {this.props.pid ? <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button> : null}
                                 <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
                                 <Button variant="contained" type="submit" sx={{width: "44%"}}>{this.props.pid ? "Update" : "Create"}</Button>
                             </div>
