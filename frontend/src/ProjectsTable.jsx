@@ -40,7 +40,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                         <TableCell align="middle">Project Name</TableCell>
                         <TableCell align="middle">Date Created</TableCell>
                         <TableCell align="middle">Last Updated</TableCell>
-                        <TableCell align="middle">Creator</TableCell>
+                        {/* <TableCell align="middle">Creator</TableCell> */}
                         <TableCell align="middle">Funds</TableCell>
                         <TableCell align="middle">Edit</TableCell>
                       </TableRow>
@@ -52,10 +52,10 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell align="middle">{row.projectName}</TableCell>
-                          <TableCell align="middle">{row.dateCreated}</TableCell>
-                          <TableCell align="middle">{row.dateUpdated}</TableCell>
-                          <TableCell align="middle">{row.creator}</TableCell>
-                          <TableCell align="middle">{row.funds}</TableCell>
+                          <TableCell align="middle">{(new Date(row.dateCreated)).toLocaleString()}</TableCell>
+                          <TableCell align="middle">{(new Date(row.dateUpdated)).toLocaleString()}</TableCell>
+                          {/* <TableCell align="middle">{row.creator}</TableCell> */}
+                          <TableCell align="middle">${row.funds}</TableCell>
                           <TableCell align="middle"><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
                         </TableRow>
                       ))}
