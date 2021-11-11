@@ -14,6 +14,8 @@ import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, 
 
 export function Home(props){
 
+    const avatarStyle = {height : '100px', width : '100px'};
+
     return (
         <div>
             <AppBar variant = "contained" color = "primary" position = 'relative'>
@@ -67,9 +69,10 @@ export function Home(props){
                 <List>
                     <ListItem alignItems="flex-start">
                         <ListItemAvatar class= "format">
-                            <Avatar alt="sai" src={Sai} style ={{height : '100px', width : '100px'}}/>
+                            <Avatar alt="sai" src={Sai} style ={avatarStyle}/>
                         </ListItemAvatar>
-                        <ListItemText
+                        <ListItemText 
+                            sx={{marginLeft:'1%'}}
                             primary="Saiteja Rawulwar"
                             secondary={
                                 <>
@@ -85,9 +88,10 @@ export function Home(props){
                             }
                         />
                         <ListItemAvatar class= "format">
-                            <Avatar alt="sree" src={Sree} style ={{height : '100px', width : '100px'}}/>
+                            <Avatar alt="sree" src={Sree} style ={avatarStyle}/>
                         </ListItemAvatar>
                         <ListItemText
+                            sx={{marginLeft:'1%'}}
                             primary="Sreesaketh Grandhe"
                             secondary={
                                 <React.Fragment>
@@ -98,14 +102,15 @@ export function Home(props){
                                         color="text.primary"
                                     >
                                     </Typography>
-                                    {" Jai Hanuman gyan gun sagar "}
+                                    {" I'm the mad titan "}
                                 </React.Fragment>
                             }
                         />
                         <ListItemAvatar class= "format">
-                            <Avatar alt="sparsh" src={Sparsh} style ={{height : '100px', width : '100px'}}/>
+                            <Avatar alt="sparsh" src={Sparsh} style ={avatarStyle}/>
                         </ListItemAvatar>
                         <ListItemText
+                            sx={{marginLeft:'1%'}}
                             primary="Sparsh Patel"
                             secondary={
                                 <React.Fragment>
@@ -121,9 +126,10 @@ export function Home(props){
                             }
                         />
                         <ListItemAvatar class= "format">
-                            <Avatar alt="hershey" src={Hershey} style ={{height : '100px', width : '100px'}}/>
+                            <Avatar alt="hershey" src={Hershey} style ={avatarStyle}/>
                         </ListItemAvatar>
                         <ListItemText
+                            sx={{marginLeft:'1%'}}
                             primary="Harshit Gupta"
                             secondary={
                                 <React.Fragment>
@@ -139,9 +145,10 @@ export function Home(props){
                             }
                         />
                         <ListItemAvatar class= "format">
-                            <Avatar alt="dhruva" src={Dhruva} style ={{height : '100px', width : '100px'}}/>
+                            <Avatar alt="dhruva" src={Dhruva} style ={avatarStyle}/>
                         </ListItemAvatar>
                         <ListItemText
+                            sx={{marginLeft:'1%'}}
                             primary="Dhruva Rao"
                             secondary={
                                 <React.Fragment>
@@ -152,7 +159,7 @@ export function Home(props){
                                         color="text.primary"
                                     >
                                     </Typography>
-                                    {" fuck i forgot to eat today"}
+                                    {" Frick I forgot to eat today"}
                                 </React.Fragment>
                             }
                         />

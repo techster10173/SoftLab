@@ -133,7 +133,7 @@ export class Login extends React.Component {
                     <Box
                         sx={{
                             width: "300px",
-                            height: 450,
+                            height: 440,
                             backgroundColor: 'white',
                             opacity: [0.9, 0.8, 0.7],
                             padding: "20px 10px 20px 10px",
@@ -143,13 +143,13 @@ export class Login extends React.Component {
                         }}
                     >
                         <Link variant="contained" sx={{width: "33%", left: "15%"}} to="/"><ArrowBackIosOutlinedIcon></ArrowBackIosOutlinedIcon></Link>
-                        <img src={logo} alt="logo" className="log_logo" />
+                        <Link variant="contained" sx={{width: "33%", left: "15%"}} to="/"><img src={logo} alt="logo" className="log_logo" /></Link>
                         <div>
                             <TextField sx={textFieldStyle} onChange={this.updateUsername} value={this.state.username} id="outlined-basic" label="Username" variant="outlined" />
                             <TextField sx={textFieldStyle} onChange={this.updatePassword} value={this.state.password} label="Password" type="password" variant="outlined" />
                             <div>
-                                <Button variant="contained" sx={{width: "33%", left: "15%"}} onClick={this.login}>Login</Button>
-                                <Button variant="contained" sx={{width: "33%", left: "19%"}} onClick={this.signup}>Signup</Button>
+                                <Button variant="contained" sx={{width: "33%", left: "15%"}} onClick={this.signup}>Signup</Button>
+                                <Button variant="contained" sx={{width: "33%", left: "19%"}} onClick={this.login}>Login</Button>
                             </div>   
                         </div>
                     </Box>
