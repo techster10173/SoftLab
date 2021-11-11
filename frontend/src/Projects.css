@@ -1,11 +1,6 @@
 .swal2-container {
     z-index: 1066;
 }
-
-.center{
-margin: auto;
-}
-
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
