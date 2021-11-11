@@ -63,7 +63,7 @@ class Project:
         }
 
         items = database.client.projects.find(query, projection=projection).skip(offset).limit(10)
-        return ProjectSchema(many=True).dump(items)
+        return ProjectSchema(many=True).dump(items), database.client.projects.count_documents(query)
 
 class ProjectSchema(Schema):
     id = fields.Str(attribute='_id')

@@ -81,8 +81,8 @@ def handleProjects():
     if request.method == 'GET':
         if request.args.get('offset') is None:
             return jsonify({"message": "Missing Offset"}), 400
-        project_data = Project.get_projects(int(request.args.get('offset')), request.user)            
-        return jsonify({"projectData": project_data}), 200
+        project_data, count = Project.get_projects(int(request.args.get('offset')), request.user)            
+        return jsonify({"projectData": project_data, "totalProjects": count}), 200
     elif request.method == 'POST':
         project = schema.load(request.json, partial=True, unknown="INCLUDE")
         project.creator = request.user

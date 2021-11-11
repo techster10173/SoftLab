@@ -1,10 +1,8 @@
 import React from 'react';
 import './projects.css';
 import axios from 'axios';
-import { HardwareTable } from './HardwareTable';
 
-
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@mui/material';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Pagination} from '@mui/material';
 
   
   export class ProjectsTable extends React.Component{
@@ -12,18 +10,30 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
       super(props);
       this.state = {
           projects: [],
-          offset: 0
+          offset: 0,
+          totalProjects: 0
       }
     }
 
     componentDidMount(){
+      this.requestProjects();
+    }
+
+    requestProjects = () => {
       axios.get(`/api/projects/?offset=${this.state.offset}`).then(data => {
-        this.setState({projects: data.data.projectData});
+        this.setState({projects: data.data.projectData, totalProjects: data.data.totalProjects});
+      });
+    }
+
+    updateOffset = (e, val) => {
+      this.setState({offset: val - 1}, () => {
+        this.requestProjects();
       });
     }
 
     render(){
         return(
+          <>
                 <TableContainer component={Paper}
                 sx={{
                   width: 'auto',
@@ -64,6 +74,9 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                     </TableBody>
                   </Table>
                 </TableContainer>
+                <Pagination count={this.state.totalProjects/10 + 1} onChange={this.updateOffset}/>
+                </>
+
         )
       } 
     }
