@@ -17,15 +17,16 @@ const theme = createTheme({
   }
 });
 
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home></Home>} />
-          <Route path="/login" element={<Login></Login>} />
-          <Route path="/projects" element={<Projects></Projects>} />
-          <Route path="/data" element={<DataSets></DataSets>} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<Login/> } />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/data" element={<DataSets />} />
           {/* <Route path="/hardwaresets" element={<HardwareSets></HardwareSets>} /> */}
         </Routes>
       </Router>
