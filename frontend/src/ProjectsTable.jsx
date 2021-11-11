@@ -17,7 +17,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
     }
 
     componentDidMount(){
-      axios.get(`/api/projects/?offset=${this.state.offset}`).then(data => {
+      axios.get(`/projects/?offset=${this.state.offset}`).then(data => {
         this.setState({projects: data.data.projectData});
       });
     }

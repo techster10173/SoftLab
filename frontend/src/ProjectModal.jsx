@@ -22,7 +22,7 @@ export class ProjectModal extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.displayModal && !prevProps.displayModal && this.props.pid) {
-            axios.get(`/api/projects/${this.props.pid}/`).then(res => {
+            axios.get(`/projects/${this.props.pid}/`).then(res => {
                 const data = res.data.projectData;
                 this.setState({
                     projectName: data.projectName,
@@ -59,7 +59,7 @@ export class ProjectModal extends React.Component {
             return;
         }
 
-        axios.put(`/api/projects/${this.props.pid}/`, {
+        axios.put(`/projects/${this.props.pid}/`, {
             projectName: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds
@@ -90,7 +90,7 @@ export class ProjectModal extends React.Component {
             return;
         }
 
-        axios.post('/api/projects/', {
+        axios.post('/projects/', {
             projectName: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds,
@@ -115,7 +115,7 @@ export class ProjectModal extends React.Component {
 
     deleteProject = (event) => {
         event.preventDefault();
-        axios.delete(`/api/projects/${this.props.pid}/`).then(res => {
+        axios.delete(`/projects/${this.props.pid}/`).then(res => {
             MySwal.fire({
                 icon: "success",
                 title: "Project Deleted!",
