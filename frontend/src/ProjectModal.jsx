@@ -113,6 +113,9 @@ export class ProjectModal extends React.Component {
         });
     }
 
+    deleteProject = (event) => {
+
+    }
     render() {
         const wrapperStyle = {
             position: 'absolute',
@@ -160,8 +163,9 @@ export class ProjectModal extends React.Component {
                                 onChange={this.handleDescriptionChange}
                             />
                             <div>
+                                <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button>
                                 <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
-                                <Button variant="contained" type="submit" sx={{width: "70%"}}>{this.props.pid ? "Update" : "Create"}</Button>
+                                <Button variant="contained" type="submit" sx={{width: "30%"}}>{this.props.pid ? "Update" : "Create"}</Button>
                             </div>
                         </FormControl>
                     </form>

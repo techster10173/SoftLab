@@ -17,18 +17,8 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
     }
 
     componentDidMount(){
-      axios.get(`/api/projects/${this.state.offset}`).then(res => res.json()).then(data => {
-        data.projectData.map(project => {
-          return {
-            projectName: project.projectName,
-            dateCreated: project.dateCreated,
-            lastUpdate: project.dateUpdated,
-            creator: project.creator,
-            funds: project.funds, 
-            edit: <button>Edit</button>
-          }
-        });
-        this.setState({projects: data.projectData});
+      axios.get(`/api/projects/?offset=${this.state.offset}`).then(data => {
+        this.setState({projects: data.data.projectData});
       });
     }
 
@@ -63,10 +53,10 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                         >
                           <TableCell align="middle">{row.projectName}</TableCell>
                           <TableCell align="middle">{row.dateCreated}</TableCell>
-                          <TableCell align="middle">{row.lastUpdate}</TableCell>
+                          <TableCell align="middle">{row.dateUpdated}</TableCell>
                           <TableCell align="middle">{row.creator}</TableCell>
                           <TableCell align="middle">{row.funds}</TableCell>
-                          <TableCell align="middle">{row.edit}</TableCell>
+                          <TableCell align="middle"><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
