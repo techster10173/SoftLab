@@ -5,7 +5,7 @@ import {Navbar} from "./Toolbar.jsx";
 import {Fab} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {ProjectsTable} from "./ProjectsTable.jsx";
-import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 
 export class Projects extends React.Component{
   constructor(props) {
