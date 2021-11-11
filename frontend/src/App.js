@@ -9,7 +9,7 @@ import { DataSets } from './DataSets.jsx';
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#00008b"
+      main: "#2d2dd2"
     },
     secondary: {
       main: "#ffa500"
