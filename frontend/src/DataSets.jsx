@@ -24,7 +24,7 @@ export class DataSets extends React.Component {
                       <TableCell align="middle">Name</TableCell>
                       <TableCell align="middle">Description</TableCell>
                       <TableCell align="middle">Memory</TableCell>
-                      <TableCell align="middle">Download</TableCell>
+                      <TableCell align="middle" sx={{textAlign: "center"}}>Download</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -37,7 +37,7 @@ export class DataSets extends React.Component {
                           <TableCell align="middle">{row.name}</TableCell>
                           <TableCell align="middle">{row.description}</TableCell>
                           <TableCell align="middle">{row.memory}</TableCell>
-                          <TableCell align="middle">{<a href= {row.download} download><FileDownloadOutlinedIcon/></a>}</TableCell>
+                          <TableCell align="middle" sx={{textAlign: "center"}}>{<a href= {row.download} download><FileDownloadOutlinedIcon/></a>}</TableCell>
                         </TableRow>
                       );
                     })}
