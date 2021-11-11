@@ -1,7 +1,7 @@
 import './home.css';
 import { Link } from 'react-router-dom';
 import React from 'react'
-import logo from "./assets/BB.png"
+import logo from "./assets/BB2.png"
 import Sai from "./assets/Sai.jpg"
 import Sparsh from "./assets/sparsh.jfif"
 import Sree from "./assets/sree.jfif"

@@ -1,7 +1,7 @@
 import {Toolbar, AppBar, Button} from '@mui/material';
 import axios from 'axios';
 import {Link, Navigate} from "react-router-dom";
-import logo from "./assets/BB.png"
+import logo from "./assets/BB2.png"
 import './home.css';
 import { useState } from 'react';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
