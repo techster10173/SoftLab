@@ -82,7 +82,7 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                   </Table>
                 </TableContainer>
                 <div >
-                    <Pagination sx={{width: 'auto' , marginBottom: 5, marginLeft: 5}} align="middle" count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
+                    <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'center', display : 'flex'}} align="middle" count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
                 </div>
                 </>
         )
