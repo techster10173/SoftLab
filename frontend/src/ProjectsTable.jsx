@@ -3,7 +3,7 @@ import './projects.css';
 import axios from 'axios';
 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Pagination} from '@mui/material';
-
+import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
   
   export class ProjectsTable extends React.Component{
     constructor(props) {
@@ -74,7 +74,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                           <TableCell align="middle">{(new Date(row.dateUpdated)).toLocaleString()}</TableCell>
                           {/* <TableCell align="middle">{row.creator}</TableCell> */}
                           <TableCell align="middle">${row.funds}</TableCell>
-                          <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
+                          <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}><LaunchRoundedIcon /></Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
