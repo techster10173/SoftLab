@@ -1,4 +1,3 @@
-import {Navbar} from "./Toolbar.jsx";
 import React from "react";
 import './projects.css';
 import {TableBody, TableCell, TableRow, TableContainer, TableHead, Paper, Table} from '@mui/material';
