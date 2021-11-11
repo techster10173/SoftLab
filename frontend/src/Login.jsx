@@ -25,7 +25,6 @@ export class Login extends React.Component {
             pass: this.state.password
         }).then(res => {
             this.setState({loggedIn: true});
-            console.log(res);
         }).catch(err => {
             this.MySwal.fire({
                 title: 'Login Failed',

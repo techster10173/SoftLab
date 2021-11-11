@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify
 from auth import Auth
 from database import init_db
 from Models.project import ProjectSchema, Project
@@ -15,7 +15,8 @@ def handle_auth():
     if request.method == "POST":
         try:
             auth_handler.signup()
-            return jsonify({"message": "Signed Up!"}), 200
+            respObject = jsonify({"message": "Signed Up!"})
+            return respObject, 200
         except Exception as e:
             if str(e) == "User Exists":
                 return jsonify({"message": str(e)}), 409
@@ -25,7 +26,8 @@ def handle_auth():
     else:
         try:
             if auth_handler.login():
-                return jsonify({"message": "Logged In!"}), 200
+                respObject = jsonify({"message": "Logged In!"})
+                return respObject, 200
             else:
                 return jsonify({"message": "Invalid Credentials"}), 405
         except Exception as e:
@@ -40,7 +42,8 @@ def handle_auth():
 @check_auth
 def handle_signout():
     Auth.logout()
-    return jsonify({"message": "Logged Out!"}), 200
+    respObject = jsonify({"message": "Logged Out!"})
+    return respObject, 200
 
 
 @app.route('/api/projects/<pid>/', methods=('GET', 'PUT', 'DELETE'))
@@ -85,6 +88,9 @@ def handleProjects():
 
 if __name__ == "__main__":
     init_db()
+    app.config.update(
+        SESSION_COOKIE_HTTPONLY=False,
+    )
     app.secret_key = environ.get("SECRET_KEY")
     app.run(debug=True, load_dotenv=True)
 
