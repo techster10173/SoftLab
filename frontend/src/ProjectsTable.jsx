@@ -42,7 +42,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                         <TableCell align="middle">Last Updated</TableCell>
                         {/* <TableCell align="middle">Creator</TableCell> */}
                         <TableCell align="middle">Funds</TableCell>
-                        <TableCell align="middle">Edit</TableCell>
+                        <TableCell align="right">Edit</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -56,7 +56,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                           <TableCell align="middle">{(new Date(row.dateUpdated)).toLocaleString()}</TableCell>
                           {/* <TableCell align="middle">{row.creator}</TableCell> */}
                           <TableCell align="middle">${row.funds}</TableCell>
-                          <TableCell align="middle"><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
+                          <TableCell align="right"><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
