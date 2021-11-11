@@ -3,7 +3,7 @@ import React from "react";
 import './projects.css';
 import {TableBody, TableCell, TableRow, TableContainer, TableHead, Paper, Table} from '@mui/material';
 import data from "./Data.json"
-import FileDownloadRoundedIcon from '@mui/icons-material/FileDownloadRounded';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 export class DataSets extends React.Component {
     render() {
@@ -37,7 +37,7 @@ export class DataSets extends React.Component {
                           <TableCell align="middle">{row.name}</TableCell>
                           <TableCell align="middle">{row.description}</TableCell>
                           <TableCell align="middle">{row.memory}</TableCell>
-                          <TableCell align="middle">{<a href= {row.download} download><FileDownloadRoundedIcon/></a>}</TableCell>
+                          <TableCell align="middle">{<a href= {row.download} download><FileDownloadOutlinedIcon/></a>}</TableCell>
                         </TableRow>
                       );
                     })}
