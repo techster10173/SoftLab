@@ -4,6 +4,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import "./projects.css"
+import "./index.css"
+import zIndex from '@mui/material/styles/zIndex';
 
 const MySwal = withReactContent(Swal)
 

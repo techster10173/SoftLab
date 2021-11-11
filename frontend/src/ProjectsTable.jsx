@@ -38,11 +38,12 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                     <TableHead sx={{backgroundColor: 'primary.color'}}>
                       <TableRow>
                         <TableCell align="middle">Project Name</TableCell>
+                        <TableCell align="middle">Description</TableCell>
                         <TableCell align="middle">Date Created</TableCell>
                         <TableCell align="middle">Last Updated</TableCell>
                         {/* <TableCell align="middle">Creator</TableCell> */}
                         <TableCell align="middle">Funds</TableCell>
-                        <TableCell align="right">Edit</TableCell>
+                        <TableCell align="middle">Edit</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -52,11 +53,12 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell align="middle">{row.projectName}</TableCell>
+                          <TableCell align="middle">{row.description}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateCreated)).toLocaleString()}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateUpdated)).toLocaleString()}</TableCell>
                           {/* <TableCell align="middle">{row.creator}</TableCell> */}
                           <TableCell align="middle">${row.funds}</TableCell>
-                          <TableCell align="right"><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
+                          <TableCell align="middle"><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
