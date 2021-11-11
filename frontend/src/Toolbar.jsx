@@ -1,4 +1,4 @@
-import {Toolbar, AppBar, Button} from '@material-ui/core';
+import {Toolbar, AppBar, Button} from '@mui/material';
 import axios from 'axios';
 import {Link, Navigate} from "react-router-dom";
 import logo from "./assets/BB.png"

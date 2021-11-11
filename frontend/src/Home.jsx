@@ -10,7 +10,7 @@ import Dhruva from "./assets/dhruva.jfif"
 import HaaS from "./assets/haas.jpg"
 
 
-import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
+import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 
 export function Home(props){
 
