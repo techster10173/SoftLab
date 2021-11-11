@@ -113,6 +113,31 @@ export class ProjectModal extends React.Component {
         });
     }
 
+    deleteProject = (event) => {
+        // event.preventDefault();
+        // axios.delete('/api/projects/', { data: {
+        //     name: this.state.projectName,
+        //     description: this.state.projectDescription,
+        //     funds: this.state.projectFunds,
+        // }
+        // }).then(res => {
+        //     MySwal.fire({
+        //         icon: "success",
+        //         title: "Project Deleted!",
+        //         timer: 1500
+        //     });
+        //     this.props.closeModalHandler();
+        // }).catch(err => {
+        //     MySwal.fire({
+        //         icon: "error",
+        //         title: "Whoops! Unexpected Problem",
+        //         text: "Please Try Again",
+        //         timer: 1500
+        //     });
+        //     console.log(err);
+        // });
+
+    }
     render() {
         const wrapperStyle = {
             position: 'absolute',
@@ -128,7 +153,7 @@ export class ProjectModal extends React.Component {
           };
 
         const cancelButtonStyle = {
-            background: "#f50057", width:"27%", marginRight: "3%", "&:hover": {background: "#ab003c"}
+            background: "#f50057", width:"25%", marginRight: "3%", "&:hover": {background: "#ab003c"}
         }
 
         return (
@@ -160,8 +185,9 @@ export class ProjectModal extends React.Component {
                                 onChange={this.handleDescriptionChange}
                             />
                             <div>
+                                <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button>
                                 <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
-                                <Button variant="contained" type="submit" sx={{width: "70%"}}>{this.props.pid ? "Update" : "Create"}</Button>
+                                <Button variant="contained" type="submit" sx={{width: "44%"}}>{this.props.pid ? "Update" : "Create"}</Button>
                             </div>
                         </FormControl>
                     </form>

@@ -41,6 +41,6 @@ def check_auth(f):
         if "uid" not in session:
             return jsonify({'message': 'Not logged in'}), 400
         else:
-            request.uid = session["uid"]
+            request.user = session["uid"]
         return f(*args, **kwargs)
     return wrap

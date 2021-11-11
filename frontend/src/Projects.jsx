@@ -25,6 +25,7 @@ export class Projects extends React.Component{
   closeModal = () => {
       this.setState({showModal: false});
   }
+
   render(){
     const fabStyle = {
         margin: 0,
@@ -38,11 +39,12 @@ export class Projects extends React.Component{
     return(
         <>
           <Navbar />
-            <ProjectsTable/>
+          <ProjectsTable openProject={this.projectHandler}/>
           <Fab sx={
             fabStyle
           } onClick={this.openCreateModal}><AddIcon/></Fab>
           <ProjectModal closeModalHandler={this.closeModal} displayModal={this.state.showModal} pid={this.state.currentProject} />
+
         </>
     )
   } 

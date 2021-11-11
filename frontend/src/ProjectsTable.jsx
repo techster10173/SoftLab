@@ -1,25 +1,26 @@
 import React from 'react';
 import './projects.css';
+import axios from 'axios';
+import { HardwareTable } from './HardwareTable';
+
 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@mui/material';
 
-function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, del) {
-    return {projectName, dateCreated, lastUpdate, creator, funds, edit, del };
-  }
   
-  const rows = [
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>)
-    
-  ];
-
   export class ProjectsTable extends React.Component{
     constructor(props) {
       super(props);
       this.state = {
-          currentProject: null,
-          showModal: false
+          projects: [],
+          offset: 0
       }
-    } 
+    }
+
+    componentDidMount(){
+      axios.get(`/api/projects/?offset=${this.state.offset}`).then(data => {
+        this.setState({projects: data.data.projectData});
+      });
+    }
 
     render(){
         return(
@@ -45,17 +46,17 @@ function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, 
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rows.map((row) => (
+                      {this.state.projects.map((row) => (
                         <TableRow
                           key={row.projectName}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                           <TableCell align="middle">{row.projectName}</TableCell>
                           <TableCell align="middle">{row.dateCreated}</TableCell>
-                          <TableCell align="middle">{row.lastUpdate}</TableCell>
+                          <TableCell align="middle">{row.dateUpdated}</TableCell>
                           <TableCell align="middle">{row.creator}</TableCell>
                           <TableCell align="middle">{row.funds}</TableCell>
-                          <TableCell align="middle">{row.edit}</TableCell>
+                          <TableCell align="middle"><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
