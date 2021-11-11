@@ -1,5 +1,5 @@
 import React from 'react';
-import './projects.css';
+import './project.css';
 import {ProjectModal} from "./ProjectModal.jsx";
 import {Navbar} from "./Toolbar.jsx";
 import {Fab} from '@mui/material';
