@@ -81,8 +81,8 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <div>
-                    <Pagination sx={{marginLeft: "47%"}} align="middle" count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
+                <div >
+                    <Pagination sx={{width: 'auto' , marginBottom: 5, marginLeft: 5}} align="middle" count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
                 </div>
                 </>
         )
