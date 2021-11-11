@@ -1,25 +1,36 @@
 import React from 'react';
 import './projects.css';
+import axios from 'axios';
+import { HardwareTable } from './HardwareTable';
+
 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@mui/material';
 
-function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, del) {
-    return {projectName, dateCreated, lastUpdate, creator, funds, edit, del };
-  }
   
-  const rows = [
-    createData('Project 1', '11/7/2021', '11/7/2021', 'BBois', 100, <Button>Edit</Button>)
-    
-  ];
-
   export class ProjectsTable extends React.Component{
     constructor(props) {
       super(props);
       this.state = {
-          currentProject: null,
-          showModal: false
+          projects: [],
+          offset: 0
       }
-    } 
+    }
+
+    componentDidMount(){
+      axios.get(`/api/projects/${this.state.offset}`).then(res => res.json()).then(data => {
+        data.projectData.map(project => {
+          return {
+            projectName: project.projectName,
+            dateCreated: project.dateCreated,
+            lastUpdate: project.lastUpdate,
+            creator: project.creator,
+            funds: project.funds, 
+            edit: <button>Edit</button>
+          }
+        });
+        this.setState({projects: data.projectData});
+      });
+    }
 
     render(){
         return(
@@ -45,7 +56,7 @@ function createData(projectName, dateCreated, lastUpdate, creator, funds, edit, 
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rows.map((row) => (
+                      {this.state.projects.map((row) => (
                         <TableRow
                           key={row.projectName}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

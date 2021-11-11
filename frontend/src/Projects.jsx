@@ -38,7 +38,7 @@ export class Projects extends React.Component{
     return(
         <>
           <Navbar />
-            <ProjectsTable/>
+          <ProjectsTable openProject={this.projectHandler}/>
           <Fab sx={
             fabStyle
           } onClick={this.openCreateModal}><AddIcon/></Fab>
