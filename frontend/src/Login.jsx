@@ -33,6 +33,24 @@ export class Login extends React.Component {
     }
 
     login = (e) => {
+        if(this.state.username === ""){
+            this.MySwal.fire({
+                title: 'Username cannot be empty',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        if(this.state.password === ""){
+            this.MySwal.fire({
+                title: 'Password cannot be empty',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
         e.preventDefault();
         axios.put('/auth/', {
             uname: this.state.username,
@@ -55,6 +73,25 @@ export class Login extends React.Component {
 
     signup = (e) => {
         e.preventDefault();
+
+        if(this.state.username === ""){
+            this.MySwal.fire({
+                title: 'Username cannot be empty',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        if(this.state.password === ""){
+            this.MySwal.fire({
+                title: 'Password cannot be empty',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
         axios.post('/auth/', {
             uname: this.state.username,
             pass: this.state.password
