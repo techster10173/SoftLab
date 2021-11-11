@@ -1,6 +1,6 @@
 import React from 'react';
 import './login.css';
-import logo from "./assets/BB.png"
+import logo from "./assets/newLogo.png"
 import {Button, TextField, Box} from '@mui/material';
 import axios from 'axios';
 import {Navigate} from 'react-router-dom';
