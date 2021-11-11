@@ -10,14 +10,7 @@ import Dhruva from "./assets/dhruva.jfif"
 import HaaS from "./assets/haas.jpg"
 
 
-import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography, Box, Grid, Paper, styled} from '@mui/material';
-
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography, Box, Grid, Paper} from '@mui/material';
 
 export function Home(props){
 
@@ -28,28 +21,20 @@ export function Home(props){
                     <div class="container">
                             <img src={logo} alt="logo" class="img1"/>
                         </div>
-
-                        <div class="menu">
-                            <ul>
-                                <li>
-                                    <a href="#about">About</a>
-                                </li>
-                                <li>
-                                    <a href="#the-team">The Team</a>
-                                </li>
-                                <li>
-                                    <Link to="/login">Login</Link>
-                                </li>
-                            </ul>
+                        <div class = "haas">
+                            <h2 href="">Brown Bois</h2> 
+                        </div>
+                        <div class="log">
+                            <Link to="/login">Login</Link>
                         </div>
                 </Toolbar>
             </AppBar>   
 
         <div id="#about">
 
-            <h1 class = "tformat">
+            <h2 class = "tformat">
                 About our Product
-            </h1>
+            </h2>
 
             <List>
             <ListItem alignItems="flex-start">
@@ -76,123 +61,103 @@ export function Home(props){
 
         <div id="#the-team">
             <div class = "team">
-                <h1 class = "tformat">
+                <h2 class = "tformat">
                     Meet our Team
-                </h1>
-                <Box sx={{ width: '100%' }}>
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={6}>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar class= "format">
-                                    <Avatar alt="sai" src={Sai} style ={{height : '250px', width : '250px'}}/>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Saiteja Rawulwar"
-                                    secondary={
-                                        <>
-                                            <Typography
-                                                sx={{ display: 'inline'}}
-                                                component="span"
-                                                variant="body"
-                                                color="text.primary"
-                                            >
-                                            </Typography>
-                                        {" I am an ECE student specializing in Software Engineering and Design and the University of Texas at Austin"}
-                                        </>
-                                    }
-                                />
-                            </ListItem>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar class= "format">
-                                    <Avatar alt="sree" src={Sree} style ={{height : '250px', width : '250px'}}/>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Sreesaketh Grandhe"
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component="span"
-                                                variant="body"
-                                                color="text.primary"
-                                            >
-                                            </Typography>
-                                        {"Sree's bio"}
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar class= "format">
-                                    <Avatar alt="sparsh" src={Sparsh} style ={{height : '250px', width : '250px'}}/>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Sparsh Patel"
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component="span"
-                                                variant="body"
-                                                color="text.primary"
-                                            >
-                                            </Typography>
-                                        {" Sparsh's bio"}
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar class= "format">
-                                    <Avatar alt="hershey" src={Hershey} style ={{height : '250px', width : '250px'}}/>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Harshit Gupta"
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component="span"
-                                                variant="body"
-                                                color="text.primary"
-                                            >
-                                            </Typography>
-                                        {" Harshit's bio"}
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                        </Grid>
-                        <Grid item xs = {6}>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar class= "format">
-                                    <Avatar alt="dhruva" src={Dhruva} style ={{height : '250px', width : '250px'}}/>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary="Dhruva Rao"
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component="span"
-                                                variant="body"
-                                                color="text.primary"
-                                            >
-                                            </Typography>
-                                        {" Dhruva's bio"}
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>                            
-                        </Grid>
-                    </Grid>
-                </Box>
+                </h2>
+                <List>
+                    <ListItem alignItems="flex-start">
+                        <ListItemAvatar class= "format">
+                            <Avatar alt="sai" src={Sai} style ={{height : '100px', width : '100px'}}/>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary="Saiteja Rawulwar"
+                            secondary={
+                                <>
+                                    <Typography
+                                        sx={{ display: 'inline'}}
+                                        component="span"
+                                        variant="body"
+                                        color="text.primary"
+                                    >
+                                    </Typography>
+                                {" MMA fighter pre brain damage"}
+                                </>
+                            }
+                        />
+                        <ListItemAvatar class= "format">
+                            <Avatar alt="sree" src={Sree} style ={{height : '100px', width : '100px'}}/>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary="Sreesaketh Grandhe"
+                            secondary={
+                                <React.Fragment>
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body"
+                                        color="text.primary"
+                                    >
+                                    </Typography>
+                                    {" Jai Hanuman gyan gun sagar "}
+                                </React.Fragment>
+                            }
+                        />
+                        <ListItemAvatar class= "format">
+                            <Avatar alt="sparsh" src={Sparsh} style ={{height : '100px', width : '100px'}}/>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary="Sparsh Patel"
+                            secondary={
+                                <React.Fragment>
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body"
+                                        color="text.primary"
+                                    >
+                                    </Typography>
+                                    {" He's one shot he's one shot"}
+                                </React.Fragment>
+                            }
+                        />
+                        <ListItemAvatar class= "format">
+                            <Avatar alt="hershey" src={Hershey} style ={{height : '100px', width : '100px'}}/>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary="Harshit Gupta"
+                            secondary={
+                                <React.Fragment>
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body"
+                                        color="text.primary"
+                                    >
+                                    </Typography>
+                                    {" Do y'all have any cookies"}
+                                </React.Fragment>
+                            }
+                        />
+                        <ListItemAvatar class= "format">
+                            <Avatar alt="dhruva" src={Dhruva} style ={{height : '100px', width : '100px'}}/>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary="Dhruva Rao"
+                            secondary={
+                                <React.Fragment>
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body"
+                                        color="text.primary"
+                                    >
+                                    </Typography>
+                                    {" fuck i forgot to eat today"}
+                                </React.Fragment>
+                            }
+                        />
+                    </ListItem>
+                </List>
             </div>
         </div>
     </div> 
