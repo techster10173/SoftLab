@@ -3,7 +3,7 @@ import {Modal, Box, TextField, FormControl, Button, InputAdornment, OutlinedInpu
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import "./projects.css"
+import "./project.css"
 
 const MySwal = withReactContent(Swal)
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import './projects.css';
 import axios from 'axios';
-import './projects.css';
+import './project.css';
 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Pagination} from '@mui/material';
 import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';

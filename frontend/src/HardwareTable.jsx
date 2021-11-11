@@ -1,5 +1,5 @@
 import React from "react";
-import './projects.css';
+import './project.css';
 import {TableBody, TableCell, TableRow, TableContainer, TableHead, Paper, Table} from '@mui/material';
 
 export class HardwareTable extends React.Component{
