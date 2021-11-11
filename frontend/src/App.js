@@ -2,7 +2,7 @@ import './App.css';
 import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 import { Login } from './Login.jsx';
 import { Home } from './Home.jsx';
-import { createTheme, ThemeProvider } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@mui/material';
 import {Projects} from './Projects.jsx';
 import { DataSets } from './DataSets.jsx';
 
