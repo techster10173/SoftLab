@@ -22,7 +22,7 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
           return {
             projectName: project.projectName,
             dateCreated: project.dateCreated,
-            lastUpdate: project.lastUpdate,
+            lastUpdate: project.dateUpdated,
             creator: project.creator,
             funds: project.funds, 
             edit: <button>Edit</button>

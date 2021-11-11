@@ -11,6 +11,8 @@ export class HardwareTable extends React.Component{
             showModal: false
         }
       } 
+    
+    hardwareList = []
     render(){
         return(
             <TableContainer component={Paper}
@@ -30,7 +32,7 @@ export class HardwareTable extends React.Component{
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {data.map((row) => {
+                      {this.hardwareList.map((row) => {
                         return (
                           <TableRow
                             key={row.name}
