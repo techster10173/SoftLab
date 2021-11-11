@@ -19,7 +19,7 @@ export class Login extends React.Component {
         this.MySwal = withReactContent(Swal)
     }
 
-    login = () => {
+    login = (e) => {
         axios.put('/auth/', {
             uname: this.state.username,
             pass: this.state.password
