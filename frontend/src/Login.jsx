@@ -1,12 +1,14 @@
 import React from 'react';
 import './login.css';
+import { Home } from './Home.jsx';
 import logo from "./assets/newLogo.png"
 import {Button, TextField, Box} from '@mui/material';
 import axios from 'axios';
-import {Navigate} from 'react-router-dom';
+import {Navigate, Router, Route, Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { createStore } from 'redux';
+import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 
 export function authReducer(state = {value: document.cookie === ""}, action) {
     switch (action.type) {
@@ -131,7 +133,7 @@ export class Login extends React.Component {
                     <Box
                         sx={{
                             width: "300px",
-                            height: 400,
+                            height: 450,
                             backgroundColor: 'white',
                             opacity: [0.9, 0.8, 0.7],
                             padding: "20px 10px 20px 10px",
@@ -140,6 +142,7 @@ export class Login extends React.Component {
                             margin: "0 auto"
                         }}
                     >
+                        <Link variant="contained" sx={{width: "33%", left: "15%"}} to="/"><ArrowBackIosOutlinedIcon></ArrowBackIosOutlinedIcon></Link>
                         <img src={logo} alt="logo" className="log_logo" />
                         <div>
                             <TextField sx={textFieldStyle} onChange={this.updateUsername} value={this.state.username} id="outlined-basic" label="Username" variant="outlined" />
