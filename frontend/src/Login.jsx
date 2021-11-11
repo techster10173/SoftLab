@@ -19,11 +19,13 @@ export class Login extends React.Component {
         this.MySwal = withReactContent(Swal)
     }
 
-    login = () => {
+    login = (e) => {
+        e.preventDefault();
         axios.put('/auth/', {
             uname: this.state.username,
             pass: this.state.password
         }).then(res => {
+            console.log(res);
             this.setState({loggedIn: true});
         }).catch(err => {
             this.MySwal.fire({
@@ -37,7 +39,8 @@ export class Login extends React.Component {
 
     }
 
-    signup = () => {
+    signup = (e) => {
+        e.preventDefault();
         axios.post('/auth/', {
             uname: this.state.username,
             pass: this.state.password
