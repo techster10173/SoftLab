@@ -57,7 +57,6 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                         <TableCell align="middle">Description</TableCell>
                         <TableCell align="middle">Date Created</TableCell>
                         <TableCell align="middle">Last Updated</TableCell>
-                        {/* <TableCell align="middle">Creator</TableCell> */}
                         <TableCell align="middle">Funds</TableCell>
                         <TableCell align="middle" sx={{textAlign: "center"}}>Edit</TableCell>
                       </TableRow>
@@ -72,7 +71,6 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
                           <TableCell align="middle">{row.description}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateCreated)).toLocaleString()}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateUpdated)).toLocaleString()}</TableCell>
-                          {/* <TableCell align="middle">{row.creator}</TableCell> */}
                           <TableCell align="middle">${row.funds}</TableCell>
                           <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
                         </TableRow>

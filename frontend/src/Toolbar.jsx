@@ -1,9 +1,10 @@
-import {Toolbar, AppBar} from '@material-ui/core';
+import {Toolbar, AppBar, Button} from '@material-ui/core';
 import axios from 'axios';
 import {Link, Navigate} from "react-router-dom";
 import logo from "./assets/BB.png"
 import './home.css';
 import { useState } from 'react';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 export function Navbar(props){
     const [open, setOpen] = useState(false);
@@ -35,11 +36,9 @@ export function Navbar(props){
                             <li>
                                 <Link to="/data">Data Sets</Link>
                             </li>
-                            <li>
-                                <a href="#" onClick={logout}>Logout</a>
-                            </li>
                         </ul>
                     </div>
+                    <Button onClick={logout}><LogoutRoundedIcon sx={{color: "white"}}/></Button>
                 </Toolbar>
             </AppBar>
             {open ? <Navigate to="/"/> : null}
