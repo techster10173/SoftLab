@@ -19,6 +19,12 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
       this.requestProjects();
     }
 
+    componentDidUpdate(prevProps, prevState){
+      if(!this.props.modalOpen && prevProps.modalOpen){
+        this.requestProjects();
+      }
+    }
+
     requestProjects = () => {
       axios.get(`/api/projects/?offset=${this.state.offset}`).then(data => {
         this.setState({projects: data.data.projectData, totalProjects: data.data.totalProjects});

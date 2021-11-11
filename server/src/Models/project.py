@@ -55,14 +55,14 @@ class Project:
     @staticmethod
     def get_projects(offset: int, creator: str):
         query = {
-            "creator": creator
+            "creator": creator,
         }
 
         projection = {
             "hardwares": 0
         }
 
-        items = database.client.projects.find(query, projection=projection).skip(offset * 10).limit(10)
+        items = database.client.projects.find(query, projection=projection).skip(offset * 10).limit(10).sort("dateCreated", -1)
         return ProjectSchema(many=True).dump(items), database.client.projects.count_documents(query)
 
 class ProjectSchema(Schema):

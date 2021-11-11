@@ -72,6 +72,7 @@ export class ProjectModal extends React.Component {
                 text: `${this.state.projectName} has successfully been updated`,
                 timer: 1500
             });
+            this.setState({projectName: "", projectDescription: "", projectFunds: 0});
             this.props.closeModalHandler();        
         }).catch(err => {
             MySwal.fire({
@@ -103,6 +104,7 @@ export class ProjectModal extends React.Component {
                 text: `${this.state.projectName} has successfully been made`,
                 timer: 1500
             });
+            this.setState({projectName: "", projectDescription: "", projectFunds: 0});
             this.props.closeModalHandler();
         }).catch(err => {
             MySwal.fire({
