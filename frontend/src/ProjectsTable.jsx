@@ -3,7 +3,6 @@ import './projects.css';
 import axios from 'axios';
 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Pagination} from '@mui/material';
-import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
 
   
   export class ProjectsTable extends React.Component{
@@ -58,8 +57,9 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                         <TableCell align="middle">Description</TableCell>
                         <TableCell align="middle">Date Created</TableCell>
                         <TableCell align="middle">Last Updated</TableCell>
+                        {/* <TableCell align="middle">Creator</TableCell> */}
                         <TableCell align="middle">Funds</TableCell>
-                        <TableCell align="middle" sx={{textAlign: "center"}}>View/Edit</TableCell>
+                        <TableCell align="middle" sx={{textAlign: "center"}}>Edit</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -72,15 +72,16 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                           <TableCell align="middle">{row.description}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateCreated)).toLocaleString()}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateUpdated)).toLocaleString()}</TableCell>
+                          {/* <TableCell align="middle">{row.creator}</TableCell> */}
                           <TableCell align="middle">${row.funds}</TableCell>
-                          <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}><LaunchRoundedIcon /></Button></TableCell>
+                          <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}>Edit</Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
                   </Table>
                 </TableContainer>
                 <div>
-                    <Pagination count={this.state.totalProjects/10 + 1} onChange={this.updateOffset}/>
+                    <Pagination count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
                 </div>
                 </>
 
