@@ -39,7 +39,7 @@ def handle_auth():
                 return jsonify({"message": "Internal Server Error"}), 500
             
 
-@app.route("/api/auth/signout", methods=["POST"])
+@app.route("/api/auth/signout/", methods=["POST"])
 @check_auth
 def handle_signout():
     Auth.logout()
