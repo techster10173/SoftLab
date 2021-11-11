@@ -1,17 +1,15 @@
-import {Toolbar, AppBar, Button} from '@material-ui/core';
+import {Toolbar, AppBar, Button} from '@mui/material';
 import axios from 'axios';
-import {Link, Navigate} from "react-router-dom";
-import logo from "./assets/BB.png"
+import {Link} from "react-router-dom";
+import logo from "./assets/BB2.png"
 import './home.css';
-import { useState } from 'react';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import {authStore} from "./Login.jsx"
 
 export function Navbar(props){
-    const [open, setOpen] = useState(false);
-
     const logout = () => {
         axios.post('/auth/signout/').then(res => {
-            setOpen(true);
+            authStore.dispatch({type: 'LOGOUT'});
         }).catch(err => {
             console.error(err);
         });
@@ -41,7 +39,6 @@ export function Navbar(props){
                     <Button onClick={logout}><LogoutRoundedIcon sx={{color: "white"}}/></Button>
                 </Toolbar>
             </AppBar>
-            {open ? <Navigate to="/"/> : null}
             </>
     )
 }

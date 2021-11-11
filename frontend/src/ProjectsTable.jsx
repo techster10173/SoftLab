@@ -1,6 +1,7 @@
 import React from 'react';
 import './projects.css';
 import axios from 'axios';
+import './projects.css';
 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Pagination} from '@mui/material';
 import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
@@ -80,11 +81,10 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                     </TableBody>
                   </Table>
                 </TableContainer>
-                <div>
-                    <Pagination count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
+                <div >
+                    <Pagination sx={{width: 'auto' , marginBottom: 5, marginLeft: 5}} align="middle" count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
                 </div>
                 </>
-
         )
       } 
     }

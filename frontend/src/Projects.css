@@ -1,7 +1,6 @@
 .swal2-container {
     z-index: 1066;
 }
-
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -65,5 +64,10 @@
       color: #000;
       text-decoration: none;
       cursor: pointer;
+    }
+
+    /* Error handling modal */
+    .swal2-container {
+      z-index: 10000;
     }
   

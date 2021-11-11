@@ -6,7 +6,20 @@ import axios from 'axios';
 import {Navigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { createStore } from 'redux';
 
+export function authReducer(state = {value: document.cookie === ""}, action) {
+    switch (action.type) {
+        case 'LOGIN':
+            return {value: true};
+        case 'LOGOUT':
+            return {value: false};
+        default:
+            return state;
+    }
+}
+
+export let authStore = createStore(authReducer);
 
 export class Login extends React.Component {
     constructor(props) {
@@ -27,6 +40,7 @@ export class Login extends React.Component {
         }).then(res => {
             console.log(res);
             this.setState({loggedIn: true});
+            authStore.dispatch({type: 'LOGIN'});
         }).catch(err => {
             this.MySwal.fire({
                 title: 'Login Failed',
@@ -45,6 +59,7 @@ export class Login extends React.Component {
             uname: this.state.username,
             pass: this.state.password
         }).then(res => {
+            authStore.dispatch({type: 'LOGIN'});
             this.setState({loggedIn: true});
             console.log(res);
         }).catch(err => {

@@ -1,7 +1,7 @@
 import './home.css';
 import { Link } from 'react-router-dom';
 import React from 'react'
-import logo from "./assets/BB.png"
+import logo from "./assets/BB2.png"
 import Sai from "./assets/Sai.jpg"
 import Sparsh from "./assets/sparsh.jfif"
 import Sree from "./assets/sree.jfif"
@@ -10,7 +10,7 @@ import Dhruva from "./assets/dhruva.jfif"
 import HaaS from "./assets/haas.jpg"
 
 
-import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
+import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 
 export function Home(props){
 
