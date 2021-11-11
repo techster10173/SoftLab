@@ -3,14 +3,12 @@ import axios from 'axios';
 import {Link, Navigate} from "react-router-dom";
 import logo from "./assets/BB.png"
 import './home.css';
-import { useState } from 'react';
+import {authStore} from "./Login.jsx"
 
 export function Navbar(props){
-    const [open, setOpen] = useState(false);
-
     const logout = () => {
-        axios.post('/api/auth/signout').then(res => {
-            setOpen(true);
+        axios.post('/auth/signout/').then(res => {
+            authStore.dispatch({type: 'LOGOUT'});
         }).catch(err => {
             console.error(err);
         });
@@ -36,13 +34,12 @@ export function Navbar(props){
                                 <Link to="/data">Data Sets</Link>
                             </li>
                             <li>
-                                <a href="#" onClick={logout}>Logout</a>
+                                <a href="" onClick={logout}>Logout</a>
                             </li>
                         </ul>
                     </div>
                 </Toolbar>
             </AppBar>
-            {open ? <Navigate to="/"/> : null}
             </>
     )
 }
