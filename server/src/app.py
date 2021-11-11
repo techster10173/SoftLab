@@ -7,7 +7,7 @@ from os import environ
 
 app = Flask(__name__)
 
-@app.route('/api/auth', methods=["GET", "POST"])
+@app.route('/api/auth/', methods=["PUT", "POST"])
 def handle_auth():
     json_data = request.get_json()
     auth_handler = Auth(json_data["uname"], json_data["pass"])
@@ -39,9 +39,7 @@ def handle_auth():
 @app.route("/api/auth/signout", methods=["POST"])
 @check_auth
 def handle_signout():
-    json_data = request.get_json()
-    auth_handler = Auth(json_data["uname"], json_data["pass"])
-    auth_handler.logout()
+    Auth.logout()
     return jsonify({"message": "Logged Out!"}), 200
 
 

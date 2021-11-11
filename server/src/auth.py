@@ -19,7 +19,8 @@ class Auth():
         else:
             return False
         
-    def logout(self):
+    @staticmethod
+    def logout():
         if "uid" in session:
             session.pop("uid")
 

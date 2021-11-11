@@ -10,7 +10,6 @@ export default function ProtectedRoute(props){
         }
         else{
             return(
-            
             <Route exact path={props.path}>
                 {props.children}
             </Route>)
