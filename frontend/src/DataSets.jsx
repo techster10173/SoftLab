@@ -1,6 +1,6 @@
 import {Navbar} from "./Toolbar.jsx";
 import React from "react";
-import './projects.css';
+import './project.css';
 import {TableBody, TableCell, TableRow, TableContainer, TableHead, Paper, Table} from '@mui/material';
 import data from "./Data.json"
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';

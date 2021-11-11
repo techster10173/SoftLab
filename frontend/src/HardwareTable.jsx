@@ -9,9 +9,8 @@ export class HardwareTable extends React.Component{
             currentProject: null,
             showModal: false
         }
-      } 
+    } 
     
-    hardwareList = [hw1, hw2]
     render(){
         return(
             <TableContainer component={Paper}
