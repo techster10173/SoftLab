@@ -1,5 +1,9 @@
 html { scroll-behavior: smooth; } 
 
+.menu{
+    margin: 0 auto;
+}
+
 .menu ul li{
     display: inline-block;
     margin-right: 20px;
