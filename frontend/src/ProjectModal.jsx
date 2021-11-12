@@ -3,7 +3,7 @@ import {Modal, Box, TextField, FormControl, Button, InputAdornment, OutlinedInpu
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import "./projects.css"
+import "./project.css"
 
 const MySwal = withReactContent(Swal)
 
@@ -22,17 +22,19 @@ export class ProjectModal extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.displayModal && !prevProps.displayModal && this.props.pid) {
-            axios.get(`/api/projects/${this.props.pid}`).then(res => res.json()).then(res => {
-                const data = res.projectData;
+            axios.get(`/projects/${this.props.pid}/`).then(res => {
+                const data = res.data.projectData;
                 this.setState({
                     projectName: data.projectName,
                     projectDescription: data.description,
                     projectFunds: data.funds,
-                    created: data.dateCreated,
-                    updated: data.dateUpdated,
                     hardwareData: data.hardwares,
                 });
             }).catch(err => console.log(err));
+        }
+        if(!this.props.displayModal && prevProps.displayModal){
+            this.setState({projectName: "", projectDescription: "", projectFunds: 0});
+
         }
     }
 
@@ -59,8 +61,8 @@ export class ProjectModal extends React.Component {
             return;
         }
 
-        axios.put(`/api/project/${this.props.pid}`, {
-            name: this.state.projectName,
+        axios.put(`/projects/${this.props.pid}/`, {
+            projectName: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds
         }).then(res => {
@@ -90,8 +92,8 @@ export class ProjectModal extends React.Component {
             return;
         }
 
-        axios.post('/api/projects/', {
-            name: this.state.projectName,
+        axios.post('/projects/', {
+            projectName: this.state.projectName,
             description: this.state.projectDescription,
             funds: this.state.projectFunds,
         }).then(res => {
@@ -99,6 +101,26 @@ export class ProjectModal extends React.Component {
                 icon: "success",
                 title: "Project Created!",
                 text: `${this.state.projectName} has successfully been made`,
+                timer: 1500
+            });
+            this.props.closeModalHandler();
+        }).catch(err => {
+            MySwal.fire({
+                icon: "error",
+                title: "Whoops! Unexpected Problem",
+                text: "Please Try Again",
+                timer: 1500
+            });
+            console.log(err);
+        });
+    }
+
+    deleteProject = (event) => {
+        event.preventDefault();
+        axios.delete(`/projects/${this.props.pid}/`).then(res => {
+            MySwal.fire({
+                icon: "success",
+                title: "Project Deleted!",
                 timer: 1500
             });
             this.props.closeModalHandler();
@@ -128,7 +150,7 @@ export class ProjectModal extends React.Component {
           };
 
         const cancelButtonStyle = {
-            background: "#f50057", width:"27%", marginRight: "3%", "&:hover": {background: "#ab003c"}
+            background: "#f50057", width:"25%", marginRight: "3%", "&:hover": {background: "#ab003c"}
         }
 
         return (
@@ -161,7 +183,8 @@ export class ProjectModal extends React.Component {
                             />
                             <div>
                                 <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
-                                <Button variant="contained" type="submit" sx={{width: "70%"}}>{this.props.pid ? "Update" : "Create"}</Button>
+                                {this.props.pid ? <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button> : null}
+                                <Button variant="contained" type="submit" sx={this.props.pid ? {width: "44%"}:{width: "72%"}}>{this.props.pid ? "Update" : "Create"}</Button>
                             </div>
                         </FormControl>
                     </form>
