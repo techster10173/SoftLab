@@ -5,10 +5,9 @@ import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper,
 function Form(props) {
     const[delta, setDelta] = useState({});
 
-    // useEffect(() => {
-    //     setunitsUsed(props.article.unitsUsed)
-    //     setName(props.article.name)
-    // }, [props.article])
+    useEffect(() => {
+        setDelta({});
+    }, [props.focusHardware]);
 
     const createDelta = (event) => 
     {
