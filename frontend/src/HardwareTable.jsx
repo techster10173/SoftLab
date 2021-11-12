@@ -10,12 +10,6 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
         this.state = {}
       }
 
-      // updateOffset = (e, val) => {
-      //   this.setState({offset: val - 1}, () => {
-      //     this.requestProjects();
-      //   });
-      // }
-
     render(){
         return(
                 <TableContainer component={Paper}
@@ -51,13 +45,7 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                         </TableBody>
                     </Table>
                     </TableContainer>
-                
 
-                
-                // <div >
-                //     {/* <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'left', display : 'flex'}} align="middle" count={Math.floor(this.state.totalHardware/11)+1} onChange={this.updateOffset}/> */}
-                // </div>
-            // </>
         )
       } 
     }
