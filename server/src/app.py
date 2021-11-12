@@ -98,7 +98,9 @@ def handle_projects():
 @app.route("/api/hardware/", methods = ("GET", "PUT"))
 def handle_hardware():
     if request.method == "GET":
-        return jsonify({"hardwareData": Hardware.get_all_hardware()}), 200
+        if request.args.get('offset') is None:
+            return jsonify({"message": "Missing Offset"}), 400
+        return jsonify({"hardwareData": Hardware.get_all_hardware(int(request.args.get('offset')))}), 200
     else:
         try:
             return jsonify({"projectData": Hardware.update_hardware(request.json)}), 200
@@ -113,37 +115,6 @@ def handle_hardware():
 def handle_specific_hardware(id: str):
     hardware = Hardware(id=id)
     return jsonify({"hardwareData": hardware.get_hardware()}), 200
-
-
-# @app.route("/updateProjects/", methods = ["PUT"])
-# def update_projects():
-#     new_projects = request.json['projects']
-#     for project in new_projects:
-#         projectName = project["projectName"]
-#         document = project_db.find({"projectName": projectName})[0]
-#         document["hardwares"] = project['hardwares']
-#         project_db.update_one({"projectName": projectName}, {"$set":document})
-
-#     # return jsonify({"message": "Updated Successfully"}), 200
-#     return get_projects()
-
-# validate units used is less than capacity and updates
-# @app.route("/updateHardwareCount/", methods = ["PUT"])
-# def update_Hardware_Count():
-#     hardwareName = request.json["hardwareName"]
-#     unitsUsed = request.json['unitSum']
-#     document = db.find({'name': hardwareName})[0]
-#     # print(request.json)
-#     capacity = document['capacity']
-#     if unitsUsed < capacity:
-#         document['unitsUsed'] = unitsUsed
-#         db.update_one({"name": hardwareName}, {"$set":document})
-#         return jsonify({"message": "Created Successfully"}), 200
-#         # return jsonify({get_articles()}), 200
-#     else:
-#         return jsonify({"message": "Unsuccessful"}), 403
-#     # return get_projects()
-
 
 
 if __name__ == "__main__":

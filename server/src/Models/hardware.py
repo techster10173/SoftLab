@@ -15,8 +15,8 @@ class Hardware():
         return HardwareSchema().dump(hardware)
 
     @staticmethod
-    def get_all_hardware():
-        hardware = database.client.hardwares.find()
+    def get_all_hardware(offset: int):
+        hardware = database.client.hardwares.find().skip(offset * 10).limit(10).sort('name', 1)
         return HardwareSchema(many=True).dump(hardware)
 
     @staticmethod

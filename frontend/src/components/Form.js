@@ -2,7 +2,6 @@ import './Form.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, Grid, ListItem, TextField} from '@mui/material';
-import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
 
 function Form(props) {
 
@@ -87,7 +86,7 @@ function Form(props) {
                                 </TableBody>
                             </Table>
                     </TableContainer>
-                    <Button onClick = {printAllHardware}>Update Projects</Button>
+                    <Button variant="contained" onClick={printAllHardware}>Update Projects</Button>
                     </>
             ):null
 
