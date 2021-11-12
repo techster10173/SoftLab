@@ -1,10 +1,12 @@
 import './Form.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
+import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, Grid, ListItem, TextField} from '@mui/material';
+import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
 
 function Form(props) {
 
-    const[name, setName] = useState(props.article.name);
+    const[name, setName] = useState(props.focusHardware.name);
     const[delta, setDelta] = useState({});
 
     // useEffect(() => {
@@ -24,7 +26,7 @@ function Form(props) {
     }
 
     const printAllHardware = () => {
-        let sum = props.article.unitsUsed;
+        let sum = props.focusHardware.unitsUsed;
         
         for (const property in delta) {
             sum += delta[property];
@@ -45,36 +47,48 @@ function Form(props) {
 
     return (
         <div>
-            {props.article ? (
-                            <div className = "mb=3">
-                            <label htmlFor = "name" className = "form-label">Hardware Name: </label>
-                            <label onChange = {(e) => setName(e.target.value)}>{name}</label>
-
-                            {props.projects && props.projects.map(project => {
-                                return(
-                                    <div key = {project.projectName}>
-                                        <h1>Project Name: {project.projectName}</h1>
-                                        <h3>Funds: {project.funds}</h3>
-                                        <h3>Units Used for {name}: {(project.hardwares[name] || 0)}</h3>
-                                        <input type = "number"
-                                        id={project.id}
-                                        onChange={setNewHardwareUnits}
-                                        // value = {project.hardwares[name] || 0}
-                                        placeholder = "Enter a Quantity"
+            {props.projects ? (
+                        <>
+                        <TableContainer component={Paper}
+                            sx={{
+                            width: '100%',
+                            marginTop: 5,
+                            height: "100%",
+                            marginBottom: 5, 
+                            boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
+                                }}>
+                            <Table aria-label="simple table">
+                                <TableHead sx={{backgroundColor: 'primary.color'}}>
+                                <TableRow>
+                                    <TableCell align="middle">Project Name</TableCell>
+                                    <TableCell align="middle">Funds</TableCell>
+                                    <TableCell align="middle">Unit Used</TableCell>
+                                    <TableCell align="middle" sx={{textAlign: "center"}}>Enter Quantity</TableCell>
+                                </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                {props.projects && props.projects.map((row) => (
+                                    <TableRow
+                                    key={row.id}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell align="middle">{row.projectName}</TableCell>
+                                        <TableCell align="middle">{row.funds}</TableCell>
+                                        <TableCell align="middle">{(row.hardwares[name] || 0)}</TableCell>
+                                        <TableCell align="middle" sx={{textAlign: "center"}}>
+                                        <TextField type = "number"
+                                            id={row.id}
+                                            onChange={setNewHardwareUnits}
+                                            label="Quantity"
                                         />
-
-                                    </div>
-                                )
-                            })}
-
-
-                            <button
-                            className = "btn btn-success mt-3"
-                            onClick = {printAllHardware}
-                            >Update Projects</button>
-
-                            
-                        </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                                </TableBody>
+                            </Table>
+                    </TableContainer>
+                    <Button onClick = {printAllHardware}>Update Projects</Button>
+                    </>
             ):null
 
             }
