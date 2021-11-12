@@ -1,7 +1,6 @@
 import './Form.css';
 
-
-import React, {useState, useEffect} from 'react'
+import axios from 'axios';import React, {useState, useEffect} from 'react'
 import APIService from './APIService'
 import { TextField } from '@material-ui/core';
 
@@ -41,21 +40,77 @@ function Form(props) {
         
     }
 
+    // const printAllHardware = () => {
+    //     console.log("printing all projects")
+    //     console.log(props.projects)
+    //     return(
+    //         <div>
+    //             {props.projects.map(project => {
+    //                 return(
+    //                     <div key = {project.projectName}>
+    //                         <h1>Project Name: {project.projectName}</h1>
+    //                         <h3>Units Used for {name}: {project.hardwares[name] || 0}</h3>
+    //                     </div>
+    //                 )
+    //             })}
+    //         </div>
+    //     )
+    // }
+
+    const [status, updateStatus] = useState(0)
+    const [hardware, updateHardware] = useState([])
+
     const printAllHardware = () => {
         console.log("printing all projects")
         console.log(props.projects)
-        return(
-            <div>
-                {props.projects.map(project => {
-                    return(
-                        <div key = {project.projectName}>
-                            <h1>Project Name: {project.projectName}</h1>
-                            <h3>Units Used for {name}: {project.hardwares[name] || 0}</h3>
-                        </div>
-                    )
-                })}
-            </div>
-        )
+
+        let sum = 0;
+        props.projects.forEach(project => {
+            sum += parseInt(project.hardwares[name])
+        });
+        console.log((sum));
+
+        // APIService.UpdateProjects(props.projects)
+        // .then(resp => props.setProjects(resp))
+        // .catch(error => console.log(error))
+
+        // APIService.UpdateProjects(props.projects)
+        // .then(resp => console.log(resp))
+        // .catch(error => console.log(error))
+
+        // const sta
+
+        axios.put(`/updateHardwareCount/`, 
+            {hardwareName: name, unitSum: sum})
+            .then(resp => 
+                APIService.UpdateProjects(props.projects)
+                .then(resp => props.setProject(resp))
+                .catch(error => console.log(error))
+                )
+            .catch(error => console.log(error));
+
+        // APIService.UpdateHardwareCount(name, sum)
+        // .then(resp => updateStatus(resp["status"]))
+        // .catch(error => console.log(error))
+
+        // console.log("printing projects")
+        // console.log(props.projects)
+
+        console.log(status)
+
+        if (status === 200){
+            console.log("less than capacity")
+            // console.log("printing all projects after status of 200")
+            // console.log(props.projects)
+            // console.log(hardware)
+            // APIService.UpdateProjects(props.projects)
+            // .then(resp => props.setProjects(resp))
+            // .catch(error => console.log(error))
+        }
+        
+        
+        // console.log("printing all projects")
+        // console.log(props.projects)
     }
 
 
