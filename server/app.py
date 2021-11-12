@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, request, jsonify, send_from_directory
 from Models.hardware import Hardware
 from auth import Auth
 from database import init_db
@@ -9,7 +9,7 @@ from bson.objectid import ObjectId
 from flask_cors import CORS
 from bson.objectid import ObjectId
 
-app = Flask(__name__, static_folder="../../frontend/build", static_url_path="")
+app = Flask(__name__, static_folder="../frontend/build", static_url_path="")
 CORS(app)
 
 @app.route('/api/auth/', methods=["PUT", "POST"])
@@ -117,14 +117,17 @@ def handle_specific_hardware(id: str):
     return jsonify({"hardwareData": hardware.get_hardware()}), 200
 
 @app.errorhandler(404)
-def catch_all(path):
+def catch_all(element):
     return send_from_directory(app.static_folder, "index.html")
 
-if __name__ == "__main__":
+@app.before_first_request
+def init():
     init_db()
     app.config.update(
         SESSION_COOKIE_HTTPONLY=False,
+        SECRET_KEY=environ.get("SECRET_KEY")
     )
-    app.secret_key = environ.get("SECRET_KEY")
-    app.run(debug=True, load_dotenv=True)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', load_dotenv=True)
 

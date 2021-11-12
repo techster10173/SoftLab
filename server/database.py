@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, ssl_support
 from os import environ
 
 client = None
