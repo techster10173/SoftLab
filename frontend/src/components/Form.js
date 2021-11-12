@@ -1,4 +1,3 @@
-import './Form.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, Grid, ListItem, TextField} from '@mui/material';
@@ -41,7 +40,6 @@ function Form(props) {
             console.error(err);
         });
     }
-
 
     return (
         <div>
@@ -88,9 +86,7 @@ function Form(props) {
                     <Button variant="contained" onClick={updateHardware}>Update Projects</Button>
                     </>
             ):null
-
             }
-
         </div>
     )
 }

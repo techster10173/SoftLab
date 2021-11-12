@@ -5,6 +5,7 @@ import Form from './components/Form';
 import {Navbar} from "./Toolbar.jsx"
 import axios from 'axios';
 import { HardwareTable } from './HardwareTable';
+import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, Grid, ListItem} from '@mui/material';
 
 export function Hardware () {
 
@@ -37,15 +38,18 @@ export function Hardware () {
   return (
     <>
       <Navbar/>
-      <div className = "big_container">
-        <div className = "container1">
-            <HardwareTable hardware={hardware} editFocusHardware={editFocusHardware} />
-        </div>
-
-        <div className = "container2">
-          {focusHardware ? <Form focusHardware={focusHardware} projects={projects} setProjects={setProjects} setNewHardwares={setNewHardwares} setHardwares={setHardwares}/> : null}
-        </div>
-      </div>
+        <Grid container rowSpacing={1} columnSpacing={{xs:1, sm:2, md:3}}>
+          <Grid item xs = {6}>
+            <ListItem>
+              <HardwareTable hardware={hardware} editFocusHardware={editFocusHardware} />
+            </ListItem>
+          </Grid>
+          <Grid item xs = {6}>
+            <ListItem>
+              {focusHardware ? <Form focusHardware={focusHardware} projects={projects} setProjects={setProjects} setNewHardwares={setNewHardwares} setHardwares={setHardwares}/> : null}
+            </ListItem>
+          </Grid>
+        </Grid>
     </>
   );
 }
