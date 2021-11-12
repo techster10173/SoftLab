@@ -102,7 +102,7 @@ export function Home(props){
                                         color="text.primary"
                                     >
                                     </Typography>
-                                    {" I'm the mad titan "}
+                                    {" Jai Hanuman gyan gun sagar "}
                                 </React.Fragment>
                             }
                         />

@@ -2,7 +2,7 @@ import React from "react";
 import './project.css';
 import {TableBody, TableCell, TableRow, TableContainer, TableHead, Paper, Table} from '@mui/material';
 
-export class HardwareTable extends React.Component{
+export class HardwareView extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -15,12 +15,12 @@ export class HardwareTable extends React.Component{
         return(
             <TableContainer component={Paper}
                 sx={{
-                  width: 'auto',
-                  height: 500,
-                  marginLeft: 5,
-                  marginRight: 5,
-                  marginTop: 5,
-                  marginBottom: 5, 
+                  width: '70%',
+                  height: 'auto',
+                  marginLeft: 3,
+                  marginRight: 1,
+                  // marginTop: 1,
+                  // marginBottom: 1, 
                   boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
                 }}>
                   <Table aria-label="simple table">
@@ -29,7 +29,7 @@ export class HardwareTable extends React.Component{
                         <TableCell align="middle">Hardwares</TableCell>
                       </TableRow>
                     </TableHead>
-                    <TableBody>
+                    {/* <TableBody>
                       {this.hardwareList.map((row) => {
                         return (
                           <TableRow
@@ -40,7 +40,7 @@ export class HardwareTable extends React.Component{
                           </TableRow>
                         );
                       })}
-                    </TableBody>
+                    </TableBody> */}
                   </Table>
             </TableContainer>
         );
