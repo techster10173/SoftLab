@@ -2,10 +2,12 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, TextField, Fab} from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
-import Save from '@mui/icons-material/Save';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 function Form(props) {
     const[delta, setDelta] = useState({});
+    const MySwal = withReactContent(Swal)
 
     useEffect(() => {
         setDelta({});
@@ -53,9 +55,20 @@ function Form(props) {
             }
             setDelta({});
             props.getProjects();
-            props.setNewHardwares(props.focusHardware.name, sum)
+            props.setNewHardwares(props.focusHardware.name, sum);
+            MySwal.fire({
+                icon: "success",
+                title: "Congrats!",
+                text: "Sucessfully checked out " + props.focusHardware.name,
+                timer: 1500
+            });
         }).catch(err => {
-            console.error(err);
+            MySwal.fire({
+                icon: "error",
+                title: "Whoops! Unexpected Problem",
+                text: err.response.data.message,
+                timer: 1500
+            });
         });
     }
     
