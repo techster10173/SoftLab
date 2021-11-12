@@ -30,13 +30,13 @@ function Form(props) {
         }
 
         axios.put("/api/hardware/", {
-            hardwareName: name,
+            hardwareName: props.focusHardware.name,
             unitSum: sum,
             projectsDelta: delta
         }).then(resp => {
             setDelta({});
             props.setProjects(resp.data.projectData[0]);
-            props.setNewHardwares(name, sum)
+            props.setNewHardwares(props.focusHardware.name, sum)
         }).catch(err => {
             console.error(err);
         });
