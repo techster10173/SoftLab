@@ -42,17 +42,26 @@ export function Hardware () {
       setProjects(resp.data.projectData);
       const totalProjects = resp.data.totalProjects;
       setTotalProjects(totalProjects)
-
     })
     .catch(error => console.error(error))
   },[projectOffset]);
+
+  const getProjects = () => {
+      axios.get(`/api/projects/?offset=${projectOffset}`)
+      .then(resp => {
+        setProjects(resp.data.projectData);
+        const totalProjects = resp.data.totalProjects;
+        setTotalProjects(totalProjects)
+      })
+      .catch(error => console.error(error));
+  }
 
   const editFocusHardware = (hardware) => {
     setFocusHardware(hardware);
   }
 
-  const setNewHardwares = () => {
-    axios.get("/api/hardware")
+  const getHardwares = () => {
+    axios.get(`/api/hardware/?offset=${hardwareOffset}`)
     .then(resp => setHardwares(resp.data.hardwareData))
     .catch(error => console.log(error));
   }
@@ -69,7 +78,7 @@ export function Hardware () {
           </Grid>
           <Grid item xs = {6}>
             <ListItem>
-              {focusHardware ? <Form focusHardware={focusHardware} projects={projects} setProjects={setProjects} setNewHardwares={setNewHardwares} setHardwares={setHardwares}/> : null}
+              {focusHardware ? <Form focusHardware={focusHardware} projects={projects} getProjects={getProjects} setNewHardwares={getHardwares} setHardwares={setHardwares}/> : null}
             </ListItem>
           </Grid>
           <Grid item xs = {6}>

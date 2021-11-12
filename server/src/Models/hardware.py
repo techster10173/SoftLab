@@ -19,7 +19,7 @@ class Hardware():
     @staticmethod
     def get_all_hardware(offset: int):
         hardware = database.client.hardwares.find().skip(offset * 10).limit(10).sort('name', 1)
-        return HardwareSchema(many=True).dump(hardware), database.client.hardwares.count_documents()
+        return HardwareSchema(many=True).dump(hardware), database.client.hardwares.count_documents({})
 
     @staticmethod
     def update_hardware(json_data):
@@ -40,7 +40,8 @@ class Hardware():
                 database.client.projects.update_one({"_id": ObjectId(pid)}, {"$inc": delta, "$set": {"dateUpdated": datetime.now()}}, )
                 if creator is None:
                     creator = database.client.projects.find_one({"_id": ObjectId(pid)})["creator"]
-            return Project.get_projects(0, creator)
+            # return Project.get_projects(0, creator)
+            return True
         else:
             raise Exception("Invalid Amount")
 

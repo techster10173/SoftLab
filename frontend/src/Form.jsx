@@ -5,10 +5,9 @@ import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper,
 function Form(props) {
     const[delta, setDelta] = useState({});
 
-    // useEffect(() => {
-    //     setunitsUsed(props.article.unitsUsed)
-    //     setName(props.article.name)
-    // }, [props.article])
+    useEffect(() => {
+        setDelta({});
+    }, [props.focusHardware]);
 
     const createDelta = (event) => 
     {
@@ -34,7 +33,7 @@ function Form(props) {
             projectsDelta: delta
         }).then(resp => {
             setDelta({});
-            props.setProjects(resp.data.projectData[0]);
+            props.getProjects();
             props.setNewHardwares(props.focusHardware.name, sum)
         }).catch(err => {
             console.error(err);
