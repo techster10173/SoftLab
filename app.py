@@ -7,7 +7,6 @@ from auth import check_auth
 from os import environ
 from bson.objectid import ObjectId
 # from flask_cors import CORS
-from bson.objectid import ObjectId
 from dotenv import load_dotenv
 
 app = Flask(__name__, static_folder="frontend/build", static_url_path="")
