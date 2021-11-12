@@ -15,7 +15,7 @@ function Form(props) {
         props.projects.forEach(project => {
             if (project.id === event.target.id){
                 let deltaEntry = {}
-                deltaEntry[event.target.id] = event.target.value - (project.hardwares[name] || 0);
+                deltaEntry[event.target.id] = event.target.value - (project.hardwares[props.focusHardware.name] || 0);
                 setDelta({...delta, ...deltaEntry});
             }
         });   
