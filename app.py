@@ -6,11 +6,12 @@ from Models.project import ProjectSchema, Project
 from auth import check_auth
 from os import environ
 from bson.objectid import ObjectId
-from flask_cors import CORS
+# from flask_cors import CORS
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
 
-app = Flask(__name__, static_folder="../frontend/build", static_url_path="")
-CORS(app)
+app = Flask(__name__, static_folder="frontend/build", static_url_path="")
+# CORS(app)
 
 @app.route('/api/auth/', methods=["PUT", "POST"])
 def handle_auth():
@@ -120,14 +121,13 @@ def handle_specific_hardware(id: str):
 def catch_all(element):
     return send_from_directory(app.static_folder, "index.html")
 
-@app.before_first_request
-def init():
-    init_db()
-    app.config.update(
-        SESSION_COOKIE_HTTPONLY=False,
-        SECRET_KEY=environ.get("SECRET_KEY")
-    )
+load_dotenv()
+init_db()
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=False,
+    SECRET_KEY=environ.get("SECRET_KEY")
+)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', load_dotenv=True)
+    app.run(host='0.0.0.0')
 

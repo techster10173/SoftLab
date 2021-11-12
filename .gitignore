@@ -1,7 +1,5 @@
-server/venv/*
-server/.env
-server/.DS_Store
+venv/*
+.env
+__pycache__
+Models/__pycache__
 .DS_Store
-server/softlab-6e579-firebase-adminsdk-ms1dc-03c667f3d7.json
-server/src/__pycache__
-server/src/Models/__pycache__
