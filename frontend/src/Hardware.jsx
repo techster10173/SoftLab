@@ -15,6 +15,8 @@ export function Hardware () {
   const [projectOffset, setProjectOffset] = useState(0);
   const [hardwareOffset, setHardwareOffset] = useState(0);
   const [totalProjects, setTotalProjects] = useState(0);
+  const [totalHardware, setTotalHardwares] = useState(0);
+
 
   const updateOffsetProject = (e, val) => {
     setProjectOffset( val - 1);
@@ -26,7 +28,11 @@ export function Hardware () {
 
   useEffect(() => {
     axios.get(`/api/hardware/?offset=${hardwareOffset}`)
-    .then(resp => setHardwares(resp.data.hardwareData))
+    .then(resp => {
+      setHardwares(resp.data.hardwareData)
+      const totalHardware = resp.data.totalHardware;
+      setTotalHardwares(totalHardware)
+    })
     .catch(error => console.error(error))
   }, [hardwareOffset]);
 
@@ -68,7 +74,7 @@ export function Hardware () {
           </Grid>
           <Grid item xs = {6}>
             <ListItem>
-              <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'left', display : 'flex'}} align="middle" count={Math.floor(hardwareOffset/11)+1} onChange={updateOffsetHardware}/>
+              <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'left', display : 'flex'}} align="middle" count={Math.floor(totalHardware/11)+1} onChange={updateOffsetHardware}/>
             </ListItem>
           </Grid>
           <Grid item xs = {6}>
