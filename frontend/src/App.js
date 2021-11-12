@@ -19,7 +19,6 @@ const theme = createTheme({
 });
 
 function redirect(auth, component){
-  console.log(auth);
   return auth ? component : <Navigate to="/login" />
 }
 
@@ -28,7 +27,6 @@ function App() {
   const [auth, setAuth] = useState(document.cookie !== "");
 
   authStore.subscribe(() => {
-    console.log(authStore.getState().value);
     setAuth(authStore.getState().value);
   });    
 

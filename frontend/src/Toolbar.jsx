@@ -8,7 +8,7 @@ import {authStore} from "./Login.jsx"
 
 export function Navbar(props){
     const logout = () => {
-        axios.post('/auth/signout/').then(res => {
+        axios.post('/api/auth/signout/').then(res => {
             authStore.dispatch({type: 'LOGOUT'});
         }).catch(err => {
             console.error(err);
