@@ -1,4 +1,5 @@
 import './Form.css';
+import axios from 'axios';
 
 import axios from 'axios';import React, {useState, useEffect} from 'react'
 import APIService from './APIService'
@@ -29,9 +30,10 @@ function Form(props) {
     }
 
     const setNewHardwareUnits = (event) => {
+        console.log("setting value for " + event.target.id)
         {props.projects.filter(project => {
             if (project.projectName === event.target.id){
-                project.hardwares[name] = Number(event.target.value)              
+                project.hardwares[name] = parseInt(event.target.value)              
             }
         })}
         // event.target.id // has project Name

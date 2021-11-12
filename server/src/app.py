@@ -171,6 +171,36 @@ def get_projects():
     results = projects_Schema.dump(documents)
     return jsonify(results)
 
+@app.route("/updateProjects/", methods = ["PUT"])
+def update_projects():
+    new_projects = request.json['projects']
+    for project in new_projects:
+        projectName = project["projectName"]
+        # print(project["hardwares"])
+        document = project_db.find({"projectName": projectName})[0]
+        document["hardwares"] = project['hardwares']
+        project_db.update_one({"projectName": projectName}, {"$set":document})
+
+    return request.json["projects"]
+
+@app.route("/updateHardwareCount/", methods = ["PUT"])
+def update_Hardware_Count():
+    hardwareName = request.json["hardwareName"]
+    unitsUsed = request.json['unitSum']
+    document = db.find({'name': hardwareName})[0]
+    # print(request.json)
+    capacity = document['capacity']
+    if unitsUsed < capacity:
+        document['unitsUsed'] = unitsUsed
+        db.update_one({"name": hardwareName}, {"$set":document})
+        return jsonify({}), 200
+    else:
+        return jsonify({}), 403
+    # return get_projects()
+
+
+
+
 @app.route("/get/<name>/", methods = ["GET", "POST"])
 def get_article(name):
     print(name)
@@ -209,7 +239,6 @@ def update_Hardware_Count():
     else:
         return jsonify({"message": "Unsuccessful"}), 403
     # return get_projects()
-
 
 @app.route("/add", methods = ["POST", "GET"])
 def add_articles():
