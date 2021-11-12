@@ -82,18 +82,18 @@ function Form(props) {
       }
 
     return (
-        <div>
+        <>
             {props.projects ? (
                         <>
                         <TableContainer component={Paper}
                             sx={{
-                            width: '100%',
+                            width:  "100%",
                             marginTop: 5,
                             height: "100%",
                             marginBottom: 5, 
                             boxShadow: '0 0 1px 3px rgba(0, 0, 0, .125)',
                                 }}>
-                            <Table aria-label="simple table">
+                            <Table sx = {{width: "100%"}} aria-label="simple table">
                                 <TableHead sx={{backgroundColor: 'primary.color'}}>
                                 <TableRow>
                                     <TableCell align="middle">Project Name</TableCell>
@@ -110,20 +110,19 @@ function Form(props) {
                                     >
                                         <TableCell align="middle">{row.projectName}</TableCell>
                                         <TableCell align="middle">{row.funds}</TableCell>
-                                        <TableCell align="middle">{(row.hardwares[props.focusHardware.name] || 0)}</TableCell>
+                                        <TableCell align="middle">{(row.hardwares[props.focusHardware.name] || 0)}</TableCell>                                        
                                         <TableCell align="middle" sx={{textAlign: "center"}}>
-                                        <TextField size = "small" type = "number"
-                                            id={row.id}
-                                            onChange={createDelta}
-                                            label="Quantity"
-                                        />
+                                            <TextField size = "small" type = "number"
+                                                id={row.id}
+                                                onChange={createDelta}
+                                                label="Quantity"
+                                            />
                                         </TableCell>
                                     </TableRow>
                                 ))}
                                 </TableBody>
                             </Table>
                     </TableContainer>
-                    {/* <Button variant="contained" onClick={updateHardware}>Update Projects</Button> */}
                     <Fab sx={
                         fabStyle
                     } onClick={updateHardware}><SaveIcon/></Fab>
@@ -131,7 +130,7 @@ function Form(props) {
                     
             ):null
             }
-        </div>
+        </>
     )
 }
 
