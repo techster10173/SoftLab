@@ -4,33 +4,6 @@
     margin: 0 auto;
   
   }
-
-  .big_container{
-      width: 100%;
-      padding-left: 20px;
-
-  }
-
-  .big_container:after{
-      display: block;
-      content: '';
-      clear: both;
-  }
-
-  .container1 {
-      /* float: left; */
-      /* width: 50%; */
-      /* padding: 20px; */
-      /* height: 100px; */
-      /* background-color: blue; */
-      /* display: inline-block; */
-  }
-
-  .container2{
-      margin-left: 50%;
-      height: 100px;
-  }
-
   
   .dropdown .dropdown-btn{
     padding: 15px 20px;

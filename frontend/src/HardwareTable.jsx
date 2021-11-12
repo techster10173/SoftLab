@@ -20,7 +20,7 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
         return(
                 <TableContainer component={Paper}
                     sx={{
-                    width: '50%',
+                    width: '100%',
                     marginTop: 5,
                     height: "100%",
                     marginBottom: 5, 
