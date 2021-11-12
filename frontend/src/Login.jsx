@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { createStore } from 'redux';
 
-export function authReducer(state = {value: document.cookie === ""}, action) {
+export function authReducer(state = {value: document.cookie.includes("session")}, action) {
     switch (action.type) {
         case 'LOGIN':
             return {value: true};
@@ -52,11 +52,10 @@ export class Login extends React.Component {
         }
 
         e.preventDefault();
-        axios.put('/auth/', {
+        axios.put('/api/auth/', {
             uname: this.state.username,
             pass: this.state.password
         }).then(res => {
-            console.log(res);
             this.setState({loggedIn: true});
             authStore.dispatch({type: 'LOGIN'});
         }).catch(err => {
@@ -92,13 +91,12 @@ export class Login extends React.Component {
             return;
         }
 
-        axios.post('/auth/', {
+        axios.post('/api/auth/', {
             uname: this.state.username,
             pass: this.state.password
         }).then(res => {
             authStore.dispatch({type: 'LOGIN'});
             this.setState({loggedIn: true});
-            console.log(res);
         }).catch(err => {
             this.MySwal.fire({
                 title: 'Signup Failed',

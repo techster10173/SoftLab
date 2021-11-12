@@ -26,7 +26,7 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
     }
 
     requestProjects = () => {
-      axios.get(`/projects/?offset=${this.state.offset}`).then(data => {
+      axios.get(`/api/projects/?offset=${this.state.offset}`).then(data => {
         this.setState({projects: data.data.projectData, totalProjects: data.data.totalProjects});
       });
     }

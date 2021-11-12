@@ -17,7 +17,7 @@ export class Projects extends React.Component{
   }
   
   componentDidMount(){
-    document.cookie !== "" ? <Projects/> : <Navigate to="/login" />
+    document.cookie.includes("session") !== "" ? <Projects/> : <Navigate to="/login" />
   }
   
   projectHandler = (pid) => {

@@ -10,14 +10,7 @@ import Dhruva from "./assets/dhruva.jfif"
 import HaaS from "./assets/haas.jpg"
 
 
-import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography, Box, Grid, Paper, styled} from '@mui/material';
-
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+import { Toolbar, AppBar, Avatar, List, ListItem, ListItemAvatar, ListItemText, Typography, Box, Grid} from '@mui/material';
 
 export function Home(props){
 

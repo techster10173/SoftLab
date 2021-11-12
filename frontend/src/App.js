@@ -20,16 +20,14 @@ const theme = createTheme({
 });
 
 function redirect(auth, component){
-  console.log(auth);
   return auth ? component : <Navigate to="/login" />
 }
 
 
 function App() {
-  const [auth, setAuth] = useState(document.cookie !== "");
+  const [auth, setAuth] = useState(document.cookie.includes("session"));
 
   authStore.subscribe(() => {
-    console.log(authStore.getState().value);
     setAuth(authStore.getState().value);
   });    
 
