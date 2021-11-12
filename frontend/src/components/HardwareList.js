@@ -1,4 +1,3 @@
-
 import React from 'react'
 
 function HardwareList(props) {
@@ -11,7 +10,7 @@ function HardwareList(props) {
         <div>
             {props.articles && props.articles.map(article => {
             return(
-                <div>
+                <div>      
                     <h1>Hardware Name: {article.name}</h1>
                     <h3>Capacity: {article.capacity}</h3>
                     <h3>Unit Price: {article.unitPrice}</h3>
@@ -25,10 +24,11 @@ function HardwareList(props) {
                         </div>
                     </div>
                     <hr/>
-                </div>
+                </div>           
             )
             })}            
         </div>
+        
     )
 }
 

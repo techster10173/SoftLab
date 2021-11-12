@@ -5,7 +5,7 @@ import { Home } from './Home.jsx';
 import { createTheme, ThemeProvider } from '@mui/material';
 import {Projects} from './Projects.jsx';
 import { DataSets } from './DataSets.jsx';
-import {Hardware} from './Hardware.js'
+import {Hardware} from './Hardware.jsx'
 import {useState} from 'react'
 
 const theme = createTheme({
