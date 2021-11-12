@@ -4,9 +4,11 @@ import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper,
 import SaveIcon from '@mui/icons-material/Save';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { ProjectsTable } from './ProjectsTable';
 
 function Form(props) {
     const[delta, setDelta] = useState({});
+    const[funds, setFunds] = useState({})
     const MySwal = withReactContent(Swal)
 
     useEffect(() => {
@@ -31,45 +33,99 @@ function Form(props) {
         props.projects.forEach(project => {
             if (project.id === event.target.id){
                 let deltaEntry = {}
+                let fundsEntry = {}
                 deltaEntry[event.target.id] = event.target.value - (project.hardwares[props.focusHardware.name] || 0);
+                // fundsEntry[event.target.id] = project.funds
+                fundsEntry[event.target.id] = {'funds': project.funds, "projectName": project.projectName}
+
                 setDelta({...delta, ...deltaEntry});
+                setFunds({...funds, ...fundsEntry});
             }
         });   
     }
 
     const updateHardware = () => {
         let sum = props.focusHardware.unitsUsed;
+
+        console.log(delta)
+        console.log(funds)
+        console.log(props.focusHardware)
         
-        for (const property in delta) {
-            sum += delta[property];
+        let updateBoolean = true
+        for (const pid in delta) {
+            sum += delta[pid]
+            const delta_val = delta[pid]
+            const unitPrice = props.focusHardware["unitPrice"]
+            const cost = delta_val * unitPrice
+
+            console.log(cost)
+
+            if (cost > funds[pid]["funds"]){
+                updateBoolean = false
+                MySwal.fire({
+                    icon: "error",
+                    title: `Not Enough Funds for Project ${funds[pid]["projectName"]}`,
+                    text: `Need $${cost - funds[pid]["funds"]} More in Funds`,
+                    timer: 60000
+                });
+            }
         }
 
-        axios.put("/api/hardware/", {
-            hardwareName: props.focusHardware.name,
-            unitSum: sum,
-            projectsDelta: delta
-        }).then(resp => {
-            const elements = document.getElementsByTagName("input");
-            for(const element of elements){
-                element.value = "";
-            }
-            setDelta({});
-            props.getProjects();
-            props.setNewHardwares(props.focusHardware.name, sum);
-            MySwal.fire({
-                icon: "success",
-                title: "Congrats!",
-                text: "Sucessfully checked out " + props.focusHardware.name,
-                timer: 1500
+        if (updateBoolean){
+            axios.put("/api/hardware/", {
+                hardwareName: props.focusHardware.name,
+                unitSum: sum,
+                projectsDelta: delta
+            }).then(resp => {
+                const elements = document.getElementsByTagName("input");
+                for(const element of elements){
+                    element.value = "";
+                }
+                setDelta({});
+                props.getProjects();
+                props.setNewHardwares(props.focusHardware.name, sum);
+                MySwal.fire({
+                    icon: "success",
+                    title: "Congrats!",
+                    text: "Sucessfully checked out " + props.focusHardware.name,
+                    timer: 1500
+                });
+            }).catch(err => {
+                MySwal.fire({
+                    icon: "error",
+                    title: "Whoops! Unexpected Problem",
+                    text: err.response.data.message,
+                    timer: 1500
+                });
             });
-        }).catch(err => {
-            MySwal.fire({
-                icon: "error",
-                title: "Whoops! Unexpected Problem",
-                text: err.response.data.message,
-                timer: 1500
-            });
-        });
+        }
+
+        // axios.put("/api/hardware/", {
+        //     hardwareName: props.focusHardware.name,
+        //     unitSum: sum,
+        //     projectsDelta: delta
+        // }).then(resp => {
+        //     const elements = document.getElementsByTagName("input");
+        //     for(const element of elements){
+        //         element.value = "";
+        //     }
+        //     setDelta({});
+        //     props.getProjects();
+        //     props.setNewHardwares(props.focusHardware.name, sum);
+        //     MySwal.fire({
+        //         icon: "success",
+        //         title: "Congrats!",
+        //         text: "Sucessfully checked out " + props.focusHardware.name,
+        //         timer: 1500
+        //     });
+        // }).catch(err => {
+        //     MySwal.fire({
+        //         icon: "error",
+        //         title: "Whoops! Unexpected Problem",
+        //         text: err.response.data.message,
+        //         timer: 1500
+        //     });
+        // });
     }
     
     const fabStyle = {
