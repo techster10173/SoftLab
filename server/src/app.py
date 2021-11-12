@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, render_template
 from Models.hardware import Hardware
 from auth import Auth
 from database import init_db
@@ -6,11 +6,10 @@ from Models.project import ProjectSchema, Project
 from auth import check_auth
 from os import environ
 from bson.objectid import ObjectId
-from marshmallow import Schema, fields
 from flask_cors import CORS
 from bson.objectid import ObjectId
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../../frontend/build", static_url_path="")
 CORS(app)
 
 @app.route('/api/auth/', methods=["PUT", "POST"])
@@ -117,6 +116,9 @@ def handle_specific_hardware(id: str):
     hardware = Hardware(id=id)
     return jsonify({"hardwareData": hardware.get_hardware()}), 200
 
+@app.errorhandler(404)
+def catch_all(path):
+    return send_from_directory(app.static_folder, "index.html")
 
 if __name__ == "__main__":
     init_db()
