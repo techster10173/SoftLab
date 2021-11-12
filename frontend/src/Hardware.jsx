@@ -5,7 +5,7 @@ import Form from './components/Form';
 import {Navbar} from "./Toolbar.jsx"
 import axios from 'axios';
 import { HardwareTable } from './HardwareTable';
-import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, Grid, ListItem} from '@mui/material';
+import {Grid, ListItem} from '@mui/material';
 
 export function Hardware () {
 
