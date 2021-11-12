@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
-import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, TextField} from '@mui/material';
+import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, TextField, Fab} from '@mui/material';
+import SaveIcon from '@mui/icons-material/Save';
+import Save from '@mui/icons-material/Save';
 
 function Form(props) {
     const[delta, setDelta] = useState({});
@@ -56,6 +58,15 @@ function Form(props) {
             console.error(err);
         });
     }
+    
+    const fabStyle = {
+        margin: 0,
+        top: 'auto',
+        right: 40,
+        bottom: 40,
+        left: 'auto',
+        position: 'fixed',
+      }
 
     return (
         <div>
@@ -99,8 +110,12 @@ function Form(props) {
                                 </TableBody>
                             </Table>
                     </TableContainer>
-                    <Button variant="contained" onClick={updateHardware}>Update Projects</Button>
+                    {/* <Button variant="contained" onClick={updateHardware}>Update Projects</Button> */}
+                    <Fab sx={
+                        fabStyle
+                    } onClick={updateHardware}><SaveIcon/></Fab>
                     </>
+                    
             ):null
             }
         </div>

@@ -44,7 +44,6 @@ export class Projects extends React.Component{
 
     return(
         <>
-        
           <Navbar />
           <ProjectsTable openProject={this.projectHandler} modalOpen={this.state.showModal}/>
           <Fab sx={
