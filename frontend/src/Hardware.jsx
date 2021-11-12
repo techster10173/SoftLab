@@ -82,14 +82,14 @@ export function Hardware () {
             </ListItem>
           </Grid>
           <Grid item xs = {6}>
-            <ListItem>
-              <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'left', display : 'flex'}} align="middle" count={Math.floor(totalHardware/11)+1} onChange={updateOffsetHardware}/>
-            </ListItem>
+            <div>
+              <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'center', display : 'flex'}} align="middle" count={Math.floor(totalHardware/11)+1} onChange={updateOffsetHardware}/>
+            </div>
           </Grid>
           <Grid item xs = {6}>
-            <ListItem>
-              {focusHardware ? <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'left', display : 'flex'}} align="middle" count={Math.floor(totalProjects/11)+1} onChange={updateOffsetProject}/> : null}
-            </ListItem>
+            <div>
+              {focusHardware ? <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'center', display : 'flex'}} align="middle" count={Math.floor(totalProjects/11)+1} onChange={updateOffsetProject}/> : null}
+            </div>
           </Grid>
         </Grid>
     </>
