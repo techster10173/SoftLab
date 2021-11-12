@@ -17,6 +17,7 @@ export function Hardware () {
   // const [project , setProject] = useState([])
 
 
+
   useEffect(() => {
     console.log("hi im in useeffect")
     fetch("http://127.0.0.1:5000/get",{
@@ -49,6 +50,27 @@ export function Hardware () {
     // console.log("Hello World")
     setEditedArticle(article)
   }
+
+  const setNewHardwares = (name, sum) => {
+    console.log(name)
+    console.log(sum)
+
+    articles.map(article => {
+      if (article.name === name){
+        article.unitsUsed = sum;
+      }
+    })
+    // fetch("http://127.0.0.1:5000/get",{
+    //   'method':"GET",
+    //   headers:{
+    //     "Content-Type":"application/json"
+    //   }
+    // })
+    // .then(resp => resp.json())
+    // .then(resp => setArticles(resp))
+    // .catch(error => console.log(error))
+  }
+
 
   const updatedData = (article) => {
     const new_article = articles.map(my_article => {
@@ -89,7 +111,7 @@ export function Hardware () {
         </div>
 
         <div className = "container2">
-          {editedArticle ? <Form article = {editedArticle} updatedData = {updatedData} projects = {projects} setProjects = {setProjects}/> : null}
+          {editedArticle ? <Form article = {editedArticle} updatedData = {updatedData} projects = {projects} setProjects = {setProjects} setNewHardwares = {setNewHardwares} setArticles = {setArticles}/> : null}
             {/* <ProjectList projects = {projects}/> */}
         </div>
       </div>

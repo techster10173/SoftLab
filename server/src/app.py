@@ -237,6 +237,7 @@ def update_Hardware_Count():
         document['unitsUsed'] = unitsUsed
         db.update_one({"name": hardwareName}, {"$set":document})
         return jsonify({"message": "Created Successfully"}), 200
+        # return jsonify({get_articles()}), 200
     else:
         return jsonify({"message": "Unsuccessful"}), 403
     # return get_projects()

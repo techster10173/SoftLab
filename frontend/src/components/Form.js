@@ -88,11 +88,13 @@ function Form(props) {
                 .then(resp => {
                     console.log(resp)
                     props.setProjects(resp)
-                }
+                        }
                     )
                 .catch(error => console.log(error))
                 )
             .catch(error => console.log(error));
+
+        props.setNewHardwares(name, sum)
 
         // APIService.UpdateHardwareCount(name, sum)
         // .then(resp => updateStatus(resp["status"]))
@@ -102,6 +104,8 @@ function Form(props) {
         // console.log(props.projects)
 
         console.log(status)
+
+        
 
         // if (status === 200){
         //     console.log("less than capacity")
