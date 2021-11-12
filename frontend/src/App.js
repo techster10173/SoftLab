@@ -24,7 +24,7 @@ function redirect(auth, component){
 
 
 function App() {
-  const [auth, setAuth] = useState(document.cookie !== "");
+  const [auth, setAuth] = useState(document.cookie.includes("session"));
 
   authStore.subscribe(() => {
     setAuth(authStore.getState().value);

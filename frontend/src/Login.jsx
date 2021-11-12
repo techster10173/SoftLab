@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { createStore } from 'redux';
 
-export function authReducer(state = {value: document.cookie === ""}, action) {
+export function authReducer(state = {value: document.cookie.includes("session")}, action) {
     switch (action.type) {
         case 'LOGIN':
             return {value: true};
