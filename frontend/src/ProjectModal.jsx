@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 import {Modal, Box, TextField, FormControl, Button, InputAdornment, OutlinedInput} from '@mui/material';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import "./project.css"
+import "./project.css";
+import {HardwareView} from "./HardwareView.jsx";
 
 const MySwal = withReactContent(Swal)
 
@@ -141,7 +142,7 @@ export class ProjectModal extends React.Component {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: this.props.pid ? 800: 400,
             bgcolor: 'background.paper',
             boxShadow: 24,
             padding: 2,
@@ -150,44 +151,47 @@ export class ProjectModal extends React.Component {
           };
 
         const cancelButtonStyle = {
-            background: "#f50057", width:"25%", marginRight: "3%", "&:hover": {background: "#ab003c"}
+            background: "#f50057", width:"12%", marginRight: "3%", "&:hover": {background: "#ab003c"}
         }
 
         return (
             <>
             <Modal open={this.props.displayModal}>
                 <Box sx={wrapperStyle}>
-                    <h1>{this.props.pid ? "Update" : "Create"} Project</h1>
+                    <h1 sx = {{width: "50%"}}>{this.props.pid ? "Update" : "Create"} Project</h1>
                     <form onSubmit={this.props.pid ? this.updateProject : this.createProject}>
                         <FormControl>
                             <div>
-                                <TextField label="Name" error={this.state.nameError} sx={{width: '100%', marginBottom: "5%"}} value={this.state.projectName} onChange={this.handleNameChange} />
+                                <TextField label="Name" error={this.state.nameError} sx={{width: '49%', marginBottom: "5%", marginRight: "1%"}} value={this.state.projectName} onChange={this.handleNameChange} />
                                 <OutlinedInput
                                     error={this.state.fundsError}
                                     type="number"
-                                    sx={{width: '100%', marginBottom: "5%"}}
+                                    sx={{width: '49%', marginBottom: "5%", marginLeft: "1%"}}
                                     value={this.state.projectFunds}
                                     onChange={this.handleFundsChange}
-                                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                    startAdornment={
+                                        <InputAdornment position="start">$</InputAdornment>
+                                    }
                                 />
                             </div>
-                            <TextField
-                                id="outlined-multiline-flexible"
-                                label="Description"
-                                error={this.state.descError}
-                                multiline
-                                rows={4}
-                                sx={{marginBottom: "5%"}}
-                                value={this.state.projectDescription}
-                                onChange={this.handleDescriptionChange}
-                            />
+                                <TextField
+                                    id="outlined-multiline-flexible"
+                                    label="Description"
+                                    error={this.state.descError}
+                                    multiline
+                                    rows={4}
+                                    sx={{width: '100%', marginBottom: "5%"}}
+                                    value={this.state.projectDescription}
+                                    onChange={this.handleDescriptionChange}
+                                />
                             <div>
                                 <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
                                 {this.props.pid ? <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button> : null}
-                                <Button variant="contained" type="submit" sx={this.props.pid ? {width: "44%"}:{width: "72%"}}>{this.props.pid ? "Update" : "Create"}</Button>
+                                <Button variant="contained" type="submit" sx={this.props.pid ? {width: "47%"}:{width: "73%"}}>{this.props.pid ? "Update" : "Create"}</Button>
                             </div>
                         </FormControl>
                     </form>
+                    {this.props.pid ? <HardwareView ></HardwareView> : null}
                 </Box>
             </Modal>
         </>
