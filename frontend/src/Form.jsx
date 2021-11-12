@@ -112,7 +112,7 @@ function Form(props) {
                                         <TableCell align="middle">{row.funds}</TableCell>
                                         <TableCell align="middle">{(row.hardwares[props.focusHardware.name] || 0)}</TableCell>
                                         <TableCell align="middle" sx={{textAlign: "center"}}>
-                                        <TextField type = "number"
+                                        <TextField size = "small" type = "number"
                                             id={row.id}
                                             onChange={createDelta}
                                             label="Quantity"
