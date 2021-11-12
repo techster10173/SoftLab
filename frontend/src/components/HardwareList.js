@@ -1,7 +1,5 @@
 
-
 import React from 'react'
-import APIService from './APIService'
 
 function HardwareList(props) {
 
@@ -9,20 +7,11 @@ function HardwareList(props) {
         props.editArticle(article)
     }
 
-    const deleteArticle = (article) => {
-        APIService.DeleteArticle(article.name)
-        .then(() => props.deleteArticle(article))
-    }
-
-    // cosnt[]
-    // const[projectName, setProjectName] = useState(props.projects.projectName)
-    // const[projectFunds, setProjectFunds] = useState(props.projects.funds)
-
     return (
         <div>
             {props.articles && props.articles.map(article => {
             return(
-                <div key = {article.name}>
+                <div>
                     <h1>Hardware Name: {article.name}</h1>
                     <h3>Capacity: {article.capacity}</h3>
                     <h3>Unit Price: {article.unitPrice}</h3>
@@ -34,16 +23,6 @@ function HardwareList(props) {
                             onClick = {() => editArticle(article)}
                             >Update</button>
                         </div>
-
-
-
-
-                        {/* <div className = "col">
-                            <button className = "btn btn-danger"
-                            onClick = {() => deleteArticle(article)}
-                            
-                            >Delete</button>
-                        </div> */}
                     </div>
                     <hr/>
                 </div>

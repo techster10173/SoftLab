@@ -1,9 +1,9 @@
 
 
-export default class APIService{
+export default class hardwareAPIService{
     static UpdateArticle(name, unitsUsed){
         console.log(unitsUsed)
-        return fetch(`http://127.0.0.1:5000/update/${name}/`,{
+        return fetch(`/update/${name}/`,{
             'method':'PUT',
             headers:{
               'Content-Type':'application/json'
@@ -25,7 +25,7 @@ export default class APIService{
   // }
 
   static UpdateHardwareCount(hardwareName, unitSum){
-    return fetch(`http://127.0.0.1:5000/updateHardwareCount/`,{
+    return fetch(`/updateHardwareCount/`,{
         'method':'PUT',
         headers:{
           'Content-Type':'application/json'
@@ -44,15 +44,5 @@ export default class APIService{
         body: JSON.stringify({"projects": projects})
       })
       .then(resp => resp.json())
-    }
-  
-
-    static DeleteArticle(name){
-        return fetch(`http://127.0.0.1:5000/delete/${name}/`,{
-            'method':'DELETE',
-            headers:{
-              'Content-Type':'application/json'
-            },
-          })
     }
 }

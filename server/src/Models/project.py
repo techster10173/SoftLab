@@ -1,12 +1,10 @@
-from marshmallow import Schema, fields, post_load
+from marshmallow import Schema, fields, post_load, post_dump
 from datetime import datetime
-
-from marshmallow.decorators import post_dump
 import database
 from bson.objectid import ObjectId
 
 class Project:
-    def __init__(self, id: str = "", creator:str = "", hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = ""):
+    def __init__(self, id: str = "", dateCreated: datetime = None, dateUpdated: datetime = None, creator:str = "", hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = ""):
         if id != "":
             self.id = ObjectId(id)
         else:
@@ -16,6 +14,8 @@ class Project:
         self.hardwares = hardwares
         self.funds = funds
         self.description = description
+        self.dateCreated = dateCreated
+        self.dateUpdated = dateUpdated
 
     def create_project(self):
         self.dateCreated = datetime.now()
@@ -58,11 +58,7 @@ class Project:
             "creator": creator,
         }
 
-        projection = {
-            "hardwares": 0
-        }
-
-        items = database.client.projects.find(query, projection=projection).skip(offset * 10).limit(10).sort("dateCreated", -1)
+        items = database.client.projects.find(query).skip(offset * 10).limit(10).sort("dateCreated", -1)
         return ProjectSchema(many=True).dump(items), database.client.projects.count_documents(query)
 
 class ProjectSchema(Schema):
@@ -75,10 +71,6 @@ class ProjectSchema(Schema):
     dateCreated = fields.DateTime()
     dateUpdated = fields.DateTime()
 
-    @post_dump
-    def make_project(self, data, **kwargs):
-        return Project(**data)
-        
     @post_load
-    def make_project(self, data, **kwargs):
+    def make_project_load(self, data, **kwargs):
         return Project(**data)
