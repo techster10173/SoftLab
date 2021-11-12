@@ -19,7 +19,7 @@ class Hardware():
     @staticmethod
     def get_all_hardware(offset: int):
         hardware = database.client.hardwares.find().skip(offset * 10).limit(10).sort('name', 1)
-        return HardwareSchema(many=True).dump(hardware)
+        return HardwareSchema(many=True).dump(hardware), database.client.hardwares.count_documents()
 
     @staticmethod
     def update_hardware(json_data):

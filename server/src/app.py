@@ -100,7 +100,8 @@ def handle_hardware():
     if request.method == "GET":
         if request.args.get('offset') is None:
             return jsonify({"message": "Missing Offset"}), 400
-        return jsonify({"hardwareData": Hardware.get_all_hardware(int(request.args.get('offset')))}), 200
+        hardware_data, count = Hardware.get_hardware(int(request.args.get('offset')))
+        return jsonify({"hardwareData":hardware_data, "totalHardware": count}), 200
     else:
         try:
             return jsonify({"projectData": Hardware.update_hardware(request.json)}), 200
