@@ -1,7 +1,9 @@
 from bson.objectid import ObjectId
-from marshmallow import Schema, fields, post_load, post_dump
+from marshmallow import Schema, fields, post_load
 from Models.project import Project
 import database
+from datetime import datetime
+
 
 class Hardware():
     def __init__(self, name = "", capacity = 0, unitPrice = 0.0, unitsUsed = 0):
@@ -35,7 +37,7 @@ class Hardware():
                 key = "hardwares." + hardwareName
                 delta = {}
                 delta[key] = delta_val
-                database.client.projects.update_one({"_id": ObjectId(pid)}, {"$inc": delta})
+                database.client.projects.update_one({"_id": ObjectId(pid)}, {"$inc": delta, "$set": {"dateUpdated": datetime.now()}}, )
                 if creator is None:
                     creator = database.client.projects.find_one({"_id": ObjectId(pid)})["creator"]
             return Project.get_projects(0, creator)

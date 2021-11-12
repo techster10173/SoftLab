@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, post_load, post_dump
+from marshmallow import Schema, fields, post_load
 from datetime import datetime
 import database
 from bson.objectid import ObjectId
