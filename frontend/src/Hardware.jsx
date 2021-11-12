@@ -1,7 +1,6 @@
 import './App.css';
 import './Hardware.css';
 import {useState, useEffect} from "react";
-import HardwareList from './components/HardwareList';
 import Form from './components/Form';
 import {Navbar} from "./Toolbar.jsx"
 import axios from 'axios';
