@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
-import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, TextField} from '@mui/material';
+import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, Grid, ListItem, TextField} from '@mui/material';
 
 function Form(props) {
-
-    const[name, setName] = useState(props.focusHardware.name);
     const[delta, setDelta] = useState({});
 
     // useEffect(() => {
@@ -12,7 +10,7 @@ function Form(props) {
     //     setName(props.article.name)
     // }, [props.article])
 
-    const setNewHardwareUnits = (event) => 
+    const createDelta = (event) => 
     {
         props.projects.forEach(project => {
             if (project.id === event.target.id){
@@ -23,7 +21,7 @@ function Form(props) {
         });   
     }
 
-    const printAllHardware = () => {
+    const updateHardware = () => {
         let sum = props.focusHardware.unitsUsed;
         
         for (const property in delta) {
@@ -35,6 +33,7 @@ function Form(props) {
             unitSum: sum,
             projectsDelta: delta
         }).then(resp => {
+            setDelta({});
             props.setProjects(resp.data.projectData[0]);
             props.setNewHardwares(name, sum)
         }).catch(err => {
@@ -71,11 +70,11 @@ function Form(props) {
                                     >
                                         <TableCell align="middle">{row.projectName}</TableCell>
                                         <TableCell align="middle">{row.funds}</TableCell>
-                                        <TableCell align="middle">{(row.hardwares[name] || 0)}</TableCell>
+                                        <TableCell align="middle">{(row.hardwares[props.focusHardware.name] || 0)}</TableCell>
                                         <TableCell align="middle" sx={{textAlign: "center"}}>
                                         <TextField type = "number"
                                             id={row.id}
-                                            onChange={setNewHardwareUnits}
+                                            onChange={createDelta}
                                             label="Quantity"
                                         />
                                         </TableCell>
@@ -84,7 +83,7 @@ function Form(props) {
                                 </TableBody>
                             </Table>
                     </TableContainer>
-                    <Button onClick = {printAllHardware}>Update Projects</Button>
+                    <Button variant="contained" onClick={updateHardware}>Update Projects</Button>
                     </>
             ):null
             }

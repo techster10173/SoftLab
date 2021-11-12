@@ -1,7 +1,6 @@
 import './App.css';
 import './Hardware.css';
 import {useState, useEffect} from "react";
-import HardwareList from './components/HardwareList';
 import Form from './components/Form';
 import {Navbar} from "./Toolbar.jsx"
 import axios from 'axios';
@@ -16,9 +15,7 @@ export function Hardware () {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    axios.get("/api/hardware")
-    .then(resp => setHardwares(resp.data.hardwareData))
-    .catch(error => console.log(error))
+    setNewHardwares();
   }, []);
 
   useEffect(() => {
@@ -28,27 +25,13 @@ export function Hardware () {
   },[offset]);
 
   const editFocusHardware = (hardware) => {
-    console.log(hardware);
     setFocusHardware(hardware);
   }
 
-  const setNewHardwares = (name, sum) => {
-    console.log(name)
-    console.log(sum)
-
-    let newHardware = hardware
-
-    newHardware.map(article => {
-      if (article.name === name){
-        article.unitsUsed = sum;
-      }
-      return article
-    });
-
-    setHardwares(newHardware);
-    // axios.get("/api/hardware")
-    // .then(resp => setHardwares(resp.data.hardwareData))
-    // .catch(error => console.log(error))
+  const setNewHardwares = () => {
+    axios.get("/api/hardware")
+    .then(resp => setHardwares(resp.data.hardwareData))
+    .catch(error => console.log(error));
   }
 
 
