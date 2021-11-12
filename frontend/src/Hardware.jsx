@@ -62,7 +62,14 @@ export function Hardware () {
 
   const getHardwares = () => {
     axios.get(`/api/hardware/?offset=${hardwareOffset}`)
-    .then(resp => setHardwares(resp.data.hardwareData))
+    .then(resp => {
+      setHardwares(resp.data.hardwareData);
+      resp.data.hardwareData.forEach(hardware => {
+        if(hardware.name === focusHardware.name){
+          editFocusHardware(hardware);
+        }
+      })
+    })
     .catch(error => console.log(error));
   }
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
-import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, Pagination, Grid, ListItem, TextField} from '@mui/material';
+import {Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper, Button, TextField} from '@mui/material';
 
 function Form(props) {
     const[delta, setDelta] = useState({});
@@ -8,6 +8,19 @@ function Form(props) {
     useEffect(() => {
         setDelta({});
     }, [props.focusHardware]);
+
+    useEffect(() => {
+        for(const key in delta){
+            let htmlElement = document.getElementById(key);
+            if(htmlElement){
+                props.projects.forEach(project => {
+                    if(project.id === key){
+                        htmlElement.value = delta[key] + (project.hardwares[props.focusHardware.name] || 0);
+                    }
+                });
+            }
+        }
+    }, [props.projects])
 
     const createDelta = (event) => 
     {
@@ -32,6 +45,10 @@ function Form(props) {
             unitSum: sum,
             projectsDelta: delta
         }).then(resp => {
+            const elements = document.getElementsByTagName("input");
+            for(const element of elements){
+                element.value = "";
+            }
             setDelta({});
             props.getProjects();
             props.setNewHardwares(props.focusHardware.name, sum)
