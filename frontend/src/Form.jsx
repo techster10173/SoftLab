@@ -58,7 +58,7 @@ function Form(props) {
                                     <TableCell align="middle">Project Name</TableCell>
                                     <TableCell align="middle">Funds</TableCell>
                                     <TableCell align="middle">Unit Used</TableCell>
-                                    <TableCell align="middle" sx={{textAlign: "center"}}>Enter Quantity</TableCell>
+                                    <TableCell align="middle" sx={{textAlign: "center"}}>Enter {props.focusHardware.name} Quantity</TableCell>
                                 </TableRow>
                                 </TableHead>
                                 <TableBody>
