@@ -1,7 +1,6 @@
 import './Form.css';
 import axios from 'axios';
-
-import axios from 'axios';import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import APIService from './APIService'
 import { TextField } from '@material-ui/core';
 
@@ -86,7 +85,11 @@ function Form(props) {
             {hardwareName: name, unitSum: sum})
             .then(resp => 
                 APIService.UpdateProjects(props.projects)
-                .then(resp => props.setProject(resp))
+                .then(resp => {
+                    console.log(resp)
+                    props.setProjects(resp)
+                }
+                    )
                 .catch(error => console.log(error))
                 )
             .catch(error => console.log(error));
@@ -100,15 +103,15 @@ function Form(props) {
 
         console.log(status)
 
-        if (status === 200){
-            console.log("less than capacity")
-            // console.log("printing all projects after status of 200")
-            // console.log(props.projects)
-            // console.log(hardware)
-            // APIService.UpdateProjects(props.projects)
-            // .then(resp => props.setProjects(resp))
-            // .catch(error => console.log(error))
-        }
+        // if (status === 200){
+        //     console.log("less than capacity")
+        //     console.log("printing all projects after status of 200")
+        //     console.log(props.projects)
+        //     console.log(hardware)
+        //     APIService.UpdateProjects(props.projects)
+        //     .then(resp => props.setProjects(resp))
+        //     .catch(error => console.log(error))
+        // }
         
         
         // console.log("printing all projects")

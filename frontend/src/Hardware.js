@@ -14,7 +14,7 @@ export function Hardware () {
   const [editedArticle, setEditedArticle] = useState(null)
 
   const [projects, setProjects] = useState([])
-  const [project , setProject] = useState([])
+  // const [project , setProject] = useState([])
 
 
   useEffect(() => {
@@ -72,9 +72,9 @@ export function Hardware () {
     setArticles(new_articles)
   }
 
-  let handleProjectChange = (e) => {
-    setProject(e.target.value)
-  }
+  // let handleProjectChange = (e) => {
+  //   setProject(e.target.value)
+  // }
 
 
   return (
@@ -89,7 +89,7 @@ export function Hardware () {
         </div>
 
         <div className = "container2">
-          {editedArticle ? <Form article = {editedArticle} updatedData = {updatedData} projects = {projects}/> : null}
+          {editedArticle ? <Form article = {editedArticle} updatedData = {updatedData} projects = {projects} setProjects = {setProjects}/> : null}
             {/* <ProjectList projects = {projects}/> */}
         </div>
       </div>
