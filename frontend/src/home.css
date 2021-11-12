@@ -24,6 +24,44 @@ html { scroll-behavior: smooth; }
     text-decoration: underline;
 }
 
+
+.log{
+    display: inline-block;
+    margin-top: 0px;
+    text-align: right;
+    width: 100%;
+}
+
+.log a {
+    text-decoration: none;
+    font-family: "Ariel Black", Gadget, sans-serif;
+    font-size: 18px;
+    color: white;
+    padding: 20px 10px 20px 10px;
+    margin-right: 20px;
+    
+}
+
+.log ul li a:hover {
+    text-decoration: underline;
+}
+.haas{
+    width : 100%;
+}
+.haas a {
+    text-decoration: none;
+    font-family: "Ariel Black", Gadget, sans-serif;
+    font-size: 18px;
+    color: white;
+    padding: 20px 10px 20px 10px;
+    margin-right: 20px;
+    
+}
+
+.haas ul li a:hover {
+    text-decoration: underline;
+}
+
 .img1{
     width: 50px;
     height: auto;
