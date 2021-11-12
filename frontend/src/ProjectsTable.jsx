@@ -72,7 +72,6 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                           <TableCell align="middle">{row.description}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateCreated)).toLocaleString()}</TableCell>
                           <TableCell align="middle">{(new Date(row.dateUpdated)).toLocaleString()}</TableCell>
-                          {/* <TableCell align="middle">{row.creator}</TableCell> */}
                           <TableCell align="middle">${row.funds}</TableCell>
                           <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}><LaunchRoundedIcon /></Button></TableCell>
                         </TableRow>
@@ -83,7 +82,7 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                 <div >
                     <Pagination sx={{width: 'auto' , marginBottom: 5, justifyContent: 'center', display : 'flex'}} align="middle" count={Math.floor(this.state.totalProjects/11)+1} onChange={this.updateOffset}/>
                 </div>
-                </>
+              </>
         )
       } 
     }
