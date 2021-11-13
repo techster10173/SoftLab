@@ -73,7 +73,6 @@ export function Hardware () {
     .catch(error => console.log(error));
   }
 
-
   return (
     <>
       <Navbar/>
