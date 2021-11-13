@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a1505cce.chunk.css",
+    "main.js": "/static/js/main.0b7db2d5.chunk.js",
+    "main.js.map": "/static/js/main.0b7db2d5.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c89a899a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c89a899a.js.map",
+    "static/js/2.73765e66.chunk.js": "/static/js/2.73765e66.chunk.js",
+    "static/js/2.73765e66.chunk.js.map": "/static/js/2.73765e66.chunk.js.map",
+    "static/js/3.b2493c6f.chunk.js": "/static/js/3.b2493c6f.chunk.js",
+    "static/js/3.b2493c6f.chunk.js.map": "/static/js/3.b2493c6f.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.a1505cce.chunk.css.map": "/static/css/main.a1505cce.chunk.css.map",
+    "static/js/2.73765e66.chunk.js.LICENSE.txt": "/static/js/2.73765e66.chunk.js.LICENSE.txt",
+    "static/media/Sai.6e0d4843.jpg": "/static/media/Sai.6e0d4843.jpg",
+    "static/media/dhruva.eb66406a.jfif": "/static/media/dhruva.eb66406a.jfif",
+    "static/media/haas.66fb6dc5.jpg": "/static/media/haas.66fb6dc5.jpg",
+    "static/media/hershey.1874f854.jfif": "/static/media/hershey.1874f854.jfif",
+    "static/media/newLogo.b31e6ef7.png": "/static/media/newLogo.b31e6ef7.png",
+    "static/media/sparsh.b26c4ea9.jfif": "/static/media/sparsh.b26c4ea9.jfif",
+    "static/media/sree.9a4e80a0.jfif": "/static/media/sree.9a4e80a0.jfif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c89a899a.js",
+    "static/js/2.73765e66.chunk.js",
+    "static/css/main.a1505cce.chunk.css",
+    "static/js/main.0b7db2d5.chunk.js"
+  ]
+}
