@@ -34,10 +34,14 @@ class Hardware():
             new_projects = json_data['projectsDelta']
 
             for pid, delta_val in new_projects.items():
+                funds = database.client.projects.find_one({"_id": ObjectId(pid)})["funds"]
+                cost = delta_val * hardware_document["unitPrice"]
+                new_funds = funds - cost
+
                 key = "hardwares." + hardwareName
                 delta = {}
                 delta[key] = delta_val
-                database.client.projects.update_one({"_id": ObjectId(pid)}, {"$inc": delta, "$set": {"dateUpdated": datetime.now()}}, )
+                database.client.projects.update_one({"_id": ObjectId(pid)}, {"$inc": delta, "$set": {"dateUpdated": datetime.now(), "funds": new_funds}})
                 if creator is None:
                     creator = database.client.projects.find_one({"_id": ObjectId(pid)})["creator"]
             # return Project.get_projects(0, creator)
