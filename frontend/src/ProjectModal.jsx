@@ -200,7 +200,7 @@ export class ProjectModal extends React.Component {
                             <div>
                                 <Button variant="contained" sx={cancelButtonStyle} onClick={this.props.closeModalHandler}>Cancel</Button>
                                 {this.props.pid ? <Button variant="contained" sx={cancelButtonStyle} onClick={this.deleteProject}>Delete</Button> : null}
-                                <Button variant="contained" type="submit" sx={this.props.pid ? {width: "47%"}:{width: "73%"}}>{this.props.pid ? "Update" : "Create"}</Button>
+                                <Button variant="contained" type="submit" sx={this.props.pid ? {width: "45%"}:{width: "73%"}}>{this.props.pid ? "Update" : "Create"}</Button>
                             </div>
                         </FormControl>
                     </form>

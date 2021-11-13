@@ -1,10 +1,9 @@
 import React from 'react';
 import './login.css';
-import { Home } from './Home.jsx';
 import logo from "./assets/newLogo.png"
 import {Button, TextField, Box} from '@mui/material';
 import axios from 'axios';
-import {Navigate, Router, Route, Link} from 'react-router-dom';
+import {Navigate, Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { createStore } from 'redux';
