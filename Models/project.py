@@ -26,6 +26,7 @@ class Project:
     def update_project(self):
         self.dateUpdated = datetime.now()
         document = self.get_project()
+        del self.dateCreated
         if self.creator == document["creator"]:
             database.client.projects.update_one({'_id': self.id}, {'$set': self.__dict__})
         else:
