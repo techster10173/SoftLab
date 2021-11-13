@@ -42,6 +42,7 @@ export class ProjectModal extends React.Component {
                     projectFunds: data.funds,
                     hardwares: arr
                 });
+                this.ogFunds = data.funds;
             }).catch(err => console.log(err));
         }
         if(!this.props.displayModal && prevProps.displayModal){
@@ -61,7 +62,7 @@ export class ProjectModal extends React.Component {
 
     handleFundsChange = (event) => {
         const funds = event.target.value;
-        this.setState({projectFunds: funds, fundsError: funds < 0});
+        this.setState({projectFunds: funds, fundsError: funds < 0 || this.state.projectFunds < this.ogFunds});
     }
 
     updateProject = (event) => {
@@ -69,7 +70,7 @@ export class ProjectModal extends React.Component {
         
         this.setState({nameError: this.state.projectName === "", descError: this.state.projectDescription === ""});
 
-        if(this.state.projectName === "" || this.state.projectDescription === "" || this.state.projectFunds < 0){
+        if(this.state.projectName === "" || this.state.projectDescription === "" || this.state.projectFunds < this.ogFunds){
             return;
         }
 

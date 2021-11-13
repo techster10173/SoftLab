@@ -29,6 +29,17 @@ function Form(props) {
     }, [props.projects])
 
     const createDelta = (event) => {
+
+        if (event.target.value < 0){
+            MySwal.fire({
+                icon: "error",
+                title: `Invalid Amount`,
+                text: `Enter a Positive Value`,
+                timer: 1500
+            });
+            return;
+        }
+
         props.projects.forEach(project => {
             if (project.id === event.target.id) {
                 let deltaEntry = {}
@@ -171,6 +182,7 @@ function Form(props) {
                                                 id={row.id}
                                                 onChange={createDelta}
                                                 label="Quantity"
+                                                inputProps={{ min: 0 }}
                                             />
                                         </TableCell>
                                     </TableRow>
