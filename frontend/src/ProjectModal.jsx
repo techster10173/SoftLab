@@ -18,6 +18,7 @@ export class ProjectModal extends React.Component {
             fundsError: false,
             nameError: false,
             descError: false,
+            hardwares:[]
         }
     }
 
@@ -25,11 +26,21 @@ export class ProjectModal extends React.Component {
         if (this.props.displayModal && !prevProps.displayModal && this.props.pid) {
             axios.get(`/api/projects/${this.props.pid}/`).then(res => {
                 const data = res.data.projectData;
+
+                let arr = [];
+                for (const [key, value] of Object.entries(data.hardwares)) {
+                    let element = [key, value];
+                    console.log(element);
+                    console.log("hi");
+                    arr.push(element);
+                }
+
+                
                 this.setState({
                     projectName: data.projectName,
                     projectDescription: data.description,
                     projectFunds: data.funds,
-                    hardwareData: data.hardwares,
+                    hardwares: arr
                 });
             }).catch(err => console.log(err));
         }
@@ -143,6 +154,7 @@ export class ProjectModal extends React.Component {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: this.props.pid ? 800: 400,
+            height: 240,
             bgcolor: 'background.paper',
             boxShadow: 24,
             padding: 2,
@@ -191,7 +203,7 @@ export class ProjectModal extends React.Component {
                             </div>
                         </FormControl>
                     </form>
-                    {this.props.pid ? <HardwareView ></HardwareView> : null}
+                    {this.props.pid ? <HardwareView hardwares={this.state.hardwares}></HardwareView> : null}
                 </Box>
             </Modal>
         </>

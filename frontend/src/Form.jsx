@@ -96,7 +96,7 @@ function Form(props) {
                             <TableHead sx={{ backgroundColor: 'primary.color' }}>
                                 <TableRow>
                                     <TableCell align="middle">Project Name</TableCell>
-                                    <TableCell align="middle">Fundås</TableCell>
+                                    <TableCell align="middle">Funds</TableCell>
                                     <TableCell align="middle">Unit Used</TableCell>
                                     <TableCell align="middle" sx={{ textAlign: "center" }}>Enter {props.focusHardware.name} Quantity</TableCell>
                                 </TableRow>
