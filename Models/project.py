@@ -40,6 +40,9 @@ class Project:
             
         if self.creator == project["creator"]:
             database.client.projects.delete_one({'_id': self.id})
+
+            for hardware_name in project["hardwares"]:
+                database.client.hardwares.update_one({'name': hardware_name}, {'$inc': {'unitsUsed': ((project["hardwares"][hardware_name]) * -1)}})
         else:
             raise Exception("User Lacks Permissions")
         return project
