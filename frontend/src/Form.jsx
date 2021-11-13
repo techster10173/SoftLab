@@ -4,7 +4,6 @@ import { Table, TableContainer, TableCell, TableBody, TableHead, TableRow, Paper
 import SaveIcon from '@mui/icons-material/Save';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { ProjectsTable } from './ProjectsTable';
 
 function Form(props) {
     const[delta, setDelta] = useState({});
@@ -45,7 +44,6 @@ function Form(props) {
                 let deltaEntry = {}
                 let fundsEntry = {}
                 deltaEntry[event.target.id] = event.target.value - (project.hardwares[props.focusHardware.name] || 0);
-                // fundsEntry[event.target.id] = project.funds
                 fundsEntry[event.target.id] = {'funds': project.funds, "projectName": project.projectName}
 
                 setDelta({...delta, ...deltaEntry});
