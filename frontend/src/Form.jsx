@@ -45,7 +45,6 @@ function Form(props) {
                 let deltaEntry = {}
                 let fundsEntry = {}
                 deltaEntry[event.target.id] = event.target.value - (project.hardwares[props.focusHardware.name] || 0);
-                // fundsEntry[event.target.id] = project.funds
                 fundsEntry[event.target.id] = {'funds': project.funds, "projectName": project.projectName}
 
                 setDelta({...delta, ...deltaEntry});
@@ -109,33 +108,6 @@ function Form(props) {
                 });
             });
         }
-
-        // axios.put("/api/hardware/", {
-        //     hardwareName: props.focusHardware.name,
-        //     unitSum: sum,
-        //     projectsDelta: delta
-        // }).then(resp => {
-        //     const elements = document.getElementsByTagName("input");
-        //     for(const element of elements){
-        //         element.value = "";
-        //     }
-        //     setDelta({});
-        //     props.getProjects();
-        //     props.setNewHardwares(props.focusHardware.name, sum);
-        //     MySwal.fire({
-        //         icon: "success",
-        //         title: "Congrats!",
-        //         text: "Sucessfully checked out " + props.focusHardware.name,
-        //         timer: 1500
-        //     });
-        // }).catch(err => {
-        //     MySwal.fire({
-        //         icon: "error",
-        //         title: "Whoops! Unexpected Problem",
-        //         text: err.response.data.message,
-        //         timer: 1500
-        //     });
-        // });
     }
 
     const fabStyle = {
