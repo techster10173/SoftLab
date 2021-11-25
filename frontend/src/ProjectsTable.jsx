@@ -4,6 +4,7 @@ import './project.css';
 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Pagination} from '@mui/material';
 import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
   
   export class ProjectsTable extends React.Component{
     constructor(props) {
@@ -60,6 +61,7 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                         <TableCell align="middle">Creator</TableCell>
                         <TableCell align="middle">Funds</TableCell>
                         <TableCell align="middle" sx={{textAlign: "center"}}>Edit</TableCell>
+                        <TableCell align="middle" sx={{textAlign: "center"}}>Share</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -75,6 +77,7 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
                           <TableCell align="middle">{row.creator}</TableCell>
                           <TableCell align="middle">${row.funds}</TableCell>
                           <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}><LaunchRoundedIcon /></Button></TableCell>
+                          <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openShare(row.id)}><PersonAddIcon /></Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
