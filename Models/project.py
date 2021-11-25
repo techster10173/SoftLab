@@ -4,18 +4,27 @@ import database
 from bson.objectid import ObjectId
 
 class Project:
-    def __init__(self, id: str = "", dateCreated: datetime = None, dateUpdated: datetime = None, creator:str = "", hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = ""):
+    def __init__(self, id: str = "", dateCreated: datetime = None, dateUpdated: datetime = None, 
+        creator:str = "", hardwares:dict = {}, projectName:str = "", funds:float = 0.0, description:str = "", members:list = []):
         if id != "":
             self.id = ObjectId(id)
         else:
-            self.id = id
+            self.id = ObjectId()
         self.projectName = projectName
-        self.creator = creator
+        if creator != "":
+            self.creator = ObjectId(creator)
+        else:
+            self.creator = ObjectId()
         self.hardwares = hardwares
         self.funds = funds
         self.description = description
         self.dateCreated = dateCreated
         self.dateUpdated = dateUpdated
+        self.members = members
+
+    def _is_creator(self):
+        project = database.client.projects.find_one(filter={'_id': self.id}, projection={'creator': 1})
+        return self.creator == ObjectId(project["creator"])
 
     def create_project(self):
         self.dateCreated = datetime.now()
@@ -25,21 +34,16 @@ class Project:
 
     def update_project(self):
         self.dateUpdated = datetime.now()
-        document = self.get_project()
         del self.dateCreated
-        if self.creator == document["creator"]:
+        if self._is_creator():
             database.client.projects.update_one({'_id': self.id}, {'$set': self.__dict__})
         else:
             raise Exception("User Lacks Permissions")
 
     def delete_project(self):
-        project = None
-        try:
-            project = self.get_project()
-        except Exception as e:
-            return e
-            
-        if self.creator == project["creator"]:
+        project = self.get_project()
+
+        if self.creator == ObjectId(project["creator"]):
             database.client.projects.delete_one({'_id': self.id})
 
             for hardware_name in project["hardwares"]:
@@ -51,19 +55,87 @@ class Project:
     def get_project(self):
         project = database.client.projects.find_one({'_id': self.id})
         project_obj = ProjectSchema().dump(project)
-        if project_obj["creator"] == self.creator:
+        if ObjectId(project_obj["creator"]) == self.creator:
             return project_obj
         else:
             raise Exception("User Lacks Permissions")
 
-    @staticmethod
-    def get_projects(offset: int, creator: str):
-        query = {
-            "creator": creator,
-        }
+    def set_users(self):
+        if self._is_creator():
+            database.client.projects.update_one({'_id': self.id}, {'$set': {'members': self.members}})
+        else:
+            raise Exception("User Lacks Permissions")
 
-        items = database.client.projects.find(query).skip(offset * 10).limit(10).sort("dateCreated", -1)
-        return ProjectSchema(many=True).dump(items), database.client.projects.count_documents(query)
+    def get_users(self):
+        if self._is_creator():
+            users = database.client.projects.aggregate([
+                {'$match': {'_id': self.id}},
+                {
+                    '$lookup': {
+                        'from': 'users',
+                        'localField': 'members',
+                        'foreignField': '_id',
+                        'as': 'users'
+                    }
+                },
+                {'$project': {'users.password': 0}}
+            ])
+            return users
+        else:
+            raise Exception("User Lacks Permissions")
+
+    def get_projects(self, offset: int):
+        query = [
+            {
+                "$match": {
+                    "$or": [
+                        {"creator": self.creator},
+                        {"members": self.creator}
+                    ],
+                },
+                
+            },
+            {
+                "$skip": 10*offset
+            },
+            {
+                "$limit": 10
+            },
+            {
+                '$lookup': {
+                    'from': 'users',
+                    'localField': 'creator',
+                    'foreignField': '_id',
+                    'as': 'creator'
+                }
+            },
+            {
+                "$unwind": "$creator"
+            },
+            {
+                "$project": {
+                    "_id": 1,
+                    "projectName": 1,
+                    "funds": 1,
+                    "description": 1,
+                    "dateCreated": 1,
+                    "dateUpdated": 1,
+                    "creator": "$creator.uname"
+                }
+            }
+        ]
+
+        count_query = {
+            "$or": [
+                {"creator": self.creator},
+                {"members": self.creator}
+            ],
+        }
+           
+
+        items = database.client.projects.aggregate(query)
+        return ProjectSchema(many=True).dump(items), database.client.projects.count_documents(count_query)
+
 
 class ProjectSchema(Schema):
     id = fields.Str(attribute='_id')
@@ -74,6 +146,7 @@ class ProjectSchema(Schema):
     description = fields.Str()
     dateCreated = fields.DateTime()
     dateUpdated = fields.DateTime()
+    members = fields.List(fields.Str())
 
     @post_load
     def make_project_load(self, data, **kwargs):

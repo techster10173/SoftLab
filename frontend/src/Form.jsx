@@ -28,7 +28,6 @@ function Form(props) {
     }, [props.projects])
 
     const createDelta = (event) => {
-
         if (event.target.value < 0){
             MySwal.fire({
                 icon: "error",

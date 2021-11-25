@@ -44,7 +44,6 @@ class Hardware():
                 database.client.projects.update_one({"_id": ObjectId(pid)}, {"$inc": delta, "$set": {"dateUpdated": datetime.now(), "funds": new_funds}})
                 if creator is None:
                     creator = database.client.projects.find_one({"_id": ObjectId(pid)})["creator"]
-            # return Project.get_projects(0, creator)
             return True
         else:
             raise Exception("Invalid Amount")
