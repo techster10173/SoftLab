@@ -1,18 +1,20 @@
 import React from 'react';
 import './project.css';
-import {ProjectModal} from "./ProjectModal.jsx";
-import {Navbar} from "./Toolbar.jsx";
+import {ProjectModal} from "./ProjectModal";
+import {Navbar} from "./Toolbar";
 import {Fab} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import {ProjectsTable} from "./ProjectsTable.jsx";
+import {ProjectsTable} from "./ProjectsTable";
 import {Navigate} from "react-router-dom";
+import {ShareModal} from "./ShareModal"
 
 export class Projects extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
         currentProject: null,
-        showModal: false
+        showEditModal: false,
+        showShareModal: false,
     }
   }
   
@@ -21,15 +23,23 @@ export class Projects extends React.Component{
   }
   
   projectHandler = (pid) => {
-    this.setState({currentProject: pid, showModal: true});
+    this.setState({currentProject: pid, showEditModal: true});
   }
 
   openCreateModal = () => {
       this.projectHandler(null);
   }
 
-  closeModal = () => {
-      this.setState({showModal: false});
+  closeEditModal = () => {
+      this.setState({showEditModal: false});
+  }
+
+  openShareModal = (pid) => {
+      this.setState({showShareModal: true, currentProject: pid});
+  }
+
+  closeShareModal = () => {
+      this.setState({showShareModal: false});
   }
 
   render(){
@@ -45,12 +55,12 @@ export class Projects extends React.Component{
     return(
         <>
           <Navbar />
-          <ProjectsTable openProject={this.projectHandler} modalOpen={this.state.showModal}/>
+          <ProjectsTable openShare={this.openShareModal} openProject={this.projectHandler} modalOpen={this.state.showEditModal}/>
           <Fab sx={
             fabStyle
           } onClick={this.openCreateModal}><AddIcon/></Fab>
-          <ProjectModal closeModalHandler={this.closeModal} displayModal={this.state.showModal} pid={this.state.currentProject} />
-
+          <ProjectModal closeModalHandler={this.closeEditModal} displayModal={this.state.showEditModal} pid={this.state.currentProject} />
+          <ShareModal closeModalHandler={this.closeShareModal} displayModal={this.state.showShareModal} pid={this.state.currentProject} />
         </>
     )
   } 
