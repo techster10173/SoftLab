@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 from Models.hardware import Hardware
-from auth import Auth
+from auth import Auth, User
 from database import init_db
 from Models.project import ProjectSchema, Project
 from auth import check_auth
@@ -48,6 +48,15 @@ def handle_signout():
     respObject = jsonify({"message": "Logged Out!"})
     return respObject, 200
 
+@app.route("/api/users/", methods=["GET"])
+@check_auth
+def handle_users():
+    if request.args.get('query') is None:
+            return jsonify({"message": "Missing Query"}), 400
+    users = User.get_users(request.args.get('query'))
+    respObject = jsonify({"users": users})
+    return respObject, 200
+
 
 @app.route('/api/projects/<pid>/invite/', methods=["PUT", "GET"])
 @check_auth
@@ -69,7 +78,7 @@ def handle_invite(pid):
                 return jsonify({"message": str(e)}), 500
     else:
         try:
-            return jsonify({"invites": project.get_users()}), 200
+            return jsonify({"users": project.get_users()}), 200
         except Exception as e:
             if str(e) == "User Lacks Permissions":
                 return jsonify({"message": str(e)}), 403

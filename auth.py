@@ -1,5 +1,6 @@
 from flask import request, jsonify, session
 from functools import wraps
+from marshmallow import Schema, fields, post_load
 import database
 import bcrypt
 
@@ -44,3 +45,26 @@ def check_auth(f):
             request.user = session["uid"]
         return f(*args, **kwargs)
     return wrap
+
+class UserSchema(Schema):
+    id = fields.Str(attribute='_id')
+    uname = fields.Str()
+
+    @post_load
+    def make_project_load(self, data, **kwargs):
+        return User(**data)
+
+class User():
+    def __init__(self, id = "", uname = ""):
+        self.id = id
+        self.uname = uname
+
+    @staticmethod
+    def get_users(query: str):
+        users = database.client.users.find(filter={
+            "$text":{
+                "$search": query
+            }
+        }).limit(5)
+
+        return UserSchema(many=True).dump(users)
