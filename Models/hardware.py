@@ -30,7 +30,6 @@ class Hardware():
             hardware_document["unitsUsed"] = unitsUsed
             database.client.hardwares.update_one({"name": hardwareName}, {"$set": hardware_document})
             
-            creator = None
             new_projects = json_data['projectsDelta']
 
             for pid, delta_val in new_projects.items():
@@ -42,8 +41,6 @@ class Hardware():
                 delta = {}
                 delta[key] = delta_val
                 database.client.projects.update_one({"_id": ObjectId(pid)}, {"$inc": delta, "$set": {"dateUpdated": datetime.now(), "funds": new_funds}})
-                if creator is None:
-                    creator = database.client.projects.find_one({"_id": ObjectId(pid)})["creator"]
             return True
         else:
             raise Exception("Invalid Amount")

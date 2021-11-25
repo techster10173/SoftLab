@@ -2,6 +2,7 @@ from marshmallow import Schema, fields, post_load
 from datetime import datetime
 import database
 from bson.objectid import ObjectId
+from auth import UserSchema
 
 class Project:
     def __init__(self, id: str = "", dateCreated: datetime = None, dateUpdated: datetime = None, 
@@ -61,10 +62,11 @@ class Project:
             raise Exception("User Lacks Permissions")
 
     def set_users(self):
-        if self._is_creator():
-            database.client.projects.update_one({'_id': self.id}, {'$set': {'members': self.members}})
-        else:
+        if not self._is_creator():
             raise Exception("User Lacks Permissions")
+
+        members = [ObjectId(member) for member in self.members]
+        database.client.projects.update_one({'_id': self.id}, {'$set': {'members': members}})
 
     def get_users(self):
         if self._is_creator():
@@ -78,9 +80,15 @@ class Project:
                         'as': 'users'
                     }
                 },
-                {'$project': {'users.password': 0}}
+                {'$project': {
+                    "_id": 0,
+                    'users._id': 1,
+                    'users.uname': 1,
+                }}
             ])
-            return users
+
+            users = [user["users"] for user in users][0]
+            return UserSchema(many=True).dump(users)
         else:
             raise Exception("User Lacks Permissions")
 
