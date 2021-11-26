@@ -23,9 +23,14 @@ class Project:
         self.dateUpdated = dateUpdated
         self.members = members
 
-    def _is_creator(self):
-        project = database.client.projects.find_one(filter={'_id': self.id}, projection={'creator': 1})
-        return self.creator == ObjectId(project["creator"])
+    def _get_roles(self):
+        project = database.client.projects.find_one(filter={'_id': self.id}, projection={'creator': 1, 'members': 1})
+        if project["creator"] == self.creator:
+            return "creator"
+        elif self.creator in [ObjectId(member) for member in project["members"]]:
+            return "editor"
+        else:
+            return "viewer"
 
     def create_project(self):
         self.dateCreated = datetime.now()
@@ -36,15 +41,17 @@ class Project:
     def update_project(self):
         self.dateUpdated = datetime.now()
         del self.dateCreated
-        if self._is_creator():
+        role = self._get_roles()
+        if role == "creator" or role == "editor":
             database.client.projects.update_one({'_id': self.id}, {'$set': self.__dict__})
         else:
             raise Exception("User Lacks Permissions")
 
     def delete_project(self):
         project = self.get_project()
+        role = self._get_roles()
 
-        if self.creator == ObjectId(project["creator"]):
+        if role == "creator" or role == "editor":
             database.client.projects.delete_one({'_id': self.id})
 
             for hardware_name in project["hardwares"]:
@@ -56,20 +63,26 @@ class Project:
     def get_project(self):
         project = database.client.projects.find_one({'_id': self.id})
         project_obj = ProjectSchema().dump(project)
-        if ObjectId(project_obj["creator"]) == self.creator:
+        if ObjectId(project_obj["creator"]) == self.creator or self.creator in [ObjectId(member) for member in project_obj["members"]]:
             return project_obj
         else:
             raise Exception("User Lacks Permissions")
 
     def set_users(self):
-        if not self._is_creator():
+        role = self._get_roles()
+        if role != "creator":
             raise Exception("User Lacks Permissions")
+        
+        if len(self.members) > 20:
+            raise Exception("Too many members")
 
         members = [ObjectId(member) for member in self.members]
         database.client.projects.update_one({'_id': self.id}, {'$set': {'members': members}})
 
     def get_users(self):
-        if self._is_creator():
+        role = self._get_roles()
+
+        if role != "creator":
             users = database.client.projects.aggregate([
                 {'$match': {'_id': self.id}},
                 {
