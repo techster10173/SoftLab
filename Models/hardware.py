@@ -26,7 +26,7 @@ class Hardware():
         hardwareName = json_data["hardwareName"]
         unitsUsed = json_data['unitSum']
         hardware_document = HardwareSchema().dump(database.client.hardwares.find_one({"name": hardwareName}))
-        if unitsUsed < hardware_document["capacity"]:
+        if unitsUsed <= hardware_document["capacity"]:
             hardware_document["unitsUsed"] = unitsUsed
             database.client.hardwares.update_one({"name": hardwareName}, {"$set": hardware_document})
             
