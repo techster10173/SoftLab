@@ -16,9 +16,9 @@ class Auth():
             raise Exception("No Account")
         elif bcrypt.checkpw(self.password.encode('utf-8'), record["password"]):
             session["uid"] = str(record["_id"])
-            return True
+            return True, self.uname
         else:
-            return False
+            return False, None
         
     @staticmethod
     def logout():
@@ -33,6 +33,7 @@ class Auth():
             hashed = bcrypt.hashpw(self.password.encode('utf-8'), bcrypt.gensalt())
             result = database.client.users.insert_one({"uname": self.uname, "password": hashed})
             session["uid"] = str(result.inserted_id)
+            return self.uname
         
 
 

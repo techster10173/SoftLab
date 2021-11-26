@@ -9,11 +9,18 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
   export class ProjectsTable extends React.Component{
     constructor(props) {
       super(props);
+
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; uid=`);
+
       this.state = {
           projects: [],
           offset: 0,
-          totalProjects: 0
+          totalProjects: 0,
+          uid: parts.pop().split(';').shift(),
       }
+
+
     }
 
     componentDidMount(){
@@ -36,6 +43,10 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
       this.setState({offset: val - 1}, () => {
         this.requestProjects();
       });
+    }
+
+    getUname = () => {
+      
     }
 
     render(){
@@ -77,7 +88,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
                           <TableCell align="middle">{row.creator}</TableCell>
                           <TableCell align="middle">${row.funds}</TableCell>
                           <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openProject(row.id)}><LaunchRoundedIcon /></Button></TableCell>
-                          <TableCell align="middle" sx={{textAlign: "center"}}><Button onClick={(e) => this.props.openShare(row.id)}><PersonAddIcon /></Button></TableCell>
+                          <TableCell align="middle" sx={{textAlign: "center"}}><Button disabled={this.state.uid !== row.creator} onClick={(e) => this.props.openShare(row.id)}><PersonAddIcon /></Button></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

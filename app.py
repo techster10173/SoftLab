@@ -17,8 +17,9 @@ def handle_auth():
 
     if request.method == "POST":
         try:
-            auth_handler.signup()
+            uid = auth_handler.signup()
             respObject = jsonify({"message": "Signed Up!"})
+            respObject.set_cookie("uid", uid)
             return respObject, 200
         except Exception as e:
             if str(e) == "User Exists":
@@ -28,8 +29,10 @@ def handle_auth():
                 return jsonify({"message": "Internal Server Error"}), 500
     else:
         try:
-            if auth_handler.login():
+            can_login, uid = auth_handler.login()
+            if can_login:
                 respObject = jsonify({"message": "Logged In!"})
+                respObject.set_cookie("uid", uid)
                 return respObject, 200
             else:
                 return jsonify({"message": "Invalid Credentials"}), 405
