@@ -41,8 +41,10 @@ class Project:
     def update_project(self):
         self.dateUpdated = datetime.now()
         del self.dateCreated
+        del self.members
         role = self._get_roles()
         if role == "creator" or role == "editor":
+            del self.creator
             database.client.projects.update_one({'_id': self.id}, {'$set': self.__dict__})
         else:
             raise Exception("User Lacks Permissions")
