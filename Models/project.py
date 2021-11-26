@@ -84,7 +84,7 @@ class Project:
     def get_users(self):
         role = self._get_roles()
 
-        if role != "creator":
+        if role == "creator":
             users = database.client.projects.aggregate([
                 {'$match': {'_id': self.id}},
                 {
