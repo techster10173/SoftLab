@@ -1,16 +1,14 @@
 from flask import Flask, request, jsonify, send_from_directory
 from Models.hardware import Hardware
-from auth import Auth
+from auth import Auth, User
 from database import init_db
 from Models.project import ProjectSchema, Project
 from auth import check_auth
 from os import environ
 from bson.objectid import ObjectId
-# from flask_cors import CORS
 from dotenv import load_dotenv
 
 app = Flask(__name__, static_folder="frontend/build", static_url_path="")
-# CORS(app)
 
 @app.route('/api/auth/', methods=["PUT", "POST"])
 def handle_auth():
@@ -19,8 +17,9 @@ def handle_auth():
 
     if request.method == "POST":
         try:
-            auth_handler.signup()
+            uid = auth_handler.signup()
             respObject = jsonify({"message": "Signed Up!"})
+            respObject.set_cookie("uid", uid)
             return respObject, 200
         except Exception as e:
             if str(e) == "User Exists":
@@ -30,8 +29,10 @@ def handle_auth():
                 return jsonify({"message": "Internal Server Error"}), 500
     else:
         try:
-            if auth_handler.login():
+            can_login, uid = auth_handler.login()
+            if can_login:
                 respObject = jsonify({"message": "Logged In!"})
+                respObject.set_cookie("uid", uid)
                 return respObject, 200
             else:
                 return jsonify({"message": "Invalid Credentials"}), 405
@@ -50,6 +51,44 @@ def handle_signout():
     respObject = jsonify({"message": "Logged Out!"})
     return respObject, 200
 
+@app.route("/api/users/", methods=["GET"])
+@check_auth
+def handle_users():
+    if request.args.get('query') is None:
+            return jsonify({"message": "Missing Query"}), 400
+    users = User.get_users(request.args.get('query'))
+    respObject = jsonify({"users": users})
+    return respObject, 200
+
+
+@app.route('/api/projects/<pid>/invite/', methods=["PUT", "GET"])
+@check_auth
+def handle_invite(pid):
+    project = Project(id=pid, creator=request.user)
+
+    if request.method == "PUT":
+        json_data = request.get_json()
+        project.members = json_data["members"]
+
+        try:
+            project.set_users()
+            return jsonify({"message": "Invited!"}), 200
+        except Exception as e:
+            if str(e) == "User Lacks Permissions":
+                return jsonify({"message": str(e)}), 403
+            else:
+                print(e)
+                return jsonify({"message": str(e)}), 500
+    else:
+        try:
+            return jsonify({"users": project.get_users()}), 200
+        except Exception as e:
+            if str(e) == "User Lacks Permissions":
+                return jsonify({"message": str(e)}), 403
+            else:
+                print(e)
+                return jsonify({"message": str(e)}), 500
+
 
 @app.route('/api/projects/<pid>/', methods=('GET', 'PUT', 'DELETE'))
 @check_auth
@@ -65,7 +104,7 @@ def handle_specific_project(pid: str):
     elif request.method == 'PUT':
         project = schema.load(request.json, partial=True, unknown="INCLUDE")
         project.id = ObjectId(pid)
-        project.creator = request.user
+        project.creator = ObjectId(request.user)
         try:
             project.update_project()
             return jsonify({"message": "Project Updated"}), 200
@@ -85,15 +124,17 @@ def handle_projects():
     if request.method == 'GET':
         if request.args.get('offset') is None:
             return jsonify({"message": "Missing Offset"}), 400
-        project_data, count = Project.get_projects(int(request.args.get('offset')), request.user)            
+        project = Project(creator=request.user)
+        project_data, count = project.get_projects(int(request.args.get('offset')))            
         return jsonify({"projectData": project_data, "totalProjects": count}), 200
     elif request.method == 'POST':
-        project = schema.load(request.json, partial=True, unknown="INCLUDE")
-        project.creator = request.user
+        project = schema.load(request.json)
+        project.creator = ObjectId(request.user)
         project.create_project()
         return jsonify({"message": "Created Successfully"}), 201
 
 
+# TODO handle authorization versus server errors
 @app.route("/api/hardware/", methods = ("GET", "PUT"))
 def handle_hardware():
     if request.method == "GET":
@@ -106,7 +147,7 @@ def handle_hardware():
             return jsonify({"projectData": Hardware.update_hardware(request.json)}), 200
         except Exception as e:
             if str(e) == "Invalid Amount":
-                return jsonify({"message": str(e)}), 403
+                return jsonify({"message": str(e)}), 400
             else:
                 return jsonify({"message": str(e)}), 500
 
@@ -122,6 +163,7 @@ def catch_all(element):
 
 load_dotenv()
 init_db()
+
 app.config.update(
     SESSION_COOKIE_HTTPONLY=False,
     SECRET_KEY=environ.get("SECRET_KEY")

@@ -30,8 +30,6 @@ export class ProjectModal extends React.Component {
                 let arr = [];
                 for (const [key, value] of Object.entries(data.hardwares)) {
                     let element = [key, value];
-                    console.log(element);
-                    console.log("hi");
                     arr.push(element);
                 }
 
@@ -47,7 +45,6 @@ export class ProjectModal extends React.Component {
         }
         if(!this.props.displayModal && prevProps.displayModal){
             this.setState({projectName: "", projectDescription: "", projectFunds: 0});
-
         }
     }
 
@@ -168,7 +165,6 @@ export class ProjectModal extends React.Component {
         }
 
         return (
-            <>
             <Modal open={this.props.displayModal}>
                 <Box sx={wrapperStyle}>
                     <h1 sx = {{width: "50%"}}>{this.props.pid ? "Update" : "Create"} Project</h1>
@@ -207,7 +203,6 @@ export class ProjectModal extends React.Component {
                     {this.props.pid ? <HardwareView hardwares={this.state.hardwares}></HardwareView> : null}
                 </Box>
             </Modal>
-        </>
         )
     }
 }

@@ -18,13 +18,8 @@ export function Hardware () {
   const [totalHardware, setTotalHardwares] = useState(0);
 
 
-  const updateOffsetProject = (e, val) => {
-    setProjectOffset( val - 1);
-  }
-
-  const updateOffsetHardware = (e, val) => {
-    setHardwareOffset(val - 1);
-  }
+  const updateOffsetProject = (e, val) => setProjectOffset( val - 1);
+  const updateOffsetHardware = (e, val) => setHardwareOffset(val - 1);
 
   useEffect(() => {
     axios.get(`/api/hardware/?offset=${hardwareOffset}`)

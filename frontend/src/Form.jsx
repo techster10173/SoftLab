@@ -25,10 +25,9 @@ function Form(props) {
                 });
             }
         }
-    }, [props.projects])
+    }, [delta, props.focusHardware.name, props.projects])
 
     const createDelta = (event) => {
-
         if (event.target.value < 0){
             MySwal.fire({
                 icon: "error",
