@@ -143,7 +143,8 @@ class Project:
                     "description": 1,
                     "dateCreated": 1,
                     "dateUpdated": 1,
-                    "creator": "$creator.uname"
+                    "creator": "$creator.uname",
+                    "hardwares": 1
                 }
             }
         ]
