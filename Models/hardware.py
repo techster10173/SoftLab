@@ -1,6 +1,5 @@
 from bson.objectid import ObjectId
 from marshmallow import Schema, fields, post_load
-from Models.project import Project
 import database
 from datetime import datetime
 
