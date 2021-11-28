@@ -94,7 +94,7 @@ function Form(props) {
                 MySwal.fire({
                     icon: "success",
                     title: "Congrats!",
-                    text: "Sucessfully checked out " + props.focusHardware.name,
+                    text: "Sucessfully updated " + props.focusHardware.name,
                     timer: 1500
                 });
             }).catch(err => {
