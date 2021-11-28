@@ -103,7 +103,9 @@ export class ShareModal extends React.Component {
                                 this.setState({open: false});
                             }}
                             onChange={(event, value) => {
-                                this.setState({members: [...this.state.members, value]});
+                                if(value){
+                                    this.setState({members: [...this.state.members, value]});
+                                }
                             }}
                             getOptionLabel={option => option.uname}
                             options={this.state.options}
@@ -121,13 +123,13 @@ export class ShareModal extends React.Component {
                             )}
                             />
                         <List>
-                            {this.state.members.map(option => (
-                                <ListItem key={option.uname} secondaryAction={
-                                    <IconButton edge="end" aria-label="delete" onClick={() => this.deleteMember(option.id)}>
+                            {this.state.members && this.state.members.map(option => (
+                                <ListItem key={option?.uname} secondaryAction={
+                                    <IconButton edge="end" aria-label="delete" onClick={() => this.deleteMember(option?.id)}>
                                       <DeleteIcon />
                                     </IconButton>
                                   }>
-                                    <ListItemText primary={option.uname} />
+                                    <ListItemText primary={option?.uname} />
                                 </ListItem>
                             ))}
                         </List>
