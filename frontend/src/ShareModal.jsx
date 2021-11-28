@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import "./project.css";
-import {debounce} from 'lodash';
+import {throttle} from 'lodash';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const MySwal = withReactContent(Swal)
@@ -17,6 +17,7 @@ export class ShareModal extends React.Component {
             options: [],
             members: [],
         };
+        this.throttleChange = throttle(this.onChangeHandle, 500);
     }
 
     componentDidUpdate(prevProps){
@@ -30,10 +31,8 @@ export class ShareModal extends React.Component {
     }
 
     onChangeHandle = async value => {
-        debounce(async () => {
-            const {data} = await axios.get(`/api/users/?query=${value}`);
-            this.setState({options: data.users});
-        },500)();
+        const {data} = await axios.get(`/api/users/?query=${value}`);
+        this.setState({options: data.users});
     }
 
     addMembers = () => {
@@ -44,7 +43,6 @@ export class ShareModal extends React.Component {
         members.forEach(member => {
             newMembers.push(member.id);
         });
-
 
         axios.put(`/api/projects/${pid}/invite/`, {members: newMembers}).then(res => {
             this.props.closeModalHandler();
@@ -116,7 +114,7 @@ export class ShareModal extends React.Component {
                                 onChange={ev => {
                                     // dont fire API if the user delete or not entered anything
                                     if (ev.target.value !== "" || ev.target.value !== null) {
-                                        this.onChangeHandle(ev.target.value);
+                                        this.throttleChange(ev.target.value);
                                     }
                                 }}
                                 />
